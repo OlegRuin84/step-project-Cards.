@@ -1,8 +1,142 @@
-// class Modal {
-// }
+let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 
-// export { Modal };
+//
+// Modal`s classes
+class Modal {
+  constructor(doc, goal, description, urgency, name) {
+    (this.doc = doc),
+      (this.goal = goal),
+      (this.description = description),
+      (this.urgency = urgency),
+      (this.name = name);
+  }
+}
 
+class ModalCardiologist extends Modal {
+  constructor(
+    doc,
+    goal,
+    description,
+    urgency,
+    name,
+    pressure,
+    bmi,
+    heartDiseases,
+    age
+  ) {
+    super(doc, goal, description, urgency, name),
+      (this.pressure = pressure),
+      (this.bmi = bmi),
+      (this.heartDiseases = heartDiseases),
+      (this.age = age);
+  }
+  postToTheServer(
+    doc,
+    goal,
+    description,
+    urgency,
+    name,
+    pressure,
+    bmi,
+    heartDiseases,
+    age
+  ) {
+    async function fetchPost() {
+      let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          doc: `${doc}`,
+          goal: `${goal}`,
+          description: `${description}`,
+          urgency: `${urgency}`,
+          nameOgPatient: `${name}`,
+          pressure: `${pressure}`,
+          bmi: `${bmi}`,
+          heartDiseases: `${heartDiseases}`,
+          age: `${age}`,
+        }),
+      });
+      let data = response.json();
+      data.then((i) => {
+        let id = i.id;
+        console.log(i);
+        console.log(id);
+      });
+    }
+    fetchPost();
+  }
+}
+
+class ModalDentist extends Modal {
+  constructor(doc, goal, description, urgency, name, lastDate) {
+    super(doc, goal, description, urgency, name), (this.lastDate = lastDate);
+  }
+  postToTheServer(doc, goal, description, urgency, name, lastDate) {
+    async function fetchPost() {
+      let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          doc: `${doc}`,
+          goal: `${goal}`,
+          description: `${description}`,
+          urgency: `${urgency}`,
+          nameOgPatient: `${name}`,
+          lastDate: `${lastDate}`,
+        }),
+      });
+      let data = response.json();
+      data.then((i) => {
+        let id = i.id;
+        console.log(i);
+        console.log(id);
+      });
+    }
+    fetchPost();
+  }
+}
+
+class ModalTherapist extends Modal {
+  constructor(doc, goal, description, urgency, name, age) {
+    super(doc, goal, description, urgency, name), (this.age = age);
+  }
+  postToTheServer(doc, goal, description, urgency, name, age) {
+    async function fetchPost() {
+      let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          doc: `${doc}`,
+          goal: `${goal}`,
+          description: `${description}`,
+          urgency: `${urgency}`,
+          nameOgPatient: `${name}`,
+          age: `${age}`,
+        }),
+      });
+      let data = response.json();
+      data.then((i) => {
+        let id = i.id;
+        console.log(i);
+        console.log(id);
+      });
+    }
+    fetchPost();
+  }
+}
+
+//
+// Visit`s classes
 class Visit {
   // мета візиту
   // короткий опис візиту
@@ -169,8 +303,8 @@ let ivanToCardiologist = new VisitCardiologist(
   70,
   1
 );
-console.log(ivanToCardiologist);
-document.querySelector("#test1").innerHTML = ivanToCardiologist.render();
+// console.log(ivanToCardiologist);
+// document.querySelector("#test1").innerHTML = ivanToCardiologist.render();
 
 let andreyToDantist = new VisitDentist(
   "Визит до дантиста",
@@ -183,8 +317,8 @@ let andreyToDantist = new VisitDentist(
   "21.12.2019",
   2
 );
-console.log(andreyToDantist);
-document.querySelector("#test2").innerHTML = andreyToDantist.render();
+// console.log(andreyToDantist);
+// document.querySelector("#test2").innerHTML = andreyToDantist.render();
 
 let rimmaToTherapist = new VisitTherapist(
   "Визит до теропевта",
@@ -196,5 +330,14 @@ let rimmaToTherapist = new VisitTherapist(
   "Therapist",
   19
 );
-console.log(rimmaToTherapist);
-document.querySelector("#test3").innerHTML = rimmaToTherapist.render();
+// console.log(rimmaToTherapist);
+// document.querySelector("#test3").innerHTML = rimmaToTherapist.render();
+
+export {
+  ModalCardiologist,
+  ModalDentist,
+  ModalTherapist,
+  VisitCardiologist,
+  VisitDentist,
+  VisitTherapist,
+};

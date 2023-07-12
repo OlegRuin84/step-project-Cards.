@@ -77,6 +77,7 @@ body {
 }
 
 .log-in-window-before {
+  margin-top: 30px;
   opacity: 0;
   transition: opacity 0.5s ease;
   position: absolute;
@@ -183,10 +184,125 @@ input {
   box-shadow: rgba(255, 255, 255) 0px 0px 20px 10px;
 }
 
+/** modale window **/
+
+.window-create-card-wrapper {
+  width: 1000px;
+  position: absolute;
+  top: 30px;
+  left: 100px;
+  padding: 0px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border-radius: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: rgb(162, 204, 252);
+}
+
+.headline {
+  font-size: 30px;
+  color: rgb(73, 73, 73);
+  padding: 50px 0px 50px;
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+.select,
+.select-urgency {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: rgb(126, 126, 126);
+  background-color: rgb(219, 236, 255);
+  font-size: 22px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+}
+
+.select {
+  color: rgb(54, 148, 255);
+  font-weight: 700;
+}
+
+.option {
+  color: black;
+}
+
+.option-one {
+  color: green;
+}
+
+.option-two {
+  color: blue;
+}
+
+.option-three {
+  color: red;
+}
+
+select .option-none {
+  color: rgb(126, 126, 126);
+}
+
+.doctors-inputs-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.doctors-inputs-wrapper input {
+  width: 700px;
+  height: 40px;
+  background-color: rgb(219, 236, 255);
+  border: none;
+  outline: none;
+  margin: 10px 0px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-desc,
+.input-heartDiseases {
+  width: 700px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  outline: none;
+  background-color: rgb(219, 236, 255);
+  margin: 10px 0px;
+}
+
+textarea {
+  height: 100px;
+}
+
+textarea::placeholder {
+  font-size: 16px;
+}
+
+.select-urgency {
+  width: 740px;
+  margin-top: 10px;
+  font-size: 18px;
+  text-align: left;
+  color: brown;
+}
+
+/** cards **/
 .cards-wrapper {
   /* margin-top: 500px;
   border-top: 3px solid rgb(200, 226, 255); */
-  padding-top: 300px;
+  padding: 100px 0px 100px;
   text-align: center;
   color: rgb(63, 63, 63);
 }
