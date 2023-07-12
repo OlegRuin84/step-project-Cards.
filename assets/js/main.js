@@ -1,6 +1,6 @@
 //
 // imports
-import { createWindowAfterLogIn, deleteWorningWindow } from "./functions.js";
+import { deleteWorningWindow, createVisitBtn } from "./functions.js";
 
 let login = "1";
 let password = "1";
@@ -63,7 +63,6 @@ logInBtn.addEventListener("click", function () {
 
   // go to the system
   enterBtn.addEventListener("click", enterToTheSystem);
-
   function enterToTheSystem() {
     if (inputEmail.value !== login || inputPassword.value !== password) {
       inputEmail.classList.add("input-worning");
@@ -130,3 +129,22 @@ document.addEventListener("click", function (event) {
     isRequesting = false; // the button is working again
   }
 });
+
+//
+// Create the window after log-In
+function createWindowAfterLogIn(header) {
+  // create btn "Create a visit"
+  createVisitBtn(header);
+  let visitBtn = document.querySelector(".button-create-visit");
+  visitBtn.addEventListener("click", createWindowContent);
+
+  let isRequesting = false;
+  function createWindowContent() {
+    if (isRequesting) return;
+    isRequesting = true;
+
+    //
+    // ! Here is your code for a window, that creates visits -----------------------------------------------------
+    //
+  }
+}

@@ -30,7 +30,7 @@ body {
   display: inline-block;
   width: 100px;
   height: 100px;
-  animation: circle 80s cubic-bezier(1, 1, 1, 1) infinite;
+  /* animation: circle 80s cubic-bezier(1, 1, 1, 1) infinite; */
 }
 @keyframes circle {
   0% {
