@@ -42,13 +42,14 @@ body {
 }
 
 /* ********* log-in ********** */
-.log-in-btn-wrapper {
+.btn-wrapper {
   display: flex;
+  width: 300px;
+  justify-content: space-between;
 }
 
 .button {
-  width: 140px;
-  height: 50px;
+  border: none;
   margin-top: 20px;
   cursor: pointer;
   border-radius: 15px;
@@ -62,7 +63,12 @@ body {
 .button-log-in {
   color: white;
   background-color: rgb(54, 148, 255);
-  opacity: 1;
+  transition: transform 0.7s ease, opacity 0.5s ease;
+}
+
+.button-log-out {
+  color: white;
+  background-color: rgb(181, 54, 255);
   transition: transform 0.7s ease, opacity 0.5s ease;
 }
 
@@ -71,32 +77,22 @@ body {
   cursor: auto;
 }
 
-.button-log-in:hover {
+.button-log-in:hover,
+.button-log-out:hover {
   color: white;
   transform: scale(0.95);
 }
 
-.log-in-window-before {
-  margin-top: 30px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  position: absolute;
-  transform: translate(-50%, -25%);
+.window {
+  position: fixed;
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  width: 450px;
+  width: 800px;
   padding-top: 50px;
   padding-bottom: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
   border-radius: 15px;
-}
-
-.log-in-window {
-  opacity: 1;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -109,23 +105,28 @@ body {
   color: white;
 }
 
+.log-in-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardiologist-form {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 input {
   width: 70%;
   height: 50px;
   border-radius: 25px;
   padding: 0px 20px;
+  margin: 10px 0px;
   font-size: 20px;
-}
-
-.input-email {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  outline: none;
-  border: none;
-}
-
-.input-password {
-  margin-bottom: 20px;
   outline: none;
   border: none;
 }
@@ -145,7 +146,7 @@ input {
   position: absolute;
   z-index: 1;
   transform: translate(-50%, -15%);
-  top: 25%;
+  top: 20%;
   left: 50%;
   background-color: rgb(255, 148, 148);
   border-radius: 15px;
@@ -172,7 +173,8 @@ input {
 }
 
 /* ********* creste visit ********** */
-.button-create-visit {
+.button-create-visit,
+.create-btn {
   color: rgb(139, 139, 139);
   transition: transform 0.7s ease, box-shadow 0.5s ease;
   background-color: rgb(173, 255, 194);
@@ -214,7 +216,7 @@ input {
 
 .select,
 .select-urgency {
-  width: 100%;
+  width: 300px;
   height: 100%;
   border-radius: 25px;
   border: none;
@@ -224,7 +226,7 @@ input {
   background-color: rgb(219, 236, 255);
   font-size: 22px;
   margin-bottom: 10px;
-  padding: 10px 20px;
+  padding: 10px 0px;
 }
 
 .select {
@@ -305,4 +307,9 @@ textarea::placeholder {
   padding: 100px 0px 100px;
   text-align: center;
   color: rgb(63, 63, 63);
+}
+
+/*  */
+.hidden {
+  display: none;
 }

@@ -1,11 +1,11 @@
-// for creating btn "Create a visit"
-function createVisitBtn(elem) {
-  let visitBtn = document.createElement("div");
-  visitBtn.textContent = "СТВОРИТИ ВІЗИТ";
-  visitBtn.classList.add("button");
-  visitBtn.classList.add("button-create-visit");
-  elem.append(visitBtn);
-}
+// // for creating btn "Create a visit"
+// function createVisitBtn(elem) {
+//   let visitBtn = document.createElement("div");
+//   visitBtn.textContent = "СТВОРИТИ ВІЗИТ";
+//   visitBtn.classList.add("button");
+//   visitBtn.classList.add("button-create-visit");
+//   elem.append(visitBtn);
+// }
 
 // delete worning window
 function deleteWorningWindow() {
@@ -13,4 +13,4 @@ function deleteWorningWindow() {
   worningWindow.remove();
 }
 
-export { createVisitBtn, deleteWorningWindow };
+export { deleteWorningWindow };
