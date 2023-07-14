@@ -28,32 +28,4 @@
 //   }
 // }
 
-// async function fetchData(url, fetchMethod, data = null) {
-//   const options = {
-//     method: `${fetchMethod}`,
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-
-//   if (data) {
-//     options.body = JSON.stringify(data);
-//   }
-
-//   try {
-//     const response = await fetch(url, options);
-//     const responseData = await response.json();
-
-//     if (!response.ok) {
-//       throw new Error(responseData.message || "Помилка запиту");
-//     }
-
-//     return responseData;
-//   } catch (error) {
-//     console.error("Помилка:", error);
-//     throw error;
-//   }
-// }
-
 // export { fetchData };

@@ -24,7 +24,7 @@ async function getUserServer() {
 getUserServer();
 
 //
-// DELETE request
+// DELETE for 1 id
 async function deleteCard(cardId) {
   let response = await fetch(
     `https://ajax.test-danit.com/api/v2/cards/${cardId}`,
@@ -38,3 +38,34 @@ async function deleteCard(cardId) {
   console.log(response);
 }
 // deleteCard("180545");
+
+//
+// DELETE for all id
+async function delllete() {
+  let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  let data = await response.json();
+  console.log(data);
+  data.forEach((i) => {
+    let id = i.id;
+    console.log(i);
+
+    async function delete1(id) {
+      let deleteResponse = await fetch(
+        `https://ajax.test-danit.com/api/v2/cards/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
+    // delete1(id);
+  });
+}
+// delllete();

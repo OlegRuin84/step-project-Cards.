@@ -5,15 +5,17 @@ let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 
 // Classes for buttons
 class Button {
-  constructor(width = 140, height = 50) {
+  constructor(width = 140, height = 50, type = "button") {
     this.width = width;
     this.height = height;
+    this.type = type;
   }
 
   createButton() {
-    const buttonElement = document.createElement("div");
+    const buttonElement = document.createElement("button");
     buttonElement.style.width = `${this.width}px`;
     buttonElement.style.height = `${this.height}px`;
+    buttonElement.type = this.type;
     buttonElement.classList.add("button");
     return buttonElement;
   }
@@ -28,24 +30,27 @@ class Form {
     this.buttonElement = null;
   }
 
-  addInput(placeholderText, inputType, style) {
+  addInput(placeholderText, inputType, inputName, style) {
     const inputElement = document.createElement("input");
     inputElement.setAttribute("placeholder", `${placeholderText}`);
     inputElement.setAttribute("type", `${inputType}`);
+    inputElement.setAttribute("name", `${inputName}`);
     inputElement.classList.add(`${style}`);
     this.formElement.append(inputElement);
   }
 
-  addTextarea(placeholderText, style) {
+  addTextarea(placeholderText, inputName, style) {
     const textareaElement = document.createElement("textarea");
     textareaElement.setAttribute("placeholder", `${placeholderText}`);
+    textareaElement.setAttribute("name", `${inputName}`);
     textareaElement.classList.add(`${style}`);
     this.formElement.append(textareaElement);
   }
 
-  addSelect(style) {
+  addSelect(selectName, style) {
     const selectElement = document.createElement("select");
     const trimmedStyle = String(style).trim();
+    selectElement.setAttribute("name", `${selectName}`);
     selectElement.classList.add(trimmedStyle);
     this.formElement.append(selectElement);
     this.selectElement = selectElement;
@@ -66,11 +71,14 @@ class Form {
     }
   }
 
-  addButton(buttonText, buttonStyle) {
-    const buttonElement = document.createElement("div");
+  addButton(buttonText, buttonStyle, type) {
+    const buttonElement = new Button().createButton();
     buttonElement.textContent = buttonText;
-    buttonElement.classList.add("button");
     buttonElement.classList.add(`${buttonStyle}`);
+    buttonElement.setAttribute("type", `${type}`);
+    buttonElement.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
     this.formElement.append(buttonElement);
   }
 
@@ -84,21 +92,18 @@ class Form {
     }
   }
 
-  addSelectElement() {
-    const selectElement = document.createElement("select");
-    selectElement.classList.add("select");
-    this.formElement.append(selectElement);
-  }
+  // addSelectElement() {
+  //   const selectElement = document.createElement("select");
+  //   selectElement.classList.add("select");
+  //   this.formElement.append(selectElement);
+  // }
 
   setSelectElement(selectElement) {
     this.selectElement = selectElement;
   }
 
-  // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  sendData(url) {
-    const formElement = document.querySelector(".visit-form");
-    let input = document.querySelector(".input-login").value;
-
+  // TODO version 1 - witout FormData
+  sendData(url, titleVisut, input) {
     fetch("https://ajax.test-danit.com/api/v2/cards", {
       method: "POST",
       headers: {
@@ -106,13 +111,29 @@ class Form {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        title: "Визит к кардиологу",
-        input: input,
+        title: `${titleVisut}`,
+        goal: input,
+        // ...
       }),
     })
       .then((response) => response.json())
       .then((response) => console.log(response));
   }
+
+  // TODO version 2 - FormData + api.js
+  // sendData(url) {
+  //   const formElement = document.querySelector(".doctor-form");
+  //   const formData = new FormData(formElement);
+
+  //   fetchData(url, "POST", formData)
+  //     .then((data) => {
+  //       console.log("Відповідь сервера:", data);
+  //       this.renderCard(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Помилка відправки даних:", error);
+  //     });
+  // }
 
   // renderCard(data) {
   // }
@@ -147,8 +168,13 @@ class ModalEnterWindow extends Modal {
     this.headline.textContent = content;
 
     this.form = new Form("log-in-form");
-    this.form.addInput("Введіть логін", "text", "input-login");
-    this.form.addInput("Введіть пароль", "password", "input-password");
+    this.form.addInput("Введіть логін", "text", "login", "input-login");
+    this.form.addInput(
+      "Введіть пароль",
+      "password",
+      "password",
+      "input-password"
+    );
     this.form.addButton("УВІЙТИ", "enter-btn");
 
     this.modalElement.append(this.form.formElement);
@@ -161,7 +187,7 @@ class ModalCardWindow extends Modal {
     this.headline.textContent = content;
 
     this.form = new Form("visit-form");
-    this.form.addSelect("select");
+    this.form.addSelect("changeDoctor", "select");
 
     const selectElement = this.form.formElement.querySelector("select");
     this.form.setSelectElement(selectElement);
@@ -212,42 +238,19 @@ class ModalCardWindow extends Modal {
   }
 }
 
-// class ModalCardiologistForm {
-//   constructor() {
-//     this.form = new Form("log-in-form");
-//     this.createForm();
-//   }
-
-//   createForm() {
-//     this.form.addInput("Мета візиту", "text", "input-login");
-//     this.form.addTextarea("Опис візиту", "textarea");
-//     this.form.addInput("ПІБ", "text", "input-login");
-
-//     this.form.addSelect("select-urgency");
-//     const selectElement = this.form.formElement.querySelector("select");
-//     this.form.setSelectElement(selectElement);
-
-//     this.form.addOption("option", "-- none --", "Терміновість");
-//     this.form.addOption("option", "Звичайна");
-//     this.form.addOption("option", "Пріоритетна");
-//     this.form.addOption("option", "Невідкладна");
-
-//     this.form.addButton("СТВОРИТИ", "create-card");
-//   }
-// }
 class ModalCardiologistForm {
   constructor() {
-    this.form = new Form("log-in-form");
+    this.form = new Form("doctor-form");
     this.createForm();
     this.addButtonClickListener();
   }
 
   createForm() {
-    this.form.addInput("Мета візиту", "text", "input-login");
-    this.form.addTextarea("Опис візиту", "textarea");
-    this.form.addInput("ПІБ", "text", "input-login");
+    this.form.addInput("Мета візиту", "text", "goalVisit", "input-login");
+    this.form.addTextarea("Опис візиту", "descriptionVisit", "textarea");
+    this.form.addInput("ПІБ", "text", "namePatient", "input-login");
 
-    this.form.addSelect("select");
+    this.form.addSelect("changeUrgency", "select");
     const selectElement = this.form.formElement.querySelector("select");
     this.form.setSelectElement(selectElement);
 
@@ -256,7 +259,7 @@ class ModalCardiologistForm {
     this.form.addOption("option", "Пріоритетна");
     this.form.addOption("option", "Невідкладна");
 
-    this.form.addButton("СТВОРИТИ", "create-card");
+    this.form.addButton("СТВОРИТИ", "create-card", "submit");
   }
 
   addButtonClickListener() {
@@ -264,111 +267,8 @@ class ModalCardiologistForm {
     createButton.addEventListener("click", () => {
       // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       const url = "https://ajax.test-danit.com/api/v2/cards/";
-      this.form.sendData(url);
-    });
-  }
-}
-
-// class ModalDentistForm {
-//   constructor() {
-//     this.form = new Form("log-in-form");
-//     this.createForm();
-//   }
-
-//   createForm() {
-//     this.form.addInput("Мета візиту", "text", "input-login");
-//     this.form.addInput("ПІБ", "text", "input-login");
-
-//     this.form.addSelect("select-urgency");
-//     const selectElement = this.form.formElement.querySelector("select");
-//     this.form.setSelectElement(selectElement);
-
-//     this.form.addOption("option", "-- none --", "Терміновість");
-//     this.form.addOption("option", "Звичайна");
-
-//     this.form.addButton("СТВОРИТИ", "create-card");
-//   }
-// }
-class ModalDentistForm {
-  constructor() {
-    this.form = new Form("log-in-form");
-    this.createForm();
-    this.addButtonClickListener();
-  }
-
-  createForm() {
-    this.form.addInput("Мета візиту", "text", "input-login");
-    this.form.addTextarea("Опис візиту", "textarea");
-    this.form.addInput("ПІБ", "text", "input-login");
-
-    this.form.addSelect("select");
-    const selectElement = this.form.formElement.querySelector("select");
-    this.form.setSelectElement(selectElement);
-
-    this.form.addOption("option", "-- none --", "Терміновість");
-    this.form.addOption("option", "Звичайна");
-    this.form.addOption("option", "Пріоритетна");
-    this.form.addOption("option", "Невідкладна");
-
-    this.form.addButton("СТВОРИТИ", "create-card");
-  }
-
-  addButtonClickListener() {
-    const createButton = this.form.formElement.querySelector(".create-card");
-    createButton.addEventListener("click", () => {
-      const url = "https://ajax.test-danit.com/api/v2/cards/";
-      this.form.sendData(url);
-    });
-  }
-}
-
-// class ModalTherapistForm {
-//   constructor() {
-//     this.form = new Form("log-in-form");
-//     this.createForm();
-//   }
-
-//   createForm() {
-//     this.form.addInput("Мета візиту", "text", "input-login");
-//     this.form.addTextarea("Опис візиту", "textarea");
-//     this.form.addInput("ПІБ", "text", "input-login");
-
-//     // this.form.addSelect("select-urgency");
-//     // const selectElement = this.form.formElement.querySelector("select");
-//     // this.form.setSelectElement(selectElement);
-
-//     this.form.addButton("СТВОРИТИ", "create-card");
-//   }
-// }
-class ModalTherapistForm {
-  constructor() {
-    this.form = new Form("log-in-form");
-    this.createForm();
-    this.addButtonClickListener();
-  }
-
-  createForm() {
-    this.form.addInput("Мета візиту", "text", "input-login");
-    this.form.addTextarea("Опис візиту", "textarea");
-    this.form.addInput("ПІБ", "text", "input-login");
-
-    this.form.addSelect("select");
-    const selectElement = this.form.formElement.querySelector("select");
-    this.form.setSelectElement(selectElement);
-
-    this.form.addOption("option", "-- none --", "Терміновість");
-    this.form.addOption("option", "Звичайна");
-    this.form.addOption("option", "Пріоритетна");
-    this.form.addOption("option", "Невідкладна");
-
-    this.form.addButton("СТВОРИТИ", "create-card");
-  }
-
-  addButtonClickListener() {
-    const createButton = this.form.formElement.querySelector(".create-card");
-    createButton.addEventListener("click", () => {
-      const url = "https://ajax.test-danit.com/api/v2/cards/";
-      this.form.sendData(url);
+      let input = document.querySelector(".input-login").value;
+      this.form.sendData(url, "Візит до кардіолога", input);
     });
   }
 }
@@ -380,6 +280,76 @@ class ModalCardiologist extends ModalCardWindow {
     this.modalElement.append(this.form.formElement);
   }
 }
+
+// class for Dentist`s form
+// class ModalDentistForm {
+//   constructor() {
+//     this.form = new Form("log-in-form");
+//     this.createForm();
+//     this.addButtonClickListener();
+//   }
+
+//   createForm() {
+//     this.form.addInput("Мета візиту", "text", "input-login");
+//     this.form.addTextarea("Опис візиту", "textarea");
+//     this.form.addInput("ПІБ", "text", "input-login");
+
+//     this.form.addSelect("select");
+//     const selectElement = this.form.formElement.querySelector("select");
+//     this.form.setSelectElement(selectElement);
+
+//     this.form.addOption("option", "-- none --", "Терміновість");
+//     this.form.addOption("option", "Звичайна");
+//     this.form.addOption("option", "Пріоритетна");
+//     this.form.addOption("option", "Невідкладна");
+
+//     this.form.addButton("СТВОРИТИ", "create-card");
+//   }
+
+//   // addButtonClickListener() {
+//   //   const createButton = this.form.formElement.querySelector(".create-card");
+//   //   createButton.addEventListener("click", () => {
+//   //     const url = "https://ajax.test-danit.com/api/v2/cards/";
+//   //     this.form.sendData(url);
+//   //   });
+//   // }
+// }
+
+// class for Therapist`s form
+// class ModalTherapistForm {
+//   constructor() {
+//     this.form = new Form("log-in-form");
+//     this.createForm();
+//     this.addButtonClickListener();
+//   }
+
+//   createForm() {
+//     this.form.addInput("Мета візиту", "text", "input-login");
+//     this.form.addTextarea("Опис візиту", "textarea");
+//     this.form.addInput("ПІБ", "text", "input-login");
+
+//     this.form.addSelect("select");
+//     const selectElement = this.form.formElement.querySelector("select");
+//     this.form.setSelectElement(selectElement);
+
+//     this.form.addOption("option", "-- none --", "Терміновість");
+//     this.form.addOption("option", "Звичайна");
+//     this.form.addOption("option", "Пріоритетна");
+//     this.form.addOption("option", "Невідкладна");
+
+//     this.form.addButton("СТВОРИТИ", "create-card");
+//   }
+
+//   // addButtonClickListener() {
+//   //   const createButton = this.form.formElement.querySelector(".create-card");
+//   //   createButton.addEventListener("click", () => {
+//   //     const url = "https://ajax.test-danit.com/api/v2/cards/";
+//   //     this.form.sendData(url);
+//   //   });
+//   // }
+// }
+// -------------------------------------------------------------
+
 //
 // Visit`s classes
 class Visit {
@@ -456,12 +426,7 @@ class VisitCardiologist extends Visit {
             </div>`;
     return card;
   }
-} //Кардіолог Class Visit +
-// Фахівець
-// звичайний тиск
-// Індекс маси тіла
-// перенесені захворювання серцево-судинної системи
-// вік
+}
 
 class VisitDentist extends Visit {
   constructor(
@@ -494,8 +459,7 @@ class VisitDentist extends Visit {
             </div>`;
     return card;
   }
-} // Фахівець
-// дата останнього відвідування
+}
 
 class VisitTherapist extends Visit {
   constructor(
@@ -528,11 +492,6 @@ class VisitTherapist extends Visit {
     return card;
   }
 }
-// Фахівець
-// вік
-
-// test
-// вікладаємо все у консоль+ метод рендер у div з відповідним id = "test"...
 
 let ivanToCardiologist = new VisitCardiologist(
   "Визит до кардиологу",
@@ -583,7 +542,6 @@ export {
   Form,
   ModalEnterWindow,
   ModalCardWindow,
-  ModalCardiologist,
   VisitCardiologist,
   VisitDentist,
   VisitTherapist,

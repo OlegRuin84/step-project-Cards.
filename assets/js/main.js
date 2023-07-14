@@ -1,12 +1,7 @@
 //
 // imports
 import { deleteWorningWindow } from "./functions.js";
-import {
-  Button,
-  ModalEnterWindow,
-  ModalCardWindow,
-  ModalCardiologist,
-} from "./classes.js";
+import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
 // for testing
 let login = "1";
@@ -64,9 +59,7 @@ function openWindow() {
     if (inputLogin.value !== login || inputPassword.value !== password) {
       inputLogin.classList.add("input-worning");
       inputPassword.classList.add("input-worning");
-      // let worningWindowWrapper = document.createElement("div");
       let worningWindow = document.createElement("div");
-      // let cardsWrapper = document.querySelector(".cards-wrapper");
       worningWindow.classList.add("worning-window");
       worningWindow.textContent =
         "Невведені або некоректно введені дані. Будь ласка, повторіть спробу";
@@ -172,16 +165,5 @@ function createWindowAfterLogIn() {
 
     let createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
     createWindow.open();
-
-    let select = document.querySelector(".select");
-    if (select.value === "Кардіолог") {
-      let createBtn = document.querySelector(".create-card");
-      // createBtn.addEventListener("click", createNewCard);
-
-      // function createNewCard() {
-      //   console.log("~");
-      //   // modalCardiologist.sendData("https://ajax.test-danit.com/api/v2/cards/");
-      // }
-    }
   }
 }

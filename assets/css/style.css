@@ -105,7 +105,8 @@ body {
   color: white;
 }
 
-.log-in-form {
+.log-in-form,
+.doctor-form {
   display: flex;
   justify-content: center;
   flex-direction: column;
