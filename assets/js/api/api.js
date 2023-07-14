@@ -1,4 +1,4 @@
-// let token = "70dd6d15-1769-4113-a892-9664144ebf41";
+let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 
 // async function fetchData(url, fetchMethod, data = null) {
 //   const options = {
@@ -29,3 +29,17 @@
 // }
 
 // export { fetchData };
+
+async function fetchData(data) {
+  const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(response);
+}
+
+export { fetchData };

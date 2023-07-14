@@ -1,7 +1,7 @@
 //
 // imports
-// import { fetchData } from "./api/api.js";
-let token = "70dd6d15-1769-4113-a892-9664144ebf41";
+import { fetchData } from "./api/api.js";
+// let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 
 // Classes for buttons
 class Button {
@@ -23,44 +23,164 @@ class Button {
 
 //
 // Forms
+
+// class Form without FormData
+// class Form {
+//   constructor(style) {
+//     this.formElement = document.createElement("form");
+//     this.formElement.classList.add(`${style}`);
+//     this.buttonElement = null;
+//   }
+
+//   addInput(placeholderText, inputType, inputName, style) {
+//     const inputElement = document.createElement("input");
+//     inputElement.setAttribute("placeholder", `${placeholderText}`);
+//     inputElement.setAttribute("type", `${inputType}`);
+//     inputElement.setAttribute("name", `${inputName}`);
+//     inputElement.classList.add(`${style}`);
+//     this.formElement.append(inputElement);
+//   }
+
+//   addTextarea(placeholderText, inputName, style) {
+//     const textareaElement = document.createElement("textarea");
+//     textareaElement.setAttribute("placeholder", `${placeholderText}`);
+//     textareaElement.setAttribute("name", `${inputName}`);
+//     textareaElement.classList.add(`${style}`);
+//     this.formElement.append(textareaElement);
+//   }
+
+//   addSelect(selectName, style) {
+//     const selectElement = document.createElement("select");
+//     const trimmedStyle = String(style).trim();
+//     selectElement.setAttribute("name", `${selectName}`);
+//     selectElement.classList.add(trimmedStyle);
+//     this.formElement.append(selectElement);
+//     this.selectElement = selectElement;
+//   }
+
+//   addOption(style, value, content = value) {
+//     const optionElement = document.createElement("option");
+//     optionElement.setAttribute("value", `${value}`);
+//     optionElement.classList.add(`${style}`);
+//     optionElement.textContent = `${content}`;
+
+//     const lastOptionElement =
+//       this.selectElement.querySelector("option:last-child");
+//     if (lastOptionElement) {
+//       lastOptionElement.after(optionElement);
+//     } else {
+//       this.selectElement.append(optionElement);
+//     }
+//   }
+
+//   addButton(buttonText, buttonStyle, type) {
+//     const buttonElement = new Button().createButton();
+//     buttonElement.textContent = buttonText;
+//     buttonElement.classList.add(`${buttonStyle}`);
+//     buttonElement.setAttribute("type", `${type}`);
+//     buttonElement.addEventListener("click", (event) => {
+//       event.preventDefault();
+//     });
+//     this.formElement.append(buttonElement);
+//   }
+
+//   clearFormElement() {
+//     while (this.formElement.firstChild) {
+//       if (this.formElement.firstChild.nodeName === "OPTION") {
+//         this.formElement.firstChild.remove();
+//       } else {
+//         this.formElement.removeChild(this.formElement.firstChild);
+//       }
+//     }
+//   }
+
+//   // addSelectElement() {
+//   //   const selectElement = document.createElement("select");
+//   //   selectElement.classList.add("select");
+//   //   this.formElement.append(selectElement);
+//   // }
+
+//   setSelectElement(selectElement) {
+//     this.selectElement = selectElement;
+//   }
+
+//   // TODO version 1 - witout FormData
+//   // sendData(url, titleVisut, input) {
+//   //   fetch("https://ajax.test-danit.com/api/v2/cards", {
+//   //     method: "POST",
+//   //     headers: {
+//   //       "Content-Type": "application/json",
+//   //       Authorization: `Bearer ${token}`,
+//   //     },
+//   //     body: JSON.stringify({
+//   //       title: `${titleVisut}`,
+//   //       goal: input,
+//   //       // ...
+//   //     }),
+//   //   })
+//   //     .then((response) => response.json())
+//   //     .then((response) => console.log(response));
+//   // }
+
+//   // TODO version 2 - FormData + api.js
+//   sendData(url) {
+//     const formElement = document.querySelector(".doctor-form");
+//     const formData = new FormData(formElement);
+//     console.log(formData);
+
+//     // fetchData(url, "POST", formData)
+//     //   .then((data) => {
+//     //     console.log("Відповідь сервера:", data);
+//     //     this.renderCard(data);
+//     //   })
+//     //   .catch((error) => {
+//     //     console.error("Помилка відправки даних:", error);
+//     //   });
+//   }
+
+//   // for rendering on the Page
+//   // renderCard(data) {}
+// }
+
+// ! test 1 of 3
+// class Form wit FormData
 class Form {
   constructor(style) {
     this.formElement = document.createElement("form");
-    this.formElement.classList.add(`${style}`);
+    this.formElement.classList.add(style);
     this.buttonElement = null;
   }
 
   addInput(placeholderText, inputType, inputName, style) {
     const inputElement = document.createElement("input");
-    inputElement.setAttribute("placeholder", `${placeholderText}`);
-    inputElement.setAttribute("type", `${inputType}`);
-    inputElement.setAttribute("name", `${inputName}`);
-    inputElement.classList.add(`${style}`);
+    inputElement.setAttribute("placeholder", placeholderText);
+    inputElement.setAttribute("type", inputType);
+    inputElement.setAttribute("name", inputName);
+    inputElement.classList.add(style);
     this.formElement.append(inputElement);
   }
 
   addTextarea(placeholderText, inputName, style) {
     const textareaElement = document.createElement("textarea");
-    textareaElement.setAttribute("placeholder", `${placeholderText}`);
-    textareaElement.setAttribute("name", `${inputName}`);
-    textareaElement.classList.add(`${style}`);
+    textareaElement.setAttribute("placeholder", placeholderText);
+    textareaElement.setAttribute("name", inputName);
+    textareaElement.classList.add(style);
     this.formElement.append(textareaElement);
   }
 
   addSelect(selectName, style) {
     const selectElement = document.createElement("select");
-    const trimmedStyle = String(style).trim();
-    selectElement.setAttribute("name", `${selectName}`);
-    selectElement.classList.add(trimmedStyle);
+    selectElement.setAttribute("name", selectName);
+    selectElement.classList.add(style);
     this.formElement.append(selectElement);
     this.selectElement = selectElement;
   }
 
   addOption(style, value, content = value) {
     const optionElement = document.createElement("option");
-    optionElement.setAttribute("value", `${value}`);
-    optionElement.classList.add(`${style}`);
-    optionElement.textContent = `${content}`;
+    optionElement.setAttribute("value", value);
+    optionElement.classList.add(style);
+    optionElement.textContent = content;
 
     const lastOptionElement =
       this.selectElement.querySelector("option:last-child");
@@ -72,10 +192,10 @@ class Form {
   }
 
   addButton(buttonText, buttonStyle, type) {
-    const buttonElement = new Button().createButton();
+    const buttonElement = document.createElement("button");
     buttonElement.textContent = buttonText;
-    buttonElement.classList.add(`${buttonStyle}`);
-    buttonElement.setAttribute("type", `${type}`);
+    buttonElement.classList.add(buttonStyle);
+    buttonElement.setAttribute("type", type);
     buttonElement.addEventListener("click", (event) => {
       event.preventDefault();
     });
@@ -92,51 +212,23 @@ class Form {
     }
   }
 
-  // addSelectElement() {
-  //   const selectElement = document.createElement("select");
-  //   selectElement.classList.add("select");
-  //   this.formElement.append(selectElement);
-  // }
-
   setSelectElement(selectElement) {
     this.selectElement = selectElement;
   }
 
-  // TODO version 1 - witout FormData
-  sendData(url, titleVisut, input) {
-    fetch("https://ajax.test-danit.com/api/v2/cards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title: `${titleVisut}`,
-        goal: input,
-        // ...
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => console.log(response));
+  sendData() {
+    const formData = new FormData(this.formElement);
+    displayFormData(formData);
   }
+}
 
-  // TODO version 2 - FormData + api.js
-  // sendData(url) {
-  //   const formElement = document.querySelector(".doctor-form");
-  //   const formData = new FormData(formElement);
+// ! test 2 of 3
+// func for rendering
+function displayFormData(formData) {
+  let data = Object.fromEntries(formData.entries());
+  console.log(data);
 
-  //   fetchData(url, "POST", formData)
-  //     .then((data) => {
-  //       console.log("Відповідь сервера:", data);
-  //       this.renderCard(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Помилка відправки даних:", error);
-  //     });
-  // }
-
-  // renderCard(data) {
-  // }
+  fetchData(data);
 }
 
 //
@@ -238,6 +330,48 @@ class ModalCardWindow extends Modal {
   }
 }
 
+// class ModalCardiologistForm for work without FormData
+// class ModalCardiologistForm {
+//   constructor() {
+//     this.form = new Form("doctor-form");
+//     this.createForm();
+//     this.addButtonClickListener();
+//   }
+
+//   createForm() {
+//     this.form.addInput("Мета візиту", "text", "goalVisit", "input-login");
+//     this.form.addTextarea("Опис візиту", "descriptionVisit", "textarea");
+//     this.form.addInput("ПІБ", "text", "namePatient", "input-login");
+
+//     this.form.addSelect("changeUrgency", "select");
+//     const selectElement = this.form.formElement.querySelector("select");
+//     this.form.setSelectElement(selectElement);
+
+//     this.form.addOption("option", "-- none --", "Терміновість");
+//     this.form.addOption("option", "Звичайна");
+//     this.form.addOption("option", "Пріоритетна");
+//     this.form.addOption("option", "Невідкладна");
+
+//     this.form.addButton("СТВОРИТИ", "create-card", "submit");
+//   }
+
+//   addButtonClickListener() {
+//     const createButton = this.form.formElement.querySelector(".create-card");
+//     createButton.addEventListener("click", () => {
+//       // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//       // const url = "https://ajax.test-danit.com/api/v2/cards/";
+//       // let input = document.querySelector(".input-login").value;
+//       // this.form.sendData(url, "Візит до кардіолога", input);
+
+//       const formElement = document.querySelector(".doctor-form");
+//       const formData = new FormData(formElement);
+//       console.log(formData);
+//     });
+//   }
+// }
+
+// ! test 3 of 3
+// class ModalCardiologistForm for work with FormData
 class ModalCardiologistForm {
   constructor() {
     this.form = new Form("doctor-form");
@@ -261,14 +395,11 @@ class ModalCardiologistForm {
 
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
   }
-
+  // ! go to the server
   addButtonClickListener() {
     const createButton = this.form.formElement.querySelector(".create-card");
     createButton.addEventListener("click", () => {
-      // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      const url = "https://ajax.test-danit.com/api/v2/cards/";
-      let input = document.querySelector(".input-login").value;
-      this.form.sendData(url, "Візит до кардіолога", input);
+      this.form.sendData();
     });
   }
 }
