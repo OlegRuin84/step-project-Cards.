@@ -1,11 +1,4 @@
-// // for creating btn "Create a visit"
-// function createVisitBtn(elem) {
-//   let visitBtn = document.createElement("div");
-//   visitBtn.textContent = "СТВОРИТИ ВІЗИТ";
-//   visitBtn.classList.add("button");
-//   visitBtn.classList.add("button-create-visit");
-//   elem.append(visitBtn);
-// }
+import { fetchData } from "./api/api.js";
 
 // delete worning window
 function deleteWorningWindow() {
@@ -13,4 +6,11 @@ function deleteWorningWindow() {
   worningWindow.remove();
 }
 
-export { deleteWorningWindow };
+function sendFormData(formData) {
+  let data = Object.fromEntries(formData.entries());
+  console.log(data);
+
+  fetchData(data);
+}
+
+export { deleteWorningWindow, sendFormData };

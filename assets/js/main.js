@@ -86,7 +86,6 @@ function openWindow() {
 
 // Close the log-in window
 document.addEventListener("click", closeWindow);
-
 function closeWindow(event) {
   let targetElement = event.target;
   let window = document.querySelector(".window");
@@ -132,10 +131,16 @@ function createWindowAfterLogIn() {
   visitBtnElement.after(outBtnElement);
   let isRequesting = false;
 
+  // button go out
   outBtnElement.addEventListener("click", goOut);
   function goOut() {
     let textContent = document.querySelector(".text-about-nothing");
-    textContent.remove();
+    let window = document.querySelector(".window");
+    if (textContent) {
+      textContent.remove();
+    } else if (window) {
+      window.remove();
+    }
     let visitBtn = document.querySelector(".button-create-visit");
     visitBtn.remove();
     let outButton = document.querySelector(".out-button");
@@ -160,7 +165,7 @@ function createWindowAfterLogIn() {
     if (isRequesting) return;
     isRequesting = true;
 
-    let text = document.querySelector(".text-about-nothing");
+    let text = document.querySelector(".cards-wrapper");
     text.remove();
 
     let createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");

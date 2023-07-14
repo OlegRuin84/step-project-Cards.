@@ -28,8 +28,6 @@ let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 //   }
 // }
 
-// export { fetchData };
-
 async function fetchData(data) {
   const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
     method: "POST",
