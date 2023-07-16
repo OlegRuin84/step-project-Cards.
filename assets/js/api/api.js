@@ -38,6 +38,7 @@ async function fetchData(data) {
     body: JSON.stringify(data),
   });
   console.log(response);
+
 }
 
 export { fetchData };

@@ -3,6 +3,8 @@
 // server token
 let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 
+import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js"
+
 // GET
 async function getUserServer() {
   try {
@@ -14,6 +16,22 @@ async function getUserServer() {
     });
     let data = await response.json();
     console.log(data);
+    
+    data.forEach(e =>{
+      // console.log(e)
+      if(e.doc === 'Кардіолог'){
+        // console.log(e)
+        let card = new VisitCardiologist( e.descriptionVisit, e.goalVisit, e.changeUrgency, e.namePatient, e.doc, e.pressure, e.bmi, e.heartDisease, e.age, e.id)
+        card.render()
+      } else if(e.doc === 'Стоматолог'){
+        let card = new VisitDentist (e.descriptionVisit, e.goalVisit, e.changeUrgency, e.namePatient, e.doc, e.id)
+        card.render()
+      } else if (e.doc === 'Терапевт'){
+        let card = new VisitTherapist(e.descriptionVisit, e.goalVisit, e.changeUrgency, e.namePatient, e.doc, e.age, e.id)
+        card.render()
+      }
+      
+    })
 
     return data;
   } catch (e) {
