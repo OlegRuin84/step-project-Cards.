@@ -15,6 +15,7 @@ class Form {
     inputElement.setAttribute("type", inputType);
     inputElement.setAttribute("name", inputName);
     inputElement.classList.add(style);
+    inputElement.setAttribute("required", true);
     this.formElement.append(inputElement);
   }
 
@@ -23,6 +24,7 @@ class Form {
     textareaElement.setAttribute("placeholder", placeholderText);
     textareaElement.setAttribute("name", inputName);
     textareaElement.classList.add(style);
+    textareaElement.setAttribute("required", true);
     this.formElement.append(textareaElement);
   }
 
