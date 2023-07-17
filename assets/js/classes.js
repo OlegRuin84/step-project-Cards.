@@ -82,7 +82,6 @@ class ModalCardWindow extends Modal {
     this.form.addOption("option", "Кардіолог");
     this.form.addOption("option", "Стоматолог");
     this.form.addOption("option", "Терапевт");
-    // TODO
     this.form.addButton("ЗАКРИТИ", "close-card", "button");
 
     this.modalElement.classList.add("window-create-doctor");
@@ -93,11 +92,8 @@ class ModalCardWindow extends Modal {
       this.handleSelectChange.bind(this)
     );
 
-    // TODO
     const closeWindow = this.form.formElement.querySelector(".close-card");
     closeWindow.addEventListener("click", function () {
-      console.log("!");
-
       this.form.remove();
     });
   }
@@ -123,7 +119,6 @@ class ModalCardWindow extends Modal {
 
     if (modalForm) {
       const selectElement = this.form.formElement.querySelector("select");
-      // TODO
       const closeWindow = this.form.formElement.querySelector(".close-card");
 
       const noneOption = selectElement.querySelector(
