@@ -37,6 +37,7 @@ async function getToken(data) {
   }
 }
 
+//
 // async function fetchData(url, fetchMethod, data = null) {
 //   const options = {
 //     method: `${fetchMethod}`,
@@ -63,52 +64,6 @@ async function getToken(data) {
 //     console.error("Помилка:", error);
 //     throw error;
 //   }
-// }
-
-// TODO
-// async function fetchData(data) {
-//   const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   console.log(response);
-// }
-
-// TODO
-// async function getToken(data) {
-//   let storedLogin = localStorage.getItem("login");
-//   let storedPassword = localStorage.getItem("password");
-//   fetch("https://ajax.test-danit.com/api/v2/cards/login", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ email: storedLogin, password: storedPassword }),
-//   })
-//     .then((response) => response.text())
-//     .then((token) => {
-//       console.log(token);
-
-//       async function fetchData(token) {
-//         const response = await fetch(
-//           "https://ajax.test-danit.com/api/v2/cards",
-//           {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",
-//               Authorization: `Bearer ${token}`,
-//             },
-//             body: JSON.stringify(data),
-//           }
-//         );
-//         console.log(response);
-//       }
-//       fetchData();
-//     });
 // }
 
 export { getToken };
