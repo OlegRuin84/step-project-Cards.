@@ -85,7 +85,7 @@ class Form {
     if (isFormValid) {
       sendFormData(formData)
         .then((response) => {
-          if (response.ok) {
+          if (response && response.ok) {
             console.log("Data sent successfully");
           } else {
             throw new Error("Error sending data");

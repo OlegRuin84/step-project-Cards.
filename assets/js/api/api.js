@@ -19,18 +19,19 @@ async function getToken(data) {
   try {
     let storedLogin = localStorage.getItem("login");
     let storedPassword = localStorage.getItem("password");
-    fetch("https://ajax.test-danit.com/api/v2/cards/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: storedLogin, password: storedPassword }),
-    })
-      .then((response) => response.text())
-      .then((token) => {
-        console.log(token);
-        fetchData(token, data);
-      });
+    const response = await fetch(
+      "https://ajax.test-danit.com/api/v2/cards/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: storedLogin, password: storedPassword }),
+      }
+    );
+    const token = await response.text();
+    console.log(token);
+    fetchData(token, data);
   } catch (error) {
     console.log("Помилка в getToken, файл api.js");
     console.log(error);

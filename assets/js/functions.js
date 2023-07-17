@@ -9,10 +9,18 @@ function deleteWorningWindow() {
 }
 
 function sendFormData(formData) {
-  let data = Object.fromEntries(formData.entries());
-  console.log(data);
+  return new Promise((resolve, reject) => {
+    let data = Object.fromEntries(formData.entries());
+    console.log(data);
 
-  getToken(data);
+    getToken(data)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export { deleteWorningWindow, sendFormData };
