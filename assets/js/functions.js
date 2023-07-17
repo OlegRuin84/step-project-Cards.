@@ -13,6 +13,4 @@ function sendFormData(formData) {
   fetchData(data);
 }
 
-
-
-  export { deleteWorningWindow, sendFormData };
+export { deleteWorningWindow, sendFormData };

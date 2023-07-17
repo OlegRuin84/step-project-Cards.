@@ -1,7 +1,9 @@
 //
 // imports
 import { deleteWorningWindow } from "./functions.js";
-import { Button, ModalEnterWindow, ModalCardWindow, VisitCardiologist} from "./classes.js";
+// ! Oleg
+// import { Button, ModalEnterWindow, ModalCardWindow, VisitCardiologist} from "./classes.js";
+import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
 // for testing
 let login = "1";
@@ -175,14 +177,15 @@ function createWindowAfterLogIn() {
 
 // card__btn-more Listener
 
-let conteinerCards = document.querySelector('.conteiner__cards')
-// console.log(conteinerCards)
-  conteinerCards.addEventListener('click', function(event){
-  // console.log(event.target.closest('div').id)
-  let div = event.target.closest('div').lastElementChild
-  if(div.style.display === ""){
-    div.style.display = "block"
-  }else if(div.style.display === "block"){
-    div.style.display = ""
-  }
-  })
+// ! Oleg
+// let conteinerCards = document.querySelector('.conteiner__cards')
+// // console.log(conteinerCards)
+//   conteinerCards.addEventListener('click', function(event){
+//   // console.log(event.target.closest('div').id)
+//   let div = event.target.closest('div').lastElementChild
+//   if(div.style.display === ""){
+//     div.style.display = "block"
+//   }else if(div.style.display === "block"){
+//     div.style.display = ""
+//   }
+//   })
