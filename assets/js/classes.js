@@ -82,6 +82,8 @@ class ModalCardWindow extends Modal {
     this.form.addOption("option", "Кардіолог");
     this.form.addOption("option", "Стоматолог");
     this.form.addOption("option", "Терапевт");
+    // TODO
+    this.form.addButton("ЗАКРИТИ", "close-card", "button");
 
     this.modalElement.classList.add("window-create-doctor");
     this.modalElement.append(this.form.formElement);
@@ -90,6 +92,14 @@ class ModalCardWindow extends Modal {
       "change",
       this.handleSelectChange.bind(this)
     );
+
+    // TODO
+    const closeWindow = this.form.formElement.querySelector(".close-card");
+    closeWindow.addEventListener("click", function () {
+      console.log("!");
+
+      this.form.remove();
+    });
   }
 
   handleSelectChange(event) {
@@ -113,6 +123,9 @@ class ModalCardWindow extends Modal {
 
     if (modalForm) {
       const selectElement = this.form.formElement.querySelector("select");
+      // TODO
+      const closeWindow = this.form.formElement.querySelector(".close-card");
+
       const noneOption = selectElement.querySelector(
         'option[value="-- none --"]'
       );
@@ -120,7 +133,11 @@ class ModalCardWindow extends Modal {
         noneOption.remove();
       }
       this.form.clearFormElement();
-      this.form.formElement.append(selectElement, modalForm.form.formElement);
+      this.form.formElement.append(
+        selectElement,
+        modalForm.form.formElement,
+        closeWindow
+      );
 
       const createButton =
         modalForm.form.formElement.querySelector(".create-card");
@@ -128,12 +145,12 @@ class ModalCardWindow extends Modal {
         modalForm.form.sendData();
       });
 
-      let closeCardBtn = document.querySelector(".close-card");
-      let window = document.querySelector(".window-create-doctor");
-      closeCardBtn.addEventListener("click", closeTheCard);
-      function closeTheCard() {
-        window.remove();
-      }
+      // let closeCardBtn = document.querySelector(".close-card");
+      // let window = document.querySelector(".window-create-doctor");
+      // closeCardBtn.addEventListener("click", closeTheCard);
+      // function closeTheCard() {
+      //   window.remove();
+      // }
     }
   }
 }

@@ -46,6 +46,7 @@ function createWindowAfterLogIn() {
   }
 }
 
+//
 function createWindowContent() {
   let button = document.querySelector(".button-create-visit");
   if (isRequesting || !isLoggedIn) {
@@ -61,6 +62,13 @@ function createWindowContent() {
   const newWindow = document.querySelector(".window-create-doctor");
   if (newWindow) {
     setTimeout(() => {
+      // TODO
+      // let closeButton = document.querySelector(".close-card");
+      // if (closeButton) {
+      //   closeButton.addEventListener("click", function () {
+      //     console.log("!");
+      //   });
+      // }
       document.addEventListener("click", closeModalWindow);
       button.classList.add("hidden");
     }, 0);
@@ -76,6 +84,7 @@ function createWindowContent() {
   }
   isRequesting = false;
 }
+//
 
 //
 // Create log-in window

@@ -122,7 +122,7 @@ class ModalCardiologistForm extends ModalDoctor {
       "textarea"
     );
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    this.form.addButton("ЗАКРИТИ", "close-card", "button");
+    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -141,7 +141,7 @@ class ModalDentistForm extends ModalDoctor {
       "input-login"
     );
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    this.form.addButton("ЗАКРИТИ", "close-card", "button");
+    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -155,7 +155,7 @@ class ModalTherapistForm extends ModalDoctor {
   createTherapistForm() {
     this.form.addInput("Вік", "text", "age", "input-login");
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    this.form.addButton("ЗАКРИТИ", "close-card", "button");
+    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
