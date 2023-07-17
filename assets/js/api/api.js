@@ -1,4 +1,41 @@
-let token = "70dd6d15-1769-4113-a892-9664144ebf41";
+async function fetchData(token, data) {
+  try {
+    const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+  } catch (error) {
+    console.log("Помилка в fetchData, файл api.js");
+    console.log(error);
+  }
+}
+
+async function getToken(data) {
+  try {
+    let storedLogin = localStorage.getItem("login");
+    let storedPassword = localStorage.getItem("password");
+    fetch("https://ajax.test-danit.com/api/v2/cards/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: storedLogin, password: storedPassword }),
+    })
+      .then((response) => response.text())
+      .then((token) => {
+        console.log(token);
+        fetchData(token, data);
+      });
+  } catch (error) {
+    console.log("Помилка в getToken, файл api.js");
+    console.log(error);
+  }
+}
 
 // async function fetchData(url, fetchMethod, data = null) {
 //   const options = {
@@ -28,16 +65,50 @@ let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 //   }
 // }
 
-async function fetchData(data) {
-  const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(response);
-}
+// TODO
+// async function fetchData(data) {
+//   const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(data),
+//   });
+//   console.log(response);
+// }
 
-export { fetchData };
+// TODO
+// async function getToken(data) {
+//   let storedLogin = localStorage.getItem("login");
+//   let storedPassword = localStorage.getItem("password");
+//   fetch("https://ajax.test-danit.com/api/v2/cards/login", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ email: storedLogin, password: storedPassword }),
+//   })
+//     .then((response) => response.text())
+//     .then((token) => {
+//       console.log(token);
+
+//       async function fetchData(token) {
+//         const response = await fetch(
+//           "https://ajax.test-danit.com/api/v2/cards",
+//           {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//               Authorization: `Bearer ${token}`,
+//             },
+//             body: JSON.stringify(data),
+//           }
+//         );
+//         console.log(response);
+//       }
+//       fetchData();
+//     });
+// }
+
+export { getToken };

@@ -1,7 +1,28 @@
 // now we are using a code below and all script only for testing... :)
+// THIS FILE ONLY FOR TESTING - we can see the result of our work on the coтsole
 
-// server token
-let token = "70dd6d15-1769-4113-a892-9664144ebf41";
+// ---------------- TEST ----------------------
+// to see the result
+// let token = "???????????????";
+// async function getUserServer() {
+//   try {
+//     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     let data = await response.json();
+//     console.log(data);
+
+//     return data;
+//   } catch (e) {
+//     console.log("Помилка в GET запиті (функція getUserServer)!");
+//     console.log(e);
+//   }
+// }
+// getUserServer();
+// ---------------- TEST ----------------------
 
 // ! Oleg
 // import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js";

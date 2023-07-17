@@ -1,4 +1,4 @@
-import { fetchData } from "./api/api.js";
+import { getToken } from "./api/api.js";
 
 // delete worning window
 function deleteWorningWindow() {
@@ -12,7 +12,7 @@ function sendFormData(formData) {
   let data = Object.fromEntries(formData.entries());
   console.log(data);
 
-  fetchData(data);
+  getToken(data);
 }
 
 export { deleteWorningWindow, sendFormData };
