@@ -1,4 +1,5 @@
 // now we are using a code below and all script only for testing... :)
+//
 
 // server token
 let token = "70dd6d15-1769-4113-a892-9664144ebf41";
