@@ -3,7 +3,9 @@ import { fetchData } from "./api/api.js";
 // delete worning window
 function deleteWorningWindow() {
   let worningWindow = document.querySelector(".worning-window");
-  worningWindow.remove();
+  if (worningWindow) {
+    worningWindow.remove();
+  }
 }
 
 function sendFormData(formData) {

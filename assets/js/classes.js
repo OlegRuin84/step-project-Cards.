@@ -61,6 +61,7 @@ class ModalEnterWindow extends Modal {
       "input-password"
     );
     this.form.addButton("УВІЙТИ", "enter-btn");
+    this.modalElement.classList.add("window-log-in");
 
     this.modalElement.append(this.form.formElement);
   }
@@ -82,6 +83,7 @@ class ModalCardWindow extends Modal {
     this.form.addOption("option", "Стоматолог");
     this.form.addOption("option", "Терапевт");
 
+    this.modalElement.classList.add("window-create-doctor");
     this.modalElement.append(this.form.formElement);
 
     selectElement.addEventListener(
@@ -125,6 +127,13 @@ class ModalCardWindow extends Modal {
       createButton.addEventListener("click", () => {
         modalForm.form.sendData();
       });
+
+      let closeCardBtn = document.querySelector(".close-card");
+      let window = document.querySelector(".window-create-doctor");
+      closeCardBtn.addEventListener("click", closeTheCard);
+      function closeTheCard() {
+        window.remove();
+      }
     }
   }
 }

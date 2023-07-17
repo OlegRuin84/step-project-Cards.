@@ -6,6 +6,7 @@ let token = "70dd6d15-1769-4113-a892-9664144ebf41";
 // ! Oleg
 // import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js";
 
+// ! Oleg
 // GET
 // async function getUserServer() {
 //   try {

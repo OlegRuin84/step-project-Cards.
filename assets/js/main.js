@@ -6,8 +6,8 @@ import { deleteWorningWindow } from "./functions.js";
 import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
 // for testing
-let login = "1";
-let password = "1";
+// let login = "1";
+// let password = "1";
 
 //
 // Create log-in button
@@ -25,64 +25,145 @@ logInBtnElement.classList.add("button-log-in");
 logInBtnElement.textContent = "ВХІД";
 header.append(btnWrapper);
 btnWrapper.append(logInBtnElement);
-
 let isRequesting = false;
+let isLoggedIn = false;
+
+let createNewVisitButton = null;
+
+// Check authorization status on page load
+window.addEventListener("DOMContentLoaded", function () {
+  let storedLogin = localStorage.getItem("login");
+  let storedPassword = localStorage.getItem("password");
+  if (storedLogin && storedPassword) {
+    logInBtnElement.style.display = "none";
+    headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
+    body.style.backgroundColor = "rgb(190, 220, 255)";
+    isLoggedIn = true;
+    createWindowAfterLogIn(header);
+  }
+});
+
+function createWindowAfterLogIn() {
+  if (!createNewVisitButton) {
+    const visitBtn = new Button();
+    createNewVisitButton = visitBtn.createButton();
+    createNewVisitButton.classList.add("button-create-visit");
+    createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
+    btnWrapper.append(createNewVisitButton);
+    createNewVisitButton.addEventListener("click", createWindowContent);
+  }
+}
+
+function createWindowContent() {
+  let button = document.querySelector(".button-create-visit");
+  if (isRequesting || !isLoggedIn) {
+    console.log("Condition check:", isRequesting, isLoggedIn);
+    return;
+  }
+  isRequesting = true;
+
+  const createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
+  createWindow.open();
+
+  // close the window
+  const newWindow = document.querySelector(".window-create-doctor");
+  if (newWindow) {
+    setTimeout(() => {
+      document.addEventListener("click", closeModalWindow);
+      button.classList.add("hidden");
+    }, 0);
+  }
+  function closeModalWindow(event) {
+    const targetElement = event.target;
+
+    if (newWindow && !newWindow.contains(targetElement)) {
+      newWindow.remove();
+      button.classList.remove("hidden");
+    }
+  }
+  isRequesting = false;
+}
 
 //
 // Create log-in window
 logInBtnElement.addEventListener("click", openWindow);
 function openWindow() {
-  if (isRequesting) return;
+  if (isRequesting || isLoggedIn) return;
   isRequesting = true;
 
   let logInWindow = new ModalEnterWindow(header, "АВТОРИЗАЦІЯ");
   logInWindow.open();
 
-  let button = document.querySelector(".button-log-in");
-  button.remove();
-  const logOutBtn = new Button();
-  const logOutBtnElement = logOutBtn.createButton();
-  logOutBtnElement.classList.add("button-log-out");
-  logOutBtnElement.textContent = "ВИЙТИ";
-  btnWrapper.append(logOutBtnElement);
+  logInBtnElement.style.display = "none";
 
   headerBackground.style.backgroundColor = "rgb(219, 219, 219)";
   body.style.backgroundColor = "rgb(219, 219, 219)";
   isRequesting = false;
 
-  let enterBtn = document.querySelector(".enter-btn");
+  const enterBtn = document.querySelector(".enter-btn");
   enterBtn.addEventListener("click", enterToTheSystem);
 
   function enterToTheSystem() {
-    let inputLogin = document.querySelector(".input-login");
-    let inputPassword = document.querySelector(".input-password");
-    let window = document.querySelector(".window");
+    const inputLogin = document.querySelector(".input-login");
+    const inputPassword = document.querySelector(".input-password");
+    const window = document.querySelector(".window");
 
-    if (inputLogin.value !== login || inputPassword.value !== password) {
-      inputLogin.classList.add("input-worning");
-      inputPassword.classList.add("input-worning");
-      let worningWindow = document.createElement("div");
-      worningWindow.classList.add("worning-window");
-      worningWindow.textContent =
-        "Невведені або некоректно введені дані. Будь ласка, повторіть спробу";
-      window.append(worningWindow);
+    // TODO: Login API request
+    async function takeToken() {
+      try {
+        let response = await fetch(
+          "https://ajax.test-danit.com/api/v2/cards/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: inputLogin.value,
+              password: inputPassword.value,
+            }),
+          }
+        );
 
-      setTimeout(deleteWorningWindow, 3000);
-    } else {
-      createWindowAfterLogIn(header);
-      // back to the main style
-      logOutBtnElement.remove();
-      logInWindow.close();
-      headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
-      body.style.backgroundColor = "rgb(190, 220, 255)";
-      let cardsWrapper = document.createElement("div");
-      cardsWrapper.classList.add("cards-wrapper");
-      let text = document.createElement("p");
-      text.classList.add("text-about-nothing");
-      text.textContent = "Жодного візита не додано";
-      cardsWrapper.append(text);
-      main.append(cardsWrapper);
+        // take the token
+        // let data = response.text().then((data) => console.log(data));
+
+        if (response.status === 200) {
+          isLoggedIn = true;
+          let data = response.text().then((data) => {
+            localStorage.setItem("login", inputLogin.value);
+            localStorage.setItem("password", inputPassword.value);
+
+            console.log(data);
+          });
+
+          logInWindow.close();
+          headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
+          body.style.backgroundColor = "rgb(190, 220, 255)";
+
+          createWindowAfterLogIn(header);
+        } else {
+          // delete
+          alert(
+            "ДРУЗІ! Вводимо логін та пароль, які вводили при реєстрації на сервері"
+          );
+
+          inputLogin.classList.add("input-worning");
+          inputPassword.classList.add("input-worning");
+          const worningWindow = document.createElement("div");
+          worningWindow.classList.add("worning-window");
+          worningWindow.textContent =
+            "Невведені або некоректно введені дані. Будь ласка, повторіть спробу";
+          window.append(worningWindow);
+
+          setTimeout(deleteWorningWindow, 3000);
+        }
+      } catch (error) {
+        console.log("Помилка:");
+        console.log(error);
+      }
     }
+    takeToken();
   }
 }
 
@@ -90,7 +171,7 @@ function openWindow() {
 document.addEventListener("click", closeWindow);
 function closeWindow(event) {
   let targetElement = event.target;
-  let window = document.querySelector(".window");
+  let window = document.querySelector(".window-log-in");
 
   if (!window) {
     return;
@@ -99,13 +180,8 @@ function closeWindow(event) {
     !targetElement.classList.contains("button-log-in")
   ) {
     window.remove();
-    let logOutBtnElement = document.querySelector(".button-log-out");
-    logOutBtnElement.remove();
-    const logInBtn = new Button();
-    const logInBtnElement = logInBtn.createButton();
-    logInBtnElement.classList.add("button-log-in");
-    logInBtnElement.textContent = "ВХІД";
-    header.append(logInBtnElement);
+    let enterBtn = document.querySelector(".button-log-in");
+    enterBtn.style.display = "flex";
 
     logInBtnElement.addEventListener("click", openWindow);
     headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
@@ -115,69 +191,22 @@ function closeWindow(event) {
   }
 }
 
-//
-// Create the modal window (for creating cards)
-function createWindowAfterLogIn() {
-  // create btn "Create a visit"
-  const visitBtn = new Button();
-  const visitBtnElement = visitBtn.createButton();
-  visitBtnElement.classList.add("button-create-visit");
-  visitBtnElement.textContent = "НОВИЙ ВІЗИТ";
-  btnWrapper.append(visitBtnElement);
+window.addEventListener("beforeunload", function () {
+  let storedLogin = localStorage.getItem("login");
+  let storedPassword = localStorage.getItem("password");
+  if (storedLogin && storedPassword) {
+    const visitBtn = new Button();
+    const visitBtnElement = visitBtn.createButton();
+    visitBtnElement.classList.add("button-create-visit");
+    visitBtnElement.textContent = "НОВИЙ ВІЗИТ";
+    btnWrapper.append(visitBtnElement);
 
-  const outBtn = new Button();
-  const outBtnElement = outBtn.createButton();
-  outBtnElement.classList.add("button-log-in");
-  outBtnElement.classList.add("out-button");
-  outBtnElement.textContent = "ВИЙТИ";
-  visitBtnElement.after(outBtnElement);
-  let isRequesting = false;
-
-  // button go out
-  outBtnElement.addEventListener("click", goOut);
-  function goOut() {
-    let textContent = document.querySelector(".text-about-nothing");
-    let window = document.querySelector(".window");
-    if (textContent) {
-      textContent.remove();
-    } else if (window) {
-      window.remove();
-    }
-    let visitBtn = document.querySelector(".button-create-visit");
-    visitBtn.remove();
-    let outButton = document.querySelector(".out-button");
-    outButton.remove();
-
-    const logInBtn = new Button();
-    const logInBtnElement = logInBtn.createButton();
-    logInBtnElement.classList.add("button-log-in");
-    logInBtnElement.textContent = "ВХІД";
-    header.append(btnWrapper);
-    btnWrapper.append(logInBtnElement);
-    logInBtnElement.addEventListener("click", openWindow);
+    visitBtnElement.addEventListener("click", createWindowContent);
   }
-
-  let buttonCreateVisit = document.querySelector(".button-create-visit");
-  buttonCreateVisit.addEventListener("click", createWindowContent);
-
-  // create modal window
-  function createWindowContent() {
-    document.removeEventListener("click", closeWindow);
-
-    if (isRequesting) return;
-    isRequesting = true;
-
-    let text = document.querySelector(".cards-wrapper");
-    text.remove();
-
-    let createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
-    createWindow.open();
-  }
-}
-
-// card__btn-more Listener
+});
 
 // ! Oleg
+// card__btn-more Listener
 // let conteinerCards = document.querySelector('.conteiner__cards')
 // // console.log(conteinerCards)
 //   conteinerCards.addEventListener('click', function(event){
