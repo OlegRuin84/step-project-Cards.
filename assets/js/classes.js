@@ -179,18 +179,19 @@ class VisitCardiologist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <h4 class="card__title">${this.namePatient}</h4>               
-            <h4 class="card__doc">${this.doc}</h4>
-            <button class="card__btn-more">More</button>
+            <button class="card__delete">❌</button>
+            <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
+            <h4 class="card__doc">Доктор: ${this.doc}</h4>
+            <button class="card__btn-more">Показати більше</button>
             <div class="card__block" data-card-info= ${this.id}> 
-              <p class ="card__descriptionVisit">${this.descriptionVisit}</p>
-              <p class="card__goalVisit">${this.goalVisit}</p>
-              <p class="card__changeUrgency">${this.changeUrgency}</p>
-              <p class="card__pressure">${this.pressure}</p>
-              <p class="card__bmi">${this.bmi}</p>
-              <p class="card__heartDisease" >${this.heartDisease}</p>
-              <p class="card__age">${this.age}</p>
-              <button class="card__btn-rewrite" >Rewrite</button>
+              <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
+              <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
+              <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
+              <p class="card__pressure">Внутрішний тиск: ${this.pressure}</p>
+              <p class="card__bmi">Індекс маси тіла: ${this.bmi}</p>
+              <p class="card__heartDisease">Перенесені захворювання серцево-судинної системи: ${this.heartDisease}</p>
+              <p class="card__age">Вік: ${this.age}</p>
+              <button class="card__btn-rewrite" >Редагувати</button>
             </div>
             </div>`;
     // Кнопка Редагувати.
@@ -241,16 +242,17 @@ class VisitDentist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <h4 class="card__title">${this.namePatient}</h4>               
-            <h4 class="card__doc">${this.doc}</h4>
-            <button class="card__btn-more">More</button>
+            <button class="card__delete">❌</button>
+            <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
+            <h4 class="card__doc">Доктор: ${this.doc}</h4>
+            <button class="card__btn-more">Показати більше</button>
             <div class="card__block" data-card-info= ${this.id}> 
-              <p class ="card__descriptionVisit">${this.descriptionVisit}</p>
-              <p class="card__goalVisit">${this.goalVisit}</p>
-              <p class="card__changeUrgency">${this.changeUrgency}</p>
-              <p class="card__age">${this.age}</p>
-              <p class="card__lastDate">${this.lastDate}</p>
-              <button class="card__btn-rewrite" >Rewrite</button>
+              <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
+              <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
+              <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
+              <p class="card__age">Вік: ${this.age}</p>
+              <p class="card__lastDate">Останній візит: ${this.lastDate}</p>
+              <button class="card__btn-rewrite" >Редагувати</button>
             </div>
             </div>`;
     let element = document.querySelector('.conteiner__cards')
@@ -287,15 +289,16 @@ class VisitTherapist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <h4 class="card__title">${this.namePatient}</h4>               
-            <h4 class="card__doc">${this.doc}</h4>
-            <button class="card__btn-more">More</button>
+            <button class="card__delete">❌</button>
+            <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
+            <h4 class="card__doc">Доктор: ${this.doc}</h4>
+            <button class="card__btn-more">Показати більше</button>
             <div class="card__block" data-card-info= ${this.id}> 
-              <p class ="card__descriptionVisit">${this.descriptionVisit}</p>
-              <p class="card__goalVisit">${this.goalVisit}</p>
-              <p class="card__changeUrgency">${this.changeUrgency}</p>
-              <p class="card__age">${this.age}</p>
-              <button class="card__btn-rewrite" >Rewrite</button>
+              <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
+              <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
+              <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
+              <p class="card__age">Вік: ${this.age}</p>
+              <button class="card__btn-rewrite" >Редагувати</button>
             </div>
             </div>`;
     let element = document.querySelector('.conteiner__cards')
