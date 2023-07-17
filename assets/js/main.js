@@ -1,13 +1,6 @@
-//
-// imports
 import { deleteWorningWindow } from "./functions.js";
-// ! Oleg
-// import { Button, ModalEnterWindow, ModalCardWindow, VisitCardiologist} from "./classes.js";
-import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
-// for testing
-// let login = "1";
-// let password = "1";
+import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
 //
 // Create log-in button
@@ -30,7 +23,6 @@ let isLoggedIn = false;
 
 let createNewVisitButton = null;
 
-// Check authorization status on page load
 window.addEventListener("DOMContentLoaded", function () {
   let storedLogin = localStorage.getItem("login");
   let storedPassword = localStorage.getItem("password");
@@ -79,6 +71,7 @@ function createWindowContent() {
     if (newWindow && !newWindow.contains(targetElement)) {
       newWindow.remove();
       button.classList.remove("hidden");
+      document.removeEventListener("click", closeModalWindow);
     }
   }
   isRequesting = false;
@@ -124,9 +117,6 @@ function openWindow() {
             }),
           }
         );
-
-        // take the token
-        // let data = response.text().then((data) => console.log(data));
 
         if (response.status === 200) {
           isLoggedIn = true;
@@ -204,17 +194,3 @@ window.addEventListener("beforeunload", function () {
     visitBtnElement.addEventListener("click", createWindowContent);
   }
 });
-
-// ! Oleg
-// card__btn-more Listener
-// let conteinerCards = document.querySelector('.conteiner__cards')
-// // console.log(conteinerCards)
-//   conteinerCards.addEventListener('click', function(event){
-//   // console.log(event.target.closest('div').id)
-//   let div = event.target.closest('div').lastElementChild
-//   if(div.style.display === ""){
-//     div.style.display = "block"
-//   }else if(div.style.display === "block"){
-//     div.style.display = ""
-//   }
-//   })
