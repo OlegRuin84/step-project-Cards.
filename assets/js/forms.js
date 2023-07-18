@@ -78,8 +78,8 @@ class Form {
 
   //   GO TO THE SERVER
   sendData() {
-    const self = this;
-    const formData = new FormData(self.formElement);
+    // const self = this;
+    const formData = new FormData(this.formElement);
     console.log(formData);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
