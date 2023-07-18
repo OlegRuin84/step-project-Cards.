@@ -356,7 +356,7 @@ textarea::placeholder {
   transform: scale(1.2);
 }
 .card__block {
-  display: none;
+  /* display: none; */
 }
 .card__btn-more,
 .card__btn-rewrite {
@@ -392,3 +392,39 @@ textarea::placeholder {
 .filter-urgency {
   width: 200px;
 } */
+
+/* * cards * */
+.card__name-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.cross {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+.cross::before,
+.cross::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 80%;
+  height: 1.5px;
+  background-color: rgb(158, 156, 156);
+}
+
+.cross::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.cross::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.cross::before:hover,
+.cross::after:hover {
+  background-color: rgb(29, 155, 240);
+}

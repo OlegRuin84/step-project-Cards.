@@ -40,9 +40,6 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//
-// function createWindowAfterLogIn() was here before
-//
 function createWindowAfterLogIn(login, password) {
   if (!createNewVisitButton) {
     let conteinerCards = document.querySelector(".conteiner__cards");
