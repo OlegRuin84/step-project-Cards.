@@ -108,7 +108,6 @@ class Form {
   // }
 
   sendData() {
-    console.log(this.formElement);
     const formData = new FormData(this.formElement);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);

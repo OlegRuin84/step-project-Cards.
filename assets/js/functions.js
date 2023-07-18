@@ -11,8 +11,6 @@ function deleteWorningWindow() {
 function sendFormData(formData) {
   return new Promise((resolve, reject) => {
     let data = Object.fromEntries(formData.entries());
-    console.log(data);
-
     getToken(data)
       .then((response) => {
         resolve(response);

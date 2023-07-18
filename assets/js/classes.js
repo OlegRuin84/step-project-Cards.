@@ -142,8 +142,10 @@ class ModalCardWindow extends Modal {
         modalForm.form.formElement.querySelector(".create-card");
       createButton.addEventListener("click", () => {
         modalForm.form.sendData();
+        // TODO GET
+
         //
-        // TODO
+        // conteiner__cards is visiable after sending
         function closeWindow() {
           let conteinerCards = document.querySelector(".conteiner__cards");
           let filterWrapper = document.querySelector(".filter-wrapper");

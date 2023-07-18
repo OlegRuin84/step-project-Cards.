@@ -10,7 +10,48 @@ async function fetchData(token, data) {
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
+    // TODO GET
+    if (response.status === 200) {
+      console.log(data);
+
+      if (data.doc === "Кардіолог") {
+        let card = new VisitCardiologist(
+          data.descriptionVisit,
+          data.goalVisit,
+          data.changeUrgency,
+          data.namePatient,
+          data.doc,
+          data.pressure,
+          data.bmi,
+          data.heartDisease,
+          data.age,
+          data.id
+        );
+        card.render();
+      } else if (data.doc === "Стоматолог") {
+        let card = new VisitDentist(
+          data.descriptionVisit,
+          data.goalVisit,
+          data.changeUrgency,
+          data.namePatient,
+          data.doc,
+          data.id
+        );
+        card.render();
+      } else if (data.doc === "Терапевт") {
+        let card = new VisitTherapist(
+          data.descriptionVisit,
+          data.goalVisit,
+          data.changeUrgency,
+          data.namePatient,
+          data.doc,
+          data.age,
+          data.id
+        );
+        card.render();
+      }
+    }
+    // TODO GET
   } catch (error) {
     console.log("Помилка в fetchData, файл api.js");
     console.log(error);
@@ -32,7 +73,6 @@ async function getToken(data) {
       }
     );
     const token = await response.text();
-    console.log(token);
     fetchData(token, data);
   } catch (error) {
     console.log("Помилка в getToken, файл api.js");
@@ -173,4 +213,4 @@ async function getUserServer(token) {
 // }
 //
 
-export { getToken, getToken2, getUserServer };
+export { getToken, getToken2 };
