@@ -50,72 +50,57 @@ window.addEventListener("DOMContentLoaded", function () {
 //     btnWrapper.append(createNewVisitButton);
 //     createNewVisitButton.addEventListener("click", createWindowContent);
 
-//     // for cards rendering
-//     let div1 = document.createElement("div");
-//     div1.classList.add("cards-wrapper");
-//     let div2 = document.createElement("div");
-//     div2.classList.add("conteiner__cards");
-//     main.prepend(div1);
-//     div1.prepend(div2);
+//     //
+//     const inputLogin = document.querySelector(".input-login").value;
+//     const inputPassword = document.querySelector(".input-password").value;
+//     //
 
-//     getToken2();
+//     // for filtering
+//     let filterWrapper = document.createElement("div");
+//     let filterDescription = document.createElement("input");
+//     let filterStatus = document.createElement("select");
+//     let filterStatusOpen = document.createElement("option");
+//     let filterStatusDone = document.createElement("option");
+//     let filterUrgency = document.createElement("select");
+//     let filterUrgencyHigh = document.createElement("option");
+//     let filterUrgencyNormal = document.createElement("option");
+//     let filterUrgencyLow = document.createElement("option");
+
+//     filterWrapper.classList.add("container");
+//     filterWrapper.classList.add("filter-wrapper");
+//     filterDescription.classList.add("filter-description");
+//     filterStatus.classList.add("filter-status");
+//     filterStatusOpen.setAttribute("value", "Open");
+//     filterStatusDone.setAttribute("value", "Done");
+//     filterUrgency.classList.add("filter-urgency");
+//     filterUrgencyHigh.setAttribute("value", "High");
+//     filterUrgencyNormal.setAttribute("value", "Norma");
+//     filterUrgencyLow.setAttribute("value", "Low");
+
+//     filterWrapper.prepend(filterDescription);
+//     filterStatus.prepend(filterStatusOpen);
+//     filterStatus.prepend(filterStatusDone);
+//     filterDescription.after(filterStatus);
+//     filterUrgency.prepend(filterUrgencyHigh);
+//     filterUrgency.prepend(filterUrgencyNormal);
+//     filterUrgency.prepend(filterUrgencyLow);
+//     filterStatus.after(filterUrgency);
+
+//     // for cards rendering
+//     let cardsWrapper = document.createElement("div");
+//     let cardsConteiner = document.createElement("div");
+//     cardsWrapper.classList.add("cards-wrapper");
+//     cardsConteiner.classList.add("conteiner__cards");
+
+//     // main.prepend(cardsWrapper);
+//     // cardsWrapper.prepend(cardsConteiner);
+//     main.prepend(filterWrapper);
+//     filterWrapper.after(cardsConteiner);
+
+//     getToken2(inputLogin, inputPassword);
 //   }
 // }
-
-function createWindowAfterLogIn() {
-  if (!createNewVisitButton) {
-    const visitBtn = new Button();
-    createNewVisitButton = visitBtn.createButton();
-    createNewVisitButton.classList.add("button-create-visit");
-    createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
-    btnWrapper.append(createNewVisitButton);
-    createNewVisitButton.addEventListener("click", createWindowContent);
-
-    // for filtering
-    let filterWrapper = document.createElement("div");
-    let filterDescription = document.createElement("input");
-    let filterStatus = document.createElement("select");
-    let filterStatusOpen = document.createElement("option");
-    let filterStatusDone = document.createElement("option");
-    let filterUrgency = document.createElement("select");
-    let filterUrgencyHigh = document.createElement("option");
-    let filterUrgencyNormal = document.createElement("option");
-    let filterUrgencyLow = document.createElement("option");
-
-    filterWrapper.classList.add("container");
-    filterWrapper.classList.add("filter-wrapper");
-    filterDescription.classList.add("filter-description");
-    filterStatus.classList.add("filter-status");
-    filterStatusOpen.setAttribute("value", "Open");
-    filterStatusDone.setAttribute("value", "Done");
-    filterUrgency.classList.add("filter-urgency");
-    filterUrgencyHigh.setAttribute("value", "High");
-    filterUrgencyNormal.setAttribute("value", "Norma");
-    filterUrgencyLow.setAttribute("value", "Low");
-
-    filterWrapper.prepend(filterDescription);
-    filterStatus.prepend(filterStatusOpen);
-    filterStatus.prepend(filterStatusDone);
-    filterDescription.after(filterStatus);
-    filterUrgency.prepend(filterUrgencyHigh);
-    filterUrgency.prepend(filterUrgencyNormal);
-    filterUrgency.prepend(filterUrgencyLow);
-    filterStatus.after(filterUrgency);
-
-    // for cards rendering
-    let cardsWrapper = document.createElement("div");
-    let cardsConteiner = document.createElement("div");
-    cardsWrapper.classList.add("cards-wrapper");
-    cardsConteiner.classList.add("conteiner__cards");
-
-    // main.prepend(cardsWrapper);
-    // cardsWrapper.prepend(cardsConteiner);
-    main.prepend(filterWrapper);
-    filterWrapper.after(cardsConteiner);
-
-    getToken2();
-  }
-}
+//
 
 //
 function createWindowContent() {
@@ -178,7 +163,9 @@ function openWindow() {
   function enterToTheSystem() {
     const inputLogin = document.querySelector(".input-login");
     const inputPassword = document.querySelector(".input-password");
+    // ! ???
     const window = document.querySelector(".window");
+    // ! ???
 
     // TODO: Login API request
     async function takeToken() {
@@ -210,7 +197,8 @@ function openWindow() {
           headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
           body.style.backgroundColor = "rgb(190, 220, 255)";
 
-          createWindowAfterLogIn(header);
+          // createWindowAfterLogIn(header);
+          createWindowAfterLogIn(inputLogin.value, inputPassword.value);
         } else {
           // delete
           alert(
@@ -233,6 +221,61 @@ function openWindow() {
       }
     }
     takeToken();
+  }
+}
+
+function createWindowAfterLogIn(login, password) {
+  if (!createNewVisitButton) {
+    const visitBtn = new Button();
+    createNewVisitButton = visitBtn.createButton();
+    createNewVisitButton.classList.add("button-create-visit");
+    createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
+    btnWrapper.append(createNewVisitButton);
+    createNewVisitButton.addEventListener("click", createWindowContent);
+
+    // for filtering
+    let filterWrapper = document.createElement("div");
+    let filterDescription = document.createElement("input");
+    let filterStatus = document.createElement("select");
+    let filterStatusOpen = document.createElement("option");
+    let filterStatusDone = document.createElement("option");
+    let filterUrgency = document.createElement("select");
+    let filterUrgencyHigh = document.createElement("option");
+    let filterUrgencyNormal = document.createElement("option");
+    let filterUrgencyLow = document.createElement("option");
+
+    filterWrapper.classList.add("container");
+    filterWrapper.classList.add("filter-wrapper");
+    filterDescription.classList.add("filter-description");
+    filterStatus.classList.add("filter-status");
+    filterStatusOpen.setAttribute("value", "Open");
+    filterStatusDone.setAttribute("value", "Done");
+    filterUrgency.classList.add("filter-urgency");
+    filterUrgencyHigh.setAttribute("value", "High");
+    filterUrgencyNormal.setAttribute("value", "Norma");
+    filterUrgencyLow.setAttribute("value", "Low");
+
+    filterWrapper.prepend(filterDescription);
+    filterStatus.prepend(filterStatusOpen);
+    filterStatus.prepend(filterStatusDone);
+    filterDescription.after(filterStatus);
+    filterUrgency.prepend(filterUrgencyHigh);
+    filterUrgency.prepend(filterUrgencyNormal);
+    filterUrgency.prepend(filterUrgencyLow);
+    filterStatus.after(filterUrgency);
+
+    // for cards rendering
+    let cardsWrapper = document.createElement("div");
+    let cardsConteiner = document.createElement("div");
+    cardsWrapper.classList.add("cards-wrapper");
+    cardsConteiner.classList.add("conteiner__cards");
+
+    // main.prepend(cardsWrapper);
+    // cardsWrapper.prepend(cardsConteiner);
+    main.prepend(filterWrapper);
+    filterWrapper.after(cardsConteiner);
+
+    getToken2(login, password);
   }
 }
 
