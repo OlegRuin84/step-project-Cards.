@@ -133,7 +133,7 @@ function createWindowContent() {
       newWindow.remove();
       button.classList.remove("hidden");
       conteinerCards.style.display = "flex";
-      filterWrapper.style.display = "block";
+      filterWrapper.style.display = "flex";
       document.removeEventListener("click", closeModalWindow);
     }
   }
@@ -189,8 +189,6 @@ function openWindow() {
           let data = response.text().then((data) => {
             localStorage.setItem("login", inputLogin.value);
             localStorage.setItem("password", inputPassword.value);
-
-            console.log(data);
           });
 
           logInWindow.close();
@@ -247,13 +245,20 @@ function createWindowAfterLogIn(login, password) {
     filterWrapper.classList.add("container");
     filterWrapper.classList.add("filter-wrapper");
     filterDescription.classList.add("filter-description");
+    filterStatus.classList.add("select");
     filterStatus.classList.add("filter-status");
     filterStatusOpen.setAttribute("value", "Open");
     filterStatusDone.setAttribute("value", "Done");
+    filterStatusOpen.textContent = "Чинна";
+    filterStatusDone.textContent = "Закрита";
     filterUrgency.classList.add("filter-urgency");
+    filterUrgency.classList.add("select");
     filterUrgencyHigh.setAttribute("value", "High");
     filterUrgencyNormal.setAttribute("value", "Norma");
     filterUrgencyLow.setAttribute("value", "Low");
+    filterUrgencyLow.textContent = "Звичайна";
+    filterUrgencyNormal.textContent = "Приоритетна";
+    filterUrgencyHigh.textContent = "Невідкладна";
 
     filterWrapper.prepend(filterDescription);
     filterStatus.prepend(filterStatusOpen);

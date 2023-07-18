@@ -3,25 +3,25 @@
 
 // ---------------- TEST ----------------------
 // to see the result
-// let token = "62c5f5c5-0f93-422d-8955-a756d445d739";
-// async function getUserServer() {
-//   try {
-//     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     let data = await response.json();
-//     console.log(data);
+let token = "62c5f5c5-0f93-422d-8955-a756d445d739";
+async function getUserServer() {
+  try {
+    let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let data = await response.json();
+    console.log(data);
 
-//     return data;
-//   } catch (e) {
-//     console.log("Помилка в GET запиті (функція getUserServer)!");
-//     console.log(e);
-//   }
-// }
-// getUserServer();
+    return data;
+  } catch (e) {
+    console.log("Помилка в GET запиті (функція getUserServer)!");
+    console.log(e);
+  }
+}
+getUserServer();
 
 //
 // DELETE for 1 id

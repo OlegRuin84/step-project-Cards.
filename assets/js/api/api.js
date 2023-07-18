@@ -77,9 +77,7 @@ async function getToken2(login, password) {
           }),
         }
       );
-      console.log(response);
       const token = await response.text();
-      console.log(token);
       getUserServer(token);
     }
   } catch (error) {
@@ -144,6 +142,7 @@ async function getUserServer(token) {
   }
 }
 
+//
 // ! You can't touch this
 // async function fetchData(url, fetchMethod, data = null) {
 //   const options = {
@@ -172,5 +171,6 @@ async function getUserServer(token) {
 //     throw error;
 //   }
 // }
+//
 
 export { getToken, getToken2, getUserServer };

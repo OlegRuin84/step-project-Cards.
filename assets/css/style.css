@@ -319,21 +319,15 @@ textarea::placeholder {
   display: none;
 }
 
-
-
-
 /* block card , Rendor new card */
 
-
-
-.conteiner__cards{
+.conteiner__cards {
   display: flex;
   flex-wrap: wrap;
   font-size: 20px;
   /* display: none; */
-
 }
-.card{
+.card {
   width: 30%;
   margin: 10px;
   padding: 5px;
@@ -351,17 +345,17 @@ textarea::placeholder {
   width: 20px;
   height: 20px;
 } */
-.card__delete{
+.card__delete {
   position: absolute;
   top: 10px;
   right: 10px;
   background-color: rgb(190, 220, 255);
   border: none;
 }
-.card__delete:hover{
+.card__delete:hover {
   transform: scale(1.2);
 }
-.card__block{
+.card__block {
   display: none;
 }
 .card__btn-more,
@@ -383,3 +377,18 @@ textarea::placeholder {
 .card__btn-rewrite:hover {
   color: blue;
 }
+
+.filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-description {
+  width: 300px;
+}
+
+/* .filter-status,
+.filter-urgency {
+  width: 200px;
+} */
