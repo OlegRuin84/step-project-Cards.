@@ -3,7 +3,7 @@
 
 // ---------------- TEST ----------------------
 // to see the result
-// let token = "???????????????";
+// let token = "62c5f5c5-0f93-422d-8955-a756d445d739";
 // async function getUserServer() {
 //   try {
 //     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
@@ -14,72 +14,6 @@
 //     });
 //     let data = await response.json();
 //     console.log(data);
-
-//     return data;
-//   } catch (e) {
-//     console.log("Помилка в GET запиті (функція getUserServer)!");
-//     console.log(e);
-//   }
-// }
-// getUserServer();
-// ---------------- TEST ----------------------
-
-// ! Oleg
-// import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js";
-
-// ! Oleg
-// GET
-// async function getUserServer() {
-//   try {
-//     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     let data = await response.json();
-//     console.log(data);
-
-//     data.forEach((e) => {
-//       // console.log(e)
-//       if (e.doc === "Кардіолог") {
-//         // console.log(e)
-//         let card = new VisitCardiologist(
-//           e.descriptionVisit,
-//           e.goalVisit,
-//           e.changeUrgency,
-//           e.namePatient,
-//           e.doc,
-//           e.pressure,
-//           e.bmi,
-//           e.heartDisease,
-//           e.age,
-//           e.id
-//         );
-//         card.render();
-//       } else if (e.doc === "Стоматолог") {
-//         let card = new VisitDentist(
-//           e.descriptionVisit,
-//           e.goalVisit,
-//           e.changeUrgency,
-//           e.namePatient,
-//           e.doc,
-//           e.id
-//         );
-//         card.render();
-//       } else if (e.doc === "Терапевт") {
-//         let card = new VisitTherapist(
-//           e.descriptionVisit,
-//           e.goalVisit,
-//           e.changeUrgency,
-//           e.namePatient,
-//           e.doc,
-//           e.age,
-//           e.id
-//         );
-//         card.render();
-//       }
-//     });
 
 //     return data;
 //   } catch (e) {
@@ -135,3 +69,4 @@
 //   });
 // }
 // delllete();
+// ---------------- TEST ----------------------

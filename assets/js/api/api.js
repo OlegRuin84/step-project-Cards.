@@ -1,3 +1,5 @@
+import { VisitCardiologist, VisitDentist, VisitTherapist } from "../classes.js";
+
 async function fetchData(token, data) {
   try {
     const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
@@ -38,7 +40,86 @@ async function getToken(data) {
   }
 }
 
-//
+async function getToken2() {
+  try {
+    let storedLogin = localStorage.getItem("login");
+    let storedPassword = localStorage.getItem("password");
+    const response = await fetch(
+      "https://ajax.test-danit.com/api/v2/cards/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: storedLogin, password: storedPassword }),
+      }
+    );
+    const token = await response.text();
+    console.log(token);
+    getUserServer(token);
+  } catch (error) {
+    console.log("Помилка в getToken, файл api.js");
+    console.log(error);
+  }
+}
+
+// for rendering cards
+async function getUserServer(token) {
+  try {
+    let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let data = await response.json();
+    data.forEach((e) => {
+      if (e.doc === "Кардіолог") {
+        let card = new VisitCardiologist(
+          e.descriptionVisit,
+          e.goalVisit,
+          e.changeUrgency,
+          e.namePatient,
+          e.doc,
+          e.pressure,
+          e.bmi,
+          e.heartDisease,
+          e.age,
+          e.id
+        );
+        card.render();
+      } else if (e.doc === "Стоматолог") {
+        let card = new VisitDentist(
+          e.descriptionVisit,
+          e.goalVisit,
+          e.changeUrgency,
+          e.namePatient,
+          e.doc,
+          e.id
+        );
+        card.render();
+      } else if (e.doc === "Терапевт") {
+        let card = new VisitTherapist(
+          e.descriptionVisit,
+          e.goalVisit,
+          e.changeUrgency,
+          e.namePatient,
+          e.doc,
+          e.age,
+          e.id
+        );
+        card.render();
+      }
+    });
+
+    return data;
+  } catch (e) {
+    console.log("Помилка в GET запиті (функція getUserServer)!");
+    console.log(e);
+  }
+}
+
+// ! You can't touch this
 // async function fetchData(url, fetchMethod, data = null) {
 //   const options = {
 //     method: `${fetchMethod}`,
@@ -67,4 +148,4 @@ async function getToken(data) {
 //   }
 // }
 
-export { getToken };
+export { getToken, getToken2, getUserServer };

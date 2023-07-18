@@ -23,4 +23,18 @@ function sendFormData(formData) {
   });
 }
 
-export { deleteWorningWindow, sendFormData };
+function shomMeMore(styleClass) {
+  let conteinerCards = document.querySelector(styleClass);
+  // console.log(conteinerCards)
+  conteinerCards.addEventListener("click", function (event) {
+    // console.log(event.target.closest('div').id)
+    let div = event.target.closest("div").lastElementChild;
+    if (div.style.display === "") {
+      div.style.display = "block";
+    } else if (div.style.display === "block") {
+      div.style.display = "";
+    }
+  });
+}
+
+export { deleteWorningWindow, sendFormData, shomMeMore };

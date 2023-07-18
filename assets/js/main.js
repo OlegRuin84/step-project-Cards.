@@ -1,6 +1,11 @@
 import { deleteWorningWindow } from "./functions.js";
-
-import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
+import { getToken2 } from "./api/api.js";
+import {
+  Button,
+  ModalEnterWindow,
+  ModalCardWindow,
+  VisitCardiologist,
+} from "./classes.js";
 
 //
 // Create log-in button
@@ -43,12 +48,23 @@ function createWindowAfterLogIn() {
     createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
     btnWrapper.append(createNewVisitButton);
     createNewVisitButton.addEventListener("click", createWindowContent);
+
+    // for cards rendering
+    let div1 = document.createElement("div");
+    div1.classList.add("cards-wrapper");
+    let div2 = document.createElement("div");
+    div2.classList.add("conteiner__cards");
+    main.prepend(div1);
+    div1.prepend(div2);
+
+    getToken2();
   }
 }
 
 //
 function createWindowContent() {
   let button = document.querySelector(".button-create-visit");
+  let conteinerCards = document.querySelector(".conteiner__cards");
   if (isRequesting || !isLoggedIn) {
     console.log("Condition check:", isRequesting, isLoggedIn);
     return;
@@ -57,6 +73,7 @@ function createWindowContent() {
 
   const createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
   createWindow.open();
+  conteinerCards.style.display = "none";
 
   // close the window
   const newWindow = document.querySelector(".window-create-doctor");
@@ -72,6 +89,7 @@ function createWindowContent() {
     if (newWindow && !newWindow.contains(targetElement)) {
       newWindow.remove();
       button.classList.remove("hidden");
+      conteinerCards.style.display = "flex";
       document.removeEventListener("click", closeModalWindow);
     }
   }

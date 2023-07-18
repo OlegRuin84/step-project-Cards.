@@ -84,6 +84,8 @@ class Form {
     formData.append("doc", selectMain[0].value);
 
     const isFormValid = this.validateForm(formData);
+    sendFormData(formData);
+
     if (isFormValid) {
       sendFormData(formData)
         .then((response) => {
