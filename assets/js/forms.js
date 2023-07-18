@@ -80,15 +80,18 @@ class Form {
   sendData() {
     const self = this;
     const formData = new FormData(self.formElement);
-    let selectMain = document.querySelectorAll(".select");
-    formData.append("doc", selectMain[0].value);
+    console.log(formData);
+    let selectMain = document.querySelector(".select-main");
+    formData.append("doc", selectMain.value);
 
     const isFormValid = this.validateForm(formData);
-    sendFormData(formData);
+    // sendFormData(formData);
 
     if (isFormValid) {
+      console.log(formData);
       sendFormData(formData)
         .then((response) => {
+          console.log(response);
           if (response && response.ok) {
             console.log("Data sent successfully");
           } else {

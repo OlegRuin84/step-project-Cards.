@@ -75,7 +75,7 @@ class ModalCardWindow extends Modal {
     this.headline.textContent = content;
 
     this.form = new Form("visit-form");
-    this.form.addSelect("changeDoctor", "select");
+    this.form.addSelect("changeDoctor", "select-main");
 
     const selectElement = this.form.formElement.querySelector("select");
     this.form.setSelectElement(selectElement);
