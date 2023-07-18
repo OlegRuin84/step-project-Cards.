@@ -65,7 +65,7 @@ getUserServer();
 //         }
 //       );
 //     }
-//     // delete1(id);
+//     delete1(id);
 //   });
 // }
 // delllete();

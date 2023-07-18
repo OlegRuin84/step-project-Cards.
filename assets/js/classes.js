@@ -6,8 +6,9 @@ import {
   ModalDentistForm,
   ModalTherapistForm,
 } from "./forms.js";
-
 import { shomMeMore } from "./functions.js";
+
+import { createWindowContent } from "./main.js";
 
 // Classes for buttons
 class Button {
@@ -122,6 +123,7 @@ class ModalCardWindow extends Modal {
     if (modalForm) {
       const selectElement = this.form.formElement.querySelector("select");
       const closeWindow = this.form.formElement.querySelector(".close-card");
+      // const createCard = this.form.formElement.querySelector(".create-card");
 
       const noneOption = selectElement.querySelector(
         'option[value="-- none --"]'
@@ -140,14 +142,21 @@ class ModalCardWindow extends Modal {
         modalForm.form.formElement.querySelector(".create-card");
       createButton.addEventListener("click", () => {
         modalForm.form.sendData();
-      });
+        //
+        // TODO
+        function closeWindow() {
+          let conteinerCards = document.querySelector(".conteiner__cards");
+          let filterWrapper = document.querySelector(".filter-wrapper");
+          let button = document.querySelector(".button-create-visit");
+          let window = document.querySelector(".window-create-doctor");
 
-      // let closeCardBtn = document.querySelector(".close-card");
-      // let window = document.querySelector(".window-create-doctor");
-      // closeCardBtn.addEventListener("click", closeTheCard);
-      // function closeTheCard() {
-      //   window.remove();
-      // }
+          window.remove();
+          conteinerCards.style.display = "flex";
+          filterWrapper.style.display = "flex";
+          button.classList.remove("hidden");
+        }
+        closeWindow();
+      });
     }
   }
 }

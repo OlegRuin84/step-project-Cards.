@@ -77,50 +77,58 @@ class Form {
   }
 
   //   GO TO THE SERVER
+  // sendData() {
+  //   // const self = this;
+  //   const formData = new FormData(this.formElement);
+  //   console.log(formData);
+  //   let selectMain = document.querySelector(".select-main");
+  //   formData.append("doc", selectMain.value);
+
+  //   const isFormValid = this.validateForm(formData);
+  //   // sendFormData(formData);
+
+  //   if (isFormValid) {
+  //     console.log(formData);
+  //     sendFormData(formData)
+  //       .then((response) => {
+  //         console.log(response);
+  //         if (response && response.ok) {
+  //           console.log("Data sent successfully");
+  //         } else {
+  //           throw new Error("Error sending data");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error sending data:", error);
+  //         alert("An error occurred while sending data. Please try again.");
+  //       });
+  //   } else {
+  //     alert("Будь ласка, заповніть всі обов'язкові поля.");
+  //   }
+  // }
+
   sendData() {
-    // const self = this;
+    console.log(this.formElement);
     const formData = new FormData(this.formElement);
-    console.log(formData);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
-
-    const isFormValid = this.validateForm(formData);
-    // sendFormData(formData);
-
-    if (isFormValid) {
-      console.log(formData);
-      sendFormData(formData)
-        .then((response) => {
-          console.log(response);
-          if (response && response.ok) {
-            console.log("Data sent successfully");
-          } else {
-            throw new Error("Error sending data");
-          }
-        })
-        .catch((error) => {
-          console.error("Error sending data:", error);
-          alert("An error occurred while sending data. Please try again.");
-        });
-    } else {
-      alert("Будь ласка, заповніть всі обов'язкові поля.");
-    }
+    sendFormData(formData);
   }
 
-  validateForm(formData) {
-    let isFormValid = true;
-    for (let inputElement of this.formElement.querySelectorAll(
-      "input[required]"
-    )) {
-      if (!inputElement.value) {
-        inputElement.classList.add("error");
-        isFormValid = false;
-      } else {
-        inputElement.classList.remove("error");
-      }
-    }
-    return isFormValid;
-  }
+  // validateForm(formData) {
+  //   let isFormValid = true;
+  //   for (let inputElement of this.formElement.querySelectorAll(
+  //     "input[required]"
+  //   )) {
+  //     if (!inputElement.value) {
+  //       inputElement.classList.add("error");
+  //       isFormValid = false;
+  //     } else {
+  //       inputElement.classList.remove("error");
+  //     }
+  //   }
+  //   return isFormValid;
+  // }
 }
 
 // all doctors form
