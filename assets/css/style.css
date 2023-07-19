@@ -302,6 +302,14 @@ textarea::placeholder {
   color: brown;
 }
 
+/* * rendering * */
+.text {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  font-size: 30px;
+}
+
 /** cards **/
 .cards-wrapper {
   /* margin-top: 500px;
