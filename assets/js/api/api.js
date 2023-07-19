@@ -139,21 +139,24 @@ async function getUserServer(token) {
     });
     let data = await response.json();
     console.log(data);
-    // TODO
-    // let filterWrapper = document.querySelector(".filter-wrapper");
-    // let text = document.createElement("div");
-    // text.classList.add("text");
-    // text.textContent = "Hy!";
-    // if (data.length !== 0) {
-    //   if (text) {
-    //     text.remove();
-    //   }
-    // } else if (data.length === 0) {
-    //   console.log("Ok");
 
-    //   filterWrapper.after(text);
-    // }
     // TODO
+    let filterWrapper = document.querySelector(".filter-wrapper");
+    let text = document.createElement("div");
+    text.classList.add("text");
+    text.textContent = "Візити відсутні";
+
+    if (data.length !== 0) {
+      if (text) {
+        text.remove();
+      }
+    } else if (data.length === 0) {
+      console.log("Ok");
+
+      filterWrapper.after(text);
+    }
+    // TODO
+
     data.forEach((e) => {
       console.log(e.doc);
       rendering(e);
