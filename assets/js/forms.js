@@ -95,7 +95,7 @@ class Form {
           if (response && response.ok) {
             console.log("Data sent successfully");
           } else {
-            throw new Error("Error sending data");
+            // throw new Error("Error sending data");
           }
         })
         .catch((error) => {

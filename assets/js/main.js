@@ -40,69 +40,6 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//
-// function createWindowAfterLogIn() {
-//   if (!createNewVisitButton) {
-//     const visitBtn = new Button();
-//     createNewVisitButton = visitBtn.createButton();
-//     createNewVisitButton.classList.add("button-create-visit");
-//     createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
-//     btnWrapper.append(createNewVisitButton);
-//     createNewVisitButton.addEventListener("click", createWindowContent);
-
-//     //
-//     const inputLogin = document.querySelector(".input-login").value;
-//     const inputPassword = document.querySelector(".input-password").value;
-//     //
-
-//     // for filtering
-//     let filterWrapper = document.createElement("div");
-//     let filterDescription = document.createElement("input");
-//     let filterStatus = document.createElement("select");
-//     let filterStatusOpen = document.createElement("option");
-//     let filterStatusDone = document.createElement("option");
-//     let filterUrgency = document.createElement("select");
-//     let filterUrgencyHigh = document.createElement("option");
-//     let filterUrgencyNormal = document.createElement("option");
-//     let filterUrgencyLow = document.createElement("option");
-
-//     filterWrapper.classList.add("container");
-//     filterWrapper.classList.add("filter-wrapper");
-//     filterDescription.classList.add("filter-description");
-//     filterStatus.classList.add("filter-status");
-//     filterStatusOpen.setAttribute("value", "Open");
-//     filterStatusDone.setAttribute("value", "Done");
-//     filterUrgency.classList.add("filter-urgency");
-//     filterUrgencyHigh.setAttribute("value", "High");
-//     filterUrgencyNormal.setAttribute("value", "Norma");
-//     filterUrgencyLow.setAttribute("value", "Low");
-
-//     filterWrapper.prepend(filterDescription);
-//     filterStatus.prepend(filterStatusOpen);
-//     filterStatus.prepend(filterStatusDone);
-//     filterDescription.after(filterStatus);
-//     filterUrgency.prepend(filterUrgencyHigh);
-//     filterUrgency.prepend(filterUrgencyNormal);
-//     filterUrgency.prepend(filterUrgencyLow);
-//     filterStatus.after(filterUrgency);
-
-//     // for cards rendering
-//     let cardsWrapper = document.createElement("div");
-//     let cardsConteiner = document.createElement("div");
-//     cardsWrapper.classList.add("cards-wrapper");
-//     cardsConteiner.classList.add("conteiner__cards");
-
-//     // main.prepend(cardsWrapper);
-//     // cardsWrapper.prepend(cardsConteiner);
-//     main.prepend(filterWrapper);
-//     filterWrapper.after(cardsConteiner);
-
-//     getToken2(inputLogin, inputPassword);
-//   }
-// }
-//
-
-//
 function createWindowContent() {
   let button = document.querySelector(".button-create-visit");
   let conteinerCards = document.querySelector(".conteiner__cards");
@@ -241,6 +178,7 @@ function createWindowAfterLogIn(login, password) {
     let filterUrgencyHigh = document.createElement("option");
     let filterUrgencyNormal = document.createElement("option");
     let filterUrgencyLow = document.createElement("option");
+    let buttonInput = document.createElement("input");
 
     filterWrapper.classList.add("container");
     filterWrapper.classList.add("filter-wrapper");
@@ -259,6 +197,9 @@ function createWindowAfterLogIn(login, password) {
     filterUrgencyLow.textContent = "Звичайна";
     filterUrgencyNormal.textContent = "Приоритетна";
     filterUrgencyHigh.textContent = "Невідкладна";
+    buttonInput.type = "button";
+    buttonInput.value = "Искать";
+    buttonInput.classList.add("section__form-btn");
 
     filterWrapper.prepend(filterDescription);
     filterStatus.prepend(filterStatusOpen);
@@ -268,6 +209,7 @@ function createWindowAfterLogIn(login, password) {
     filterUrgency.prepend(filterUrgencyNormal);
     filterUrgency.prepend(filterUrgencyLow);
     filterStatus.after(filterUrgency);
+    filterWrapper.append(buttonInput);
 
     // for cards rendering
     let cardsWrapper = document.createElement("div");
@@ -279,6 +221,43 @@ function createWindowAfterLogIn(login, password) {
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
+
+    // Функція фільтрації даних
+    function filterData(event) {
+      event.preventDefault();
+      // Отримати значення з полів вводу та вибору
+      const descriptionFilter = filterDescription.value.trim();
+      const statusFilter = filterStatus.value;
+      const urgencyFilter = filterUrgency.value;
+
+      // Отримати всі картки для фільтрації
+      const cards = document.querySelectorAll(".conteiner__cards .card");
+
+      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
+      cards.forEach((card) => {
+        const description = card
+          .querySelector(".card__descriptionVisit")
+          .textContent.trim();
+        const urgency = card
+          .querySelector(".card__changeUrgency")
+          .textContent.trim();
+        const doc = card.querySelector(".card__doc").textContent.trim();
+
+        const descriptionMatch =
+          descriptionFilter === "" || description.includes(descriptionFilter);
+        const urgencyMatch = statusFilter === "" || urgency === statusFilter;
+        const docMatch = urgencyFilter === "" || doc === urgencyFilter;
+
+        if (descriptionMatch || urgencyMatch || docMatch) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // Додайте обробник події для кнопки "Искать"
+    buttonInput.addEventListener("click", filterData);
 
     getToken2(login, password);
   }
