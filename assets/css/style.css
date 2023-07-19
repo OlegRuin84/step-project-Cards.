@@ -302,6 +302,15 @@ textarea::placeholder {
   color: brown;
 }
 
+/* * rendering * */
+.text {
+  display: flex;
+  justify-content: center;
+  padding-top: 400px;
+  font-size: 20px;
+  color: rgb(119, 119, 119);
+}
+
 /** cards **/
 .cards-wrapper {
   /* margin-top: 500px;
@@ -355,9 +364,10 @@ textarea::placeholder {
 .card__delete:hover {
   transform: scale(1.2);
 }
-.card__block {
-  /* display: none; */
-}
+/* .card__block {
+  display: none;
+} */
+
 .card__btn-more,
 .card__btn-rewrite {
   color: rgb(30, 135, 255);
