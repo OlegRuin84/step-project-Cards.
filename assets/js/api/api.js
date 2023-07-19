@@ -141,21 +141,21 @@ async function getUserServer(token) {
     console.log(data);
 
     // TODO
-    let filterWrapper = document.querySelector(".filter-wrapper");
-    let text = document.createElement("div");
-    text.classList.add("text");
-    text.textContent = "Візити відсутні";
+    // let filterWrapper = document.querySelector(".filter-wrapper");
+    // let text = document.createElement("div");
+    // text.classList.add("text");
+    // text.textContent = "Візити відсутні";
 
-    if (data.length !== 0) {
-      if (text) {
-        // text.remove();
-        text.remove();
-      }
-    } else if (data.length === 0) {
-      console.log("Ok");
+    // if (data.length !== 0) {
+    //   if (text) {
+    //     // text.remove();
+    //     text.remove();
+    //   }
+    // } else if (data.length === 0) {
+    //   console.log("Ok");
 
-      filterWrapper.after(text);
-    }
+    //   filterWrapper.after(text);
+    // }
     // TODO
 
     data.forEach((e) => {

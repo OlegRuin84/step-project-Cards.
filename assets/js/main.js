@@ -120,7 +120,7 @@ function createWindowContent() {
   let conteinerCards = document.querySelector(".conteiner__cards");
   let filterWrapper = document.querySelector(".filter-wrapper");
   // TODO
-  let text = document.querySelector(".text");
+  // let text = document.querySelector(".text");
   // TODO
 
   // close the window
@@ -131,9 +131,9 @@ function createWindowContent() {
       conteinerCards.style.display = "none";
       filterWrapper.style.display = "none";
       // TODO
-      if (text) {
-        text.style.display = "none";
-      }
+      // if (text) {
+      //   text.style.display = "none";
+      // }
       // TODO
     }, 0);
   }
@@ -146,9 +146,9 @@ function createWindowContent() {
       conteinerCards.style.display = "flex";
       filterWrapper.style.display = "flex";
       // TODO
-      if (!text) {
-        text.style.display = "flex";
-      }
+      // if (!text) {
+      //   text.style.display = "flex";
+      // }
       // TODO
       document.removeEventListener("click", closeModalWindow);
     }
