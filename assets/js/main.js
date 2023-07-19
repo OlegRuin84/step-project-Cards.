@@ -119,7 +119,7 @@ function createWindowContent() {
   let window = document.querySelector(".window-create-doctor");
   let conteinerCards = document.querySelector(".conteiner__cards");
   let filterWrapper = document.querySelector(".filter-wrapper");
-  let text = document.querySelector(".text");
+  // let text = document.querySelector(".text");
 
   // close the window
   if (window) {
@@ -128,7 +128,7 @@ function createWindowContent() {
       button.classList.add("hidden");
       conteinerCards.style.display = "none";
       filterWrapper.style.display = "none";
-      text.style.display = "none";
+      // text.style.display = "none";
     }, 0);
   }
   function closeModalWindow(event) {
@@ -139,7 +139,7 @@ function createWindowContent() {
       button.classList.remove("hidden");
       conteinerCards.style.display = "flex";
       filterWrapper.style.display = "flex";
-      text.style.display = "flex";
+      // text.style.display = "flex";
       document.removeEventListener("click", closeModalWindow);
     }
   }
