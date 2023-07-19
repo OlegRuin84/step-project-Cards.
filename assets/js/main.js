@@ -213,9 +213,9 @@ function openWindow() {
           createWindowAfterLogIn(inputLogin.value, inputPassword.value);
         } else {
           // delete
-          alert(
-            "ДРУЗІ! Вводимо логін та пароль, які вводили при реєстрації на сервері"
-          );
+          // alert(
+          //   "ДРУЗІ! Вводимо логін та пароль, які вводили при реєстрації на сервері"
+          // );
 
           inputLogin.classList.add("input-worning");
           inputPassword.classList.add("input-worning");
