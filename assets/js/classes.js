@@ -229,14 +229,14 @@ class VisitCardiologist extends Visit {
     let cross = document.createElement("div");
     let doc = document.createElement("h3");
     let name = document.createElement("h4");
-    let moreBtn = document.createElement("button");
+    let moreBtn = document.createElement("div");
     let moreInfo = document.createElement("div");
-    let desc = document.createElement("textarea");
+    let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
     let pressure = document.createElement("p");
     let bmi = document.createElement("p");
-    let heartDisease = document.createElement("textarea");
+    let heartDisease = document.createElement("p");
     let age = document.createElement("p");
     let editBtn = document.createElement("button");
 
@@ -259,14 +259,14 @@ class VisitCardiologist extends Visit {
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `Показати більше`;
-    // desc.textContent = `${this.descriptionVisit}`;
-    goal.textContent = `${this.goalVisit}`;
-    urgency.textContent = `${this.changeUrgency}`;
-    pressure.textContent = `${this.pressure}`;
-    bmi.textContent = `${this.bmi}`;
-    // heartDisease.textContent = `${this.heartDisease}`;
-    age.textContent = `${this.age}`;
+    moreBtn.textContent = `показати / сховати`;
+    desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
+    goal.textContent = `Мета візиту: ${this.goalVisit}`;
+    urgency.textContent = `Терміновість: ${this.changeUrgency}`;
+    pressure.textContent = `Звичайний тиск: ${this.pressure}`;
+    bmi.textContent = `Індекс маси тіла: ${this.bmi}`;
+    heartDisease.textContent = `Перенесенні захворювання: ${this.heartDisease}`;
+    age.textContent = `Вік: ${this.age}`;
     editBtn.textContent = "Редагувати";
 
     wrapper.append(nameWrapper);
@@ -275,9 +275,9 @@ class VisitCardiologist extends Visit {
     nameWrapper.after(name);
     name.after(moreBtn);
     moreBtn.after(moreInfo);
-    moreInfo.append(desc);
-    desc.after(goal);
-    goal.after(urgency);
+    moreInfo.append(goal);
+    goal.after(desc);
+    desc.after(urgency);
     urgency.after(pressure);
     pressure.after(bmi);
     bmi.after(heartDisease);
@@ -339,9 +339,9 @@ class VisitDentist extends Visit {
     let cross = document.createElement("div");
     let doc = document.createElement("h3");
     let name = document.createElement("h4");
-    let moreBtn = document.createElement("button");
+    let moreBtn = document.createElement("div");
     let moreInfo = document.createElement("div");
-    let desc = document.createElement("textarea");
+    let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
     let lastDate = document.createElement("p");
@@ -363,7 +363,8 @@ class VisitDentist extends Visit {
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `Показати більше`;
+    moreBtn.textContent = `показати / сховати`;
+    desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
     urgency.textContent = `${this.changeUrgency}`;
     lastDate.textContent = `${this.lastDate}`;
@@ -434,9 +435,9 @@ class VisitTherapist extends Visit {
     let cross = document.createElement("div");
     let doc = document.createElement("h3");
     let name = document.createElement("h4");
-    let moreBtn = document.createElement("button");
+    let moreBtn = document.createElement("div");
     let moreInfo = document.createElement("div");
-    let desc = document.createElement("textarea");
+    let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
     let age = document.createElement("p");
@@ -458,7 +459,8 @@ class VisitTherapist extends Visit {
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `Показати більше`;
+    moreBtn.textContent = `показати / сховати`;
+    desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
     urgency.textContent = `${this.changeUrgency}`;
     age.textContent = `${this.age}`;

@@ -331,29 +331,33 @@ textarea::placeholder {
 /* block card , Rendor new card */
 
 .conteiner__cards {
+  padding: 100px 40px;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   font-size: 20px;
+  background-color: rgb(219, 236, 255);
   /* display: none; */
 }
 .card {
-  width: 30%;
+  width: 500px;
+  min-height: 200px;
   margin: 10px;
-  padding: 5px;
-  border: 1px solid blue;
+  padding: 30px;
+  border: 2px solid white;
   box-sizing: border-box;
   position: relative;
-  /* border-radius: 20px; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
-/* .card::before {
-  content: "";
-  background: url("https://emojinarium.com/img/apple/cross-mark_274c.png");
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-} */
+
+.card p {
+  padding: 10px 0px 10px;
+  font-size: 16px;
+}
+
 .card__delete {
   position: absolute;
   top: 10px;
@@ -364,11 +368,35 @@ textarea::placeholder {
 .card__delete:hover {
   transform: scale(1.2);
 }
-/* .card__block {
-  display: none;
-} */
 
-.card__btn-more,
+.card__block {
+  width: 100%;
+  padding-top: 30px;
+}
+
+.card__descriptionVisit,
+.card__heartDisease {
+  /* word-wrap: break-word; */
+  word-break: break-all;
+  max-height: 100px;
+  /* overflow-y: scroll; */
+  overflow-y: auto;
+  font-size: 16px;
+}
+
+.card__btn-more {
+  /* color: rgb(30, 135, 255); */
+  font-size: 14px;
+  font-style: italic;
+  color: rgb(87, 87, 87);
+  width: 200px;
+  background-color: rgb(219, 236, 255);
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  align-self: flex-end;
+}
+
 .card__btn-rewrite {
   color: rgb(30, 135, 255);
   font-size: 20px;
@@ -378,17 +406,19 @@ textarea::placeholder {
   background-color: rgb(162, 204, 252);
   cursor: pointer;
   border-radius: 10px;
-  margin-bottom: 10px;
-  margin: 0 auto;
+  border: none;
+  margin-top: 50px;
   margin-bottom: 10px;
 }
 
 .card__btn-more:hover,
 .card__btn-rewrite:hover {
   color: blue;
+  text-decoration: underline;
 }
 
 .filter-wrapper {
+  padding: 100px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -405,6 +435,7 @@ textarea::placeholder {
 
 /* * cards * */
 .card__name-wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -437,4 +468,10 @@ textarea::placeholder {
 .cross::before:hover,
 .cross::after:hover {
   background-color: rgb(29, 155, 240);
+}
+
+.card__doc {
+  font-size: 26px;
+  color: rgb(54, 148, 255);
+  font-weight: 700;
 }
