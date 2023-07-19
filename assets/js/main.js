@@ -61,6 +61,7 @@ function createWindowAfterLogIn(login, password) {
     let filterUrgencyHigh = document.createElement("option");
     let filterUrgencyNormal = document.createElement("option");
     let filterUrgencyLow = document.createElement("option");
+    let buttonInput = document.createElement("input");
 
     filterWrapper.classList.add("container");
     filterWrapper.classList.add("filter-wrapper");
@@ -79,6 +80,9 @@ function createWindowAfterLogIn(login, password) {
     filterUrgencyLow.textContent = "Звичайна";
     filterUrgencyNormal.textContent = "Приоритетна";
     filterUrgencyHigh.textContent = "Невідкладна";
+    buttonInput.type = "button";
+    buttonInput.value = "Пошук";
+    buttonInput.classList.add("section__form-btn");
 
     filterWrapper.prepend(filterDescription);
     filterStatus.prepend(filterStatusOpen);
@@ -88,6 +92,7 @@ function createWindowAfterLogIn(login, password) {
     filterUrgency.prepend(filterUrgencyNormal);
     filterUrgency.prepend(filterUrgencyLow);
     filterStatus.after(filterUrgency);
+    filterWrapper.append(buttonInput);
 
     // for cards rendering
     let cardsWrapper = document.createElement("div");
@@ -99,6 +104,48 @@ function createWindowAfterLogIn(login, password) {
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
+
+    // Функція фільтрації даних
+    function filterData(event) {
+      event.preventDefault();
+      // Отримати значення з полів вводу та вибору
+      const descriptionFilter = filterDescription.value.trim();
+
+      const urgencyFilter = filterUrgency.value;
+
+      // console.log(urgencyFilter);
+
+      // Отримати всі картки для фільтрації
+      const cards = document.querySelectorAll(".conteiner__cards .card");
+
+      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
+      cards.forEach((card) => {
+        const description = card
+          .querySelector(".card__title")
+          .textContent.trim();
+
+        const urgency = card
+          .querySelector(".card__changeUrgency")
+          .textContent.trim();
+        console.log(urgency);
+
+        const descriptionMatch =
+          descriptionFilter === "" || description.includes(descriptionFilter);
+        const urgencyMatch =
+          urgencyFilter === " " || urgency.includes(urgencyFilter);
+
+        if (descriptionMatch && urgencyMatch) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // Додайте обробник події для кнопки "Искать"
+    // filterDescription.addEventListener("input", filterData);
+    filterUrgency.addEventListener("change", filterData);
+    buttonInput.addEventListener("click", filterData);
 
     getToken2(login, password);
   }
