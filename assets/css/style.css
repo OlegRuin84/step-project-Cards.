@@ -5,7 +5,7 @@ body {
 
 .container {
   position: relative;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -89,8 +89,8 @@ body {
   top: 50%;
   left: 50%;
   width: 800px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-radius: 15px;
   display: none;
   flex-direction: column;
@@ -107,6 +107,7 @@ body {
 
 .log-in-form,
 .doctor-form {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -124,9 +125,9 @@ body {
 input {
   width: 70%;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 0px 20px;
-  margin: 10px 0px;
+  margin: 5px 0px;
   font-size: 20px;
   outline: none;
   border: none;
@@ -173,7 +174,7 @@ input {
   transform: scale(1.1);
 }
 
-/* ********* creste visit ********** */
+/* ********* create visit ********** */
 .button-create-visit,
 .create-btn {
   color: rgb(139, 139, 139);
@@ -205,10 +206,19 @@ input {
   background-color: rgb(162, 204, 252);
 }
 
+.visit-form {
+  /* height: 100px; */
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .headline {
-  font-size: 30px;
+  font-size: 24px;
   color: rgb(73, 73, 73);
-  padding: 50px 0px 50px;
+  padding: 20px 0px 20px;
 }
 
 .input-wrapper {
@@ -216,19 +226,23 @@ input {
 }
 
 .select,
-.select-urgency,
 .select-main {
-  width: 300px;
+  width: 30%;
   height: 100%;
   border-radius: 25px;
   border: none;
   outline: none;
   text-align: center;
-  color: rgb(126, 126, 126);
+  color: rgb(54, 148, 255);
   background-color: rgb(219, 236, 255);
   font-size: 22px;
+  font-weight: 700;
   margin-bottom: 10px;
   padding: 10px 0px;
+}
+
+.select-main {
+  width: 80%;
 }
 
 .select {
@@ -236,24 +250,36 @@ input {
   font-weight: 700;
 }
 
-.option {
-  color: black;
+.close-card,
+.create-card {
+  margin: 20px 0px 0px;
+  cursor: pointer;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 2px;
+  font-weight: 700;
+  background-color: rgb(54, 148, 255);
+  transition: transform 0.7s ease, opacity 0.5s ease;
+  height: 40px;
+  width: 120px;
 }
 
-.option-one {
-  color: green;
+.create-card {
+  color: white;
+  border: 2px solid rgb(125, 255, 125);
 }
 
-.option-two {
-  color: blue;
+.close-card {
+  color: white;
+  border: 2px solid rgb(255, 179, 179);
 }
 
-.option-three {
-  color: red;
-}
-
-select .option-none {
-  color: rgb(126, 126, 126);
+.input-login {
+  width: 70%;
+  height: 30px;
+  font-size: 14px;
 }
 
 .doctors-inputs-wrapper {
@@ -264,7 +290,7 @@ select .option-none {
 }
 
 .doctors-inputs-wrapper input {
-  width: 700px;
+  width: 1700px;
   height: 40px;
   background-color: rgb(219, 236, 255);
   border: none;
@@ -288,6 +314,11 @@ select .option-none {
 
 textarea {
   height: 100px;
+  width: 70%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 20px;
+  border-radius: 5px;
 }
 
 textarea::placeholder {
@@ -295,11 +326,38 @@ textarea::placeholder {
 }
 
 .select-urgency {
-  width: 740px;
-  margin-top: 10px;
-  font-size: 18px;
-  text-align: left;
-  color: brown;
+  width: 75%;
+  height: 30px;
+  margin-top: 5px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: rgb(54, 148, 255);
+  background-color: white;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding: 3px 0px;
+}
+
+.select-urgency .option:nth-child(2) {
+  /* color: rgb(31, 102, 0); */
+  font-weight: 700;
+  /* background-color: rgb(31, 102, 0); */
+}
+
+.select-urgency .option:nth-child(3) {
+  /* color: rgb(255, 102, 0); */
+  font-weight: 700;
+  /* background-color: rgb(255, 102, 0); */
+}
+
+.select-urgency .option:nth-child(4) {
+  /* color: rgb(255, 48, 48); */
+  font-weight: 700;
+  /* background-color: rgb(255, 48, 48); */
 }
 
 /* * rendering * */
@@ -331,6 +389,7 @@ textarea::placeholder {
 /* block card , Rendor new card */
 
 .conteiner__cards {
+  margin: 0px 0px 50px;
   padding: 100px 40px;
   display: flex;
   justify-content: space-between;
@@ -340,7 +399,7 @@ textarea::placeholder {
   /* display: none; */
 }
 .card {
-  width: 500px;
+  width: 100%;
   min-height: 200px;
   margin: 10px;
   padding: 30px;
@@ -399,21 +458,23 @@ textarea::placeholder {
 
 .card__btn-rewrite {
   color: rgb(30, 135, 255);
-  font-size: 20px;
-  font-weight: 700;
-  width: 200px;
-  height: 50px;
-  background-color: rgb(162, 204, 252);
+  font-size: 14px;
+  /* font-weight: 700; */
+  width: 120px;
+  height: 40px;
+  /* background-color: rgb(162, 204, 252); */
   cursor: pointer;
   border-radius: 10px;
-  border: none;
+  border: 1px solid white;
   margin-top: 50px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card__btn-more:hover,
 .card__btn-rewrite:hover {
-  color: blue;
   text-decoration: underline;
 }
 
@@ -428,10 +489,12 @@ textarea::placeholder {
   width: 300px;
 }
 
-/* .filter-status,
+.filter-status,
 .filter-urgency {
   width: 200px;
-} */
+  height: 40px;
+  font-size: 14px;
+}
 
 /* * cards * */
 .card__name-wrapper {
@@ -471,7 +534,12 @@ textarea::placeholder {
 }
 
 .card__doc {
-  font-size: 26px;
+  font-size: 24px;
   color: rgb(54, 148, 255);
   font-weight: 700;
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 400;
 }

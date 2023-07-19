@@ -142,7 +142,7 @@ class ModalDoctor {
     this.form.addInput("Мета візиту", "text", "goalVisit", "input-login");
     this.form.addTextarea("Опис візиту", "descriptionVisit", "textarea");
 
-    this.form.addSelect("changeUrgency", "select");
+    this.form.addSelect("changeUrgency", "select-urgency");
     const selectElement = this.form.formElement.querySelector("select");
     this.form.setSelectElement(selectElement);
 

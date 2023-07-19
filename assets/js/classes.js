@@ -238,7 +238,7 @@ class VisitCardiologist extends Visit {
     let bmi = document.createElement("p");
     let heartDisease = document.createElement("p");
     let age = document.createElement("p");
-    let editBtn = document.createElement("button");
+    let editBtn = document.createElement("div");
 
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
@@ -257,8 +257,8 @@ class VisitCardiologist extends Visit {
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
 
-    doc.textContent = `${this.doc}`;
-    name.textContent = `${this.namePatient}`;
+    doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
+    name.textContent = `Клієнт: ${this.namePatient}`;
     moreBtn.textContent = `показати / сховати`;
     desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
     goal.textContent = `Мета візиту: ${this.goalVisit}`;
@@ -345,7 +345,7 @@ class VisitDentist extends Visit {
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
     let lastDate = document.createElement("p");
-    let editBtn = document.createElement("button");
+    let editBtn = document.createElement("div");
 
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
@@ -441,7 +441,7 @@ class VisitTherapist extends Visit {
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
     let age = document.createElement("p");
-    let editBtn = document.createElement("button");
+    let editBtn = document.createElement("div");
 
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
