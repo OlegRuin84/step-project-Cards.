@@ -41,4 +41,15 @@ async function fetchData(data) {
 
 }
 
-export { fetchData };
+// функція видалення карток
+
+function deleteCard(text){
+fetch(text, {
+method: 'DELETE',
+headers: {
+'Authorization': `Bearer ${token}`
+},
+})
+}
+
+export { fetchData, deleteCard };

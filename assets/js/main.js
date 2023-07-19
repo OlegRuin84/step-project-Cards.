@@ -2,6 +2,8 @@
 // imports
 import { deleteWorningWindow } from "./functions.js";
 import { Button, ModalEnterWindow, ModalCardWindow, VisitCardiologist} from "./classes.js";
+import { deleteCard } from "./api/api.js";
+// import { getUserServer } from "./methods.js"
 
 // for testing
 let login = "1";
@@ -175,14 +177,28 @@ function createWindowAfterLogIn() {
 
 // card__btn-more Listener
 
+
 let conteinerCards = document.querySelector('.conteiner__cards')
-// console.log(conteinerCards)
-  conteinerCards.addEventListener('click', function(event){
-  // console.log(event.target.closest('div').id)
-  let div = event.target.closest('div').lastElementChild
-  if(div.style.display === ""){
-    div.style.display = "block"
-  }else if(div.style.display === "block"){
-    div.style.display = ""
-  }
-  })
+conteinerCards.addEventListener('click', function(event){
+// змінна з номером картки, для delete
+  let cardId = event.target.dataset['delete']
+// змінна з номером div, для зміни display
+  let more = event.target.dataset['more']
+  // виклик функції для відалення на сервері
+  if(event.target.dataset['delete']){
+    console.log(`${cardId}`)
+    let text = `https://ajax.test-danit.com/api/v2/cards/${cardId}`
+    deleteCard(text);
+    // getUserServer()
+    // можливо слід оновити тут вигляд блоку, для оновлення вигляду (без видаленних карток)
+
+// керуівання style.display none/block для детельної інвормації
+  }else if (event.target.dataset['more']){
+    let div = document.querySelector(`[data-card-info='${more}']`)
+      
+    if(div.style.display === ""){
+        div.style.display = "block"
+        }else if(div.style.display === "block"){
+        div.style.display = ""
+        }}
+      })

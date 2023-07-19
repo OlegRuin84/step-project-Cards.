@@ -129,15 +129,7 @@ class ModalCardWindow extends Modal {
   }
 }
 
-// ok - bmi:"1.2" 
-// ok - changeUrgency:"Звичайна"
-// ok - descriptionVisit:"вимір тиску"
-// ok - doc:"Кардіолог"
-// ok - goalVisit:"Прановий огляд"
-// ok - heartDisease:"інсульт"
-// id:182998
-// ok - namePatient:"Івашов Ігор Хомич "
-// pressure:"130/70"
+
 // Visit`s classes
 
 class Visit {
@@ -179,11 +171,11 @@ class VisitCardiologist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <button class="card__delete">❌</button>
+            <button class="card__delete" data-delete ="${this.id}">❌</button>
             <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
             <h4 class="card__doc">Доктор: ${this.doc}</h4>
-            <button class="card__btn-more">Показати більше</button>
-            <div class="card__block" data-card-info= ${this.id}> 
+            <button class="card__btn-more" data-more = ${this.id}>Показати більше</button>
+            <div class="card__block" data-card-info = ${this.id}> 
               <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
               <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
               <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
@@ -202,7 +194,6 @@ class VisitCardiologist extends Visit {
     
     // console.log (card)
     let element = document.querySelector('.conteiner__cards')
-    // console.log(element)
       element.insertAdjacentHTML('beforeend', card)
     // return card;
   }
@@ -211,20 +202,8 @@ class VisitCardiologist extends Visit {
 
 // VisitDentist
 
-// changeUrgency:"Звичайна"
-// descriptionVisit:"огляд ротового простору"
-// doc:"Стоматолог"
-// goalVisit:""
-// id:182999
-// lastDate:"рік тому"
-// namePatient:"Кизил Марина Павловна"
-
 class VisitDentist extends Visit {
   constructor(
-    // мета візиту
-// короткий опис візиту
-// дропдаун - терміновість (звичайна, пріоритетна, невідкладна)
-// ПІБ
     descriptionVisit,
     goalVisit,
     changeUrgency,
@@ -242,11 +221,11 @@ class VisitDentist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <button class="card__delete">❌</button>
+            <button class="card__delete" data-delete =${this.id}>❌</button>
             <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
             <h4 class="card__doc">Доктор: ${this.doc}</h4>
-            <button class="card__btn-more">Показати більше</button>
-            <div class="card__block" data-card-info= ${this.id}> 
+            <button class="card__btn-more" data-more = ${this.id}>Показати більше</button>
+            <div class="card__block" data-card-info = ${this.id}> 
               <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
               <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
               <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
@@ -256,20 +235,12 @@ class VisitDentist extends Visit {
             </div>
             </div>`;
     let element = document.querySelector('.conteiner__cards')
-    // console.log(element)
       element.insertAdjacentHTML('beforeend', card)
     // return card;
   }
 } 
 
 
-// age:"18"
-// changeUrgency:"Невідкладна"
-// descriptionVisit:"Отримання лікарняного листа"
-// doc:"Терапевт"
-// goalVisit:""
-// id:183000
-// namePatient:"Ледащій Прохор Серафимович"
 
 class VisitTherapist extends Visit {
   constructor(
@@ -289,11 +260,11 @@ class VisitTherapist extends Visit {
   render() {
     let card = `       
             <div class="card" id="${this.id}">
-            <button class="card__delete">❌</button>
+            <button class="card__delete" data-delete ="${this.id}">❌</button>
             <h4 class="card__title">ПІБ: ${this.namePatient}</h4>               
             <h4 class="card__doc">Доктор: ${this.doc}</h4>
-            <button class="card__btn-more">Показати більше</button>
-            <div class="card__block" data-card-info= ${this.id}> 
+            <button class="card__btn-more" data-more = ${this.id}>Показати більше</button>
+            <div class="card__block" data-card-info = ${this.id}> 
               <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
               <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
               <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
@@ -302,7 +273,6 @@ class VisitTherapist extends Visit {
             </div>
             </div>`;
     let element = document.querySelector('.conteiner__cards')
-    // console.log(element)
       element.insertAdjacentHTML('beforeend', card)
     // return card;
   }

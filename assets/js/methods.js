@@ -87,3 +87,5 @@ async function delllete() {
   });
 }
 // delllete();
+
+export { getUserServer }
