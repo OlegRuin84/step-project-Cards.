@@ -63,7 +63,7 @@ class ModalEnterWindow extends Modal {
       "password",
       "input-password"
     );
-    this.form.addButton("УВІЙТИ", "enter-btn");
+    this.form.addButton("УВІЙТИ", "enter-btn", "button");
     this.modalElement.classList.add("window-log-in");
 
     this.modalElement.append(this.form.formElement);

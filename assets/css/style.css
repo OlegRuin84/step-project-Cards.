@@ -44,7 +44,7 @@ body {
 /* ********* log-in ********** */
 .btn-wrapper {
   display: flex;
-  width: 300px;
+  /* width: 300px; */
   justify-content: space-between;
 }
 
@@ -157,17 +157,20 @@ input {
 }
 
 .enter-btn {
+  border-radius: 10px;
+  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(30, 135, 255);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 700;
-  width: 200px;
-  height: 60px;
+  width: 120px;
+  height: 40px;
   background-color: rgb(162, 204, 252);
   cursor: pointer;
   transition: transform 0.2s ease;
+  margin-top: 20px;
 }
 
 .enter-btn:hover {
@@ -276,7 +279,8 @@ input {
   border: 2px solid rgb(255, 179, 179);
 }
 
-.input-login {
+.input-login,
+.input-password {
   width: 70%;
   height: 30px;
   font-size: 14px;
@@ -494,6 +498,10 @@ textarea::placeholder {
   width: 200px;
   height: 40px;
   font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
 }
 
 /* * cards * */
