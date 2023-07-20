@@ -6,7 +6,7 @@ import {
   ModalDentistForm,
   ModalTherapistForm,
 } from "./forms.js";
-// import { shomMeMore } from "./functions.js";
+import { formatDate } from "./functions.js";
 
 // import { createWindowContent } from "./main.js";
 
@@ -309,6 +309,7 @@ class VisitDentist extends Visit {
   }
 
   render() {
+    let formattedDate = formatDate(this.lastDate);
     let element = document.querySelector(".conteiner__cards");
 
     let wrapper = document.createElement("div");
@@ -347,7 +348,8 @@ class VisitDentist extends Visit {
     goal.textContent = `${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
     status.textContent = `Статус зустрічі: ${this.changeStatus}`;
-    lastDate.textContent = `${this.lastDate}`;
+    // lastDate.textContent = `Остання дата відвідування: ${this.lastDate}`;
+    lastDate.textContent = `Остання дата відвідування: ${formattedDate}`;
     editBtn.textContent = "Редагувати";
 
     wrapper.append(nameWrapper);
