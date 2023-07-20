@@ -70,8 +70,8 @@ function createWindowAfterLogIn(login, password) {
     filterStatus.classList.add("filter-status");
     filterStatusOpen.setAttribute("value", "Open");
     filterStatusDone.setAttribute("value", "Done");
-    filterStatusOpen.textContent = "Чинна";
-    filterStatusDone.textContent = "Закрита";
+    filterStatusOpen.textContent = "Відкритий";
+    filterStatusDone.textContent = "Закритий";
     filterUrgency.classList.add("filter-urgency");
     filterUrgency.classList.add("select");
     filterUrgencyHigh.setAttribute("value", "High");
@@ -80,9 +80,6 @@ function createWindowAfterLogIn(login, password) {
     filterUrgencyLow.textContent = "Звичайна";
     filterUrgencyNormal.textContent = "Пріоритетна";
     filterUrgencyHigh.textContent = "Невідкладна";
-    buttonInput.type = "button";
-    buttonInput.value = "Пошук";
-    buttonInput.classList.add("section__form-btn");
 
     filterWrapper.prepend(filterDescription);
     filterStatus.prepend(filterStatusOpen);
@@ -112,6 +109,9 @@ function createWindowAfterLogIn(login, password) {
       const urgencyFilter =
         filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
       console.log(urgencyFilter);
+      const statusFilter =
+        filterStatus.options[filterStatus.options.selectedIndex].textContent;
+
       // Отримати всі картки для фільтрації
       const cards = document.querySelectorAll(".card");
 
@@ -122,13 +122,15 @@ function createWindowAfterLogIn(login, password) {
           .textContent.trim();
 
         const urgency = card.querySelector(".card__changeUrgency").textContent;
+        // const status = card.querySelector(".");
         // console.log(urgency);
 
         const descriptionMatch =
           descriptionFilter === "" || description.includes(descriptionFilter);
         const urgencyMatch =
           urgencyFilter === "" || urgency.includes(urgencyFilter);
-        console.log(urgencyMatch);
+
+        const statusMatch = statusFilter === "" || console.log(urgencyMatch);
 
         if (descriptionMatch && urgencyMatch) {
           card.style.display = "block";
