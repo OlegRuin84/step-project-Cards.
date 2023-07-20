@@ -236,4 +236,28 @@ async function getUserServer(token) {
 //   }
 // }
 
-export { getToken, getToken2 };
+// запит на видалення картки
+async function deleteCardAtAPI(arg){
+  let response = await fetch(arg, {
+  method: 'DELETE',
+  headers: {
+    'Authorization': `Bearer ${token}`
+  },
+})
+  console.log(response)
+}
+
+
+// function deleteCard(text){
+//   fetch(text, {
+//   method: 'DELETE',
+//   headers: {
+//   'Authorization': `Bearer ${token}`
+//   },
+//   })
+//   }
+  
+
+
+
+export { getToken, getToken2, deleteCardAtAPI};

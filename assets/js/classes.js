@@ -257,6 +257,7 @@ class VisitCardiologist extends Visit {
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
 
+    wrapper.id = `${this.id}`;
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `Клієнт: ${this.namePatient}`;
     moreBtn.textContent = `показати / сховати`;
@@ -361,6 +362,7 @@ class VisitDentist extends Visit {
     lastDate.classList.add("card__lastDate");
     editBtn.classList.add("card__btn-rewrite");
 
+    wrapper.id = `${this.id}`;
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати / сховати`;
@@ -457,6 +459,7 @@ class VisitTherapist extends Visit {
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
 
+    wrapper.id = `${this.id}`;
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати / сховати`;
@@ -493,3 +496,5 @@ export {
   VisitDentist,
   VisitTherapist,
 };
+
+//    записав у властвість карток  wrapper.id = `${this.id}` , пр
