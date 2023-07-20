@@ -152,6 +152,12 @@ class ModalDoctor {
     this.form.addOption("option", "Звичайна");
     this.form.addOption("option", "Пріоритетна");
     this.form.addOption("option", "Невідкладна");
+
+    this.form.addSelect("changeStatus", "select-status");
+    this.form.addOption("option-status", "-- none --", "Статус");
+    this.form.addOption("option-status", "Open", "Відкритий");
+    this.form.addOption("option-status", "Done", "Закритий");
+
     this.form.addInput("ПІБ", "text", "namePatient", "input-login");
   }
 }

@@ -157,7 +157,6 @@ async function getUserServer(token) {
     //   filterWrapper.after(text);
     // }
     // TODO
-
     data.forEach((e) => {
       console.log(e.doc);
       rendering(e);

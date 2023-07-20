@@ -259,7 +259,7 @@ class VisitCardiologist extends Visit {
 
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `Клієнт: ${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
     goal.textContent = `Мета візиту: ${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
@@ -287,6 +287,10 @@ class VisitCardiologist extends Visit {
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }
@@ -363,7 +367,7 @@ class VisitDentist extends Visit {
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
     urgency.textContent = `${this.changeUrgency}`;
@@ -385,6 +389,10 @@ class VisitDentist extends Visit {
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }
@@ -459,7 +467,7 @@ class VisitTherapist extends Visit {
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
     urgency.textContent = `${this.changeUrgency}`;
@@ -481,6 +489,10 @@ class VisitTherapist extends Visit {
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }
