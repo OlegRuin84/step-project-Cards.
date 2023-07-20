@@ -59,6 +59,7 @@ class Form {
     buttonElement.addEventListener("click", (event) => {
       event.preventDefault();
     });
+
     this.formElement.append(buttonElement);
   }
 
