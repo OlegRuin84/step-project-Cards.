@@ -438,3 +438,7 @@ textarea::placeholder {
 .cross::after:hover {
   background-color: rgb(29, 155, 240);
 }
+
+.error {
+  border: 2px solid red;
+}

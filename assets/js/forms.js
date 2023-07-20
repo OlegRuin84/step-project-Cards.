@@ -32,6 +32,7 @@ class Form {
     const selectElement = document.createElement("select");
     selectElement.setAttribute("name", selectName);
     selectElement.classList.add(style);
+    selectElement.setAttribute("required", true);
     this.formElement.append(selectElement);
     this.selectElement = selectElement;
   }
@@ -80,7 +81,7 @@ class Form {
   sendData() {
     // const self = this;
     const formData = new FormData(this.formElement);
-    console.log(formData);
+    // console.log(formData);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
 
@@ -117,14 +118,14 @@ class Form {
 
   validateForm(formData) {
     let isFormValid = true;
-    for (let inputElement of this.formElement.querySelectorAll(
-      "input[required]"
+    for (let element of this.formElement.querySelectorAll(
+      "input[required], select[required]"
     )) {
-      if (!inputElement.value) {
-        inputElement.classList.add("error");
+      if (!element.value) {
+        element.classList.add("error");
         isFormValid = false;
       } else {
-        inputElement.classList.remove("error");
+        element.classList.remove("error");
       }
     }
     return isFormValid;

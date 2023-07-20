@@ -78,7 +78,7 @@ function createWindowAfterLogIn(login, password) {
     filterUrgencyNormal.setAttribute("value", "Norma");
     filterUrgencyLow.setAttribute("value", "Low");
     filterUrgencyLow.textContent = "Звичайна";
-    filterUrgencyNormal.textContent = "Приоритетна";
+    filterUrgencyNormal.textContent = "Пріоритетна";
     filterUrgencyHigh.textContent = "Невідкладна";
     buttonInput.type = "button";
     buttonInput.value = "Пошук";
@@ -92,7 +92,6 @@ function createWindowAfterLogIn(login, password) {
     filterUrgency.prepend(filterUrgencyNormal);
     filterUrgency.prepend(filterUrgencyLow);
     filterStatus.after(filterUrgency);
-    filterWrapper.append(buttonInput);
 
     // for cards rendering
     let cardsWrapper = document.createElement("div");
@@ -100,8 +99,8 @@ function createWindowAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
 
-    // main.prepend(cardsWrapper);
-    // cardsWrapper.prepend(cardsConteiner);
+    main.prepend(cardsWrapper);
+    cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
 
@@ -110,13 +109,11 @@ function createWindowAfterLogIn(login, password) {
       event.preventDefault();
       // Отримати значення з полів вводу та вибору
       const descriptionFilter = filterDescription.value.trim();
-
-      const urgencyFilter = filterUrgency.value;
-
-      // console.log(urgencyFilter);
-
+      const urgencyFilter =
+        filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
+      console.log(urgencyFilter);
       // Отримати всі картки для фільтрації
-      const cards = document.querySelectorAll(".conteiner__cards .card");
+      const cards = document.querySelectorAll(".card");
 
       // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
       cards.forEach((card) => {
@@ -124,15 +121,14 @@ function createWindowAfterLogIn(login, password) {
           .querySelector(".card__title")
           .textContent.trim();
 
-        const urgency = card
-          .querySelector(".card__changeUrgency")
-          .textContent.trim();
-        console.log(urgency);
+        const urgency = card.querySelector(".card__changeUrgency").textContent;
+        // console.log(urgency);
 
         const descriptionMatch =
           descriptionFilter === "" || description.includes(descriptionFilter);
         const urgencyMatch =
-          urgencyFilter === " " || urgency.includes(urgencyFilter);
+          urgencyFilter === "" || urgency.includes(urgencyFilter);
+        console.log(urgencyMatch);
 
         if (descriptionMatch && urgencyMatch) {
           card.style.display = "block";
@@ -140,12 +136,11 @@ function createWindowAfterLogIn(login, password) {
           card.style.display = "none";
         }
       });
+      return false;
     }
 
-    // Додайте обробник події для кнопки "Искать"
-    // filterDescription.addEventListener("input", filterData);
+    filterDescription.addEventListener("input", filterData);
     filterUrgency.addEventListener("change", filterData);
-    buttonInput.addEventListener("click", filterData);
 
     getToken2(login, password);
   }
