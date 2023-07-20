@@ -22,31 +22,6 @@ function sendFormData(formData) {
   });
 }
 
-// ! ???
-// function shomMeMore(styleClass) {
-//   let conteinerCards = document.querySelector(styleClass);
-//   conteinerCards.addEventListener("click", function (event) {
-//     let div = event.target.closest("div").lastElementChild;
-//     if (div.style.display === "") {
-//       div.style.display = "block";
-//     } else if (div.style.display === "block") {
-//       div.style.display = "";
-//     }
-//   });
-// }
-
-// function shomMeMore(styleClass) {
-//   let conteinerCards = document.querySelector(styleClass);
-//   conteinerCards.addEventListener("click", function (event) {
-//     let div = event.target.closest("div").lastElementChild;
-//     if (div.style.display === "") {
-//       div.style.display = "block";
-//     } else if (div.style.display === "block") {
-//       div.style.display = "";
-//     }
-//   });
-// }
-
 function rendering(e) {
   if (e.doc === "Кардіолог") {
     let card = new VisitCardiologist(
@@ -101,5 +76,4 @@ function formatDate(a) {
   return formattedDate;
 }
 
-// export { deleteWorningWindow, sendFormData, shomMeMore, rendering };
 export { deleteWorningWindow, sendFormData, rendering, formatDate };
