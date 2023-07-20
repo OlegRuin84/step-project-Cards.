@@ -330,7 +330,8 @@ textarea::placeholder {
 }
 
 .select-urgency,
-.select-status {
+.select-status,
+.option-status-close {
   width: 30%;
   height: 40px;
   margin-top: 5px;
@@ -346,6 +347,11 @@ textarea::placeholder {
   margin-bottom: 10px;
   padding: 3px 0px;
 }
+
+/* ! don't touch */
+/* .option-status-close {
+  display: none;
+} */
 
 .select-urgency .option:nth-child(2),
 .select-status .option-status:nth-child(2) {

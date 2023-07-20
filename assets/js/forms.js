@@ -155,8 +155,8 @@ class ModalDoctor {
 
     this.form.addSelect("changeStatus", "select-status");
     this.form.addOption("option-status", "-- none --", "Статус");
-    this.form.addOption("option-status", "Open", "Відкритий");
-    this.form.addOption("option-status", "Done", "Закритий");
+    this.form.addOption("option-status", "Відкритий", "Відкритий");
+    this.form.addOption("option-status-close", "Закритий", "Закритий");
 
     this.form.addInput("ПІБ", "text", "namePatient", "input-login");
   }

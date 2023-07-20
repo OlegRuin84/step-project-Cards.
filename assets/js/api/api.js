@@ -158,7 +158,7 @@ async function getUserServer(token) {
     // }
     // TODO
     data.forEach((e) => {
-      console.log(e.doc);
+      console.log(e);
       rendering(e);
       // if (e.doc === "Кардіолог") {
       //   let card = new VisitCardiologist(
