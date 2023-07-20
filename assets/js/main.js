@@ -61,7 +61,6 @@ function createWindowAfterLogIn(login, password) {
     let filterUrgencyHigh = document.createElement("option");
     let filterUrgencyNormal = document.createElement("option");
     let filterUrgencyLow = document.createElement("option");
-    let buttonInput = document.createElement("input");
 
     filterWrapper.classList.add("container");
     filterWrapper.classList.add("filter-wrapper");
@@ -122,7 +121,7 @@ function createWindowAfterLogIn(login, password) {
           .textContent.trim();
 
         const urgency = card.querySelector(".card__changeUrgency").textContent;
-        // const status = card.querySelector(".");
+        const status = card.querySelector(".select-status").textContent;
         // console.log(urgency);
 
         const descriptionMatch =
@@ -130,9 +129,11 @@ function createWindowAfterLogIn(login, password) {
         const urgencyMatch =
           urgencyFilter === "" || urgency.includes(urgencyFilter);
 
-        const statusMatch = statusFilter === "" || console.log(urgencyMatch);
+        const statusMatch =
+          statusFilter === "" || status.includes(statusFilter);
+        console.log(statusMatch);
 
-        if (descriptionMatch && urgencyMatch) {
+        if (descriptionMatch && urgencyMatch && statusMatch) {
           card.style.display = "block";
         } else {
           card.style.display = "none";
