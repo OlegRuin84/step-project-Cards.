@@ -59,6 +59,7 @@ class Form {
     buttonElement.addEventListener("click", (event) => {
       event.preventDefault();
     });
+
     this.formElement.append(buttonElement);
   }
 
@@ -193,7 +194,7 @@ class ModalDentistForm extends ModalDoctor {
   createDentistForm() {
     this.form.addInput(
       "Останнє відвідування",
-      "text",
+      "date",
       "lastDate",
       "input-login"
     );

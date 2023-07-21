@@ -6,7 +6,7 @@ import {
   ModalDentistForm,
   ModalTherapistForm,
 } from "./forms.js";
-// import { shomMeMore } from "./functions.js";
+import { formatDate } from "./functions.js";
 
 // import { createWindowContent } from "./main.js";
 
@@ -162,10 +162,17 @@ class ModalCardWindow extends Modal {
 }
 
 class Visit {
-  constructor(descriptionVisit, goalVisit, changeUrgency, namePatient) {
+  constructor(
+    descriptionVisit,
+    goalVisit,
+    changeUrgency,
+    changeStatus,
+    namePatient
+  ) {
     (this.descriptionVisit = descriptionVisit),
       (this.goalVisit = goalVisit),
       (this.changeUrgency = changeUrgency),
+      (this.changeStatus = changeStatus),
       (this.namePatient = namePatient);
   }
   render() {}
@@ -176,6 +183,7 @@ class VisitCardiologist extends Visit {
     descriptionVisit,
     goalVisit,
     changeUrgency,
+    changeStatus,
     namePatient,
     doc,
     pressure,
@@ -184,7 +192,13 @@ class VisitCardiologist extends Visit {
     age,
     id
   ) {
-    super(descriptionVisit, goalVisit, changeUrgency, namePatient),
+    super(
+      descriptionVisit,
+      goalVisit,
+      changeUrgency,
+      changeStatus,
+      namePatient
+    ),
       (this.doc = doc),
       (this.pressure = pressure),
       (this.bmi = bmi),
@@ -192,35 +206,7 @@ class VisitCardiologist extends Visit {
       (this.age = age),
       (this.id = id);
   }
-  // ! Oleg
-  // render() {
-  //   let card = `
-  //           <div class="card" id="${this.id}">
-  //           <button class="card__delete">❌</button>
-  //           <h4 class="card__title">ПІБ: ${this.namePatient}</h4>
-  //           <h4 class="card__doc">Доктор: ${this.doc}</h4>
-  //           <button class="card__btn-more">Показати більше</button>
-  //           <div class="card__block" data-card-info= "${this.id}">
-  //             <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
-  //             <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
 
-  //             <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
-  //             <p class="card__pressure">Внутрішний тиск: ${this.pressure}</p>
-  //             <p class="card__bmi">Індекс маси тіла: ${this.bmi}</p>
-  //             <p class="card__heartDisease">Перенесені захворювання серцево-судинної системи: ${this.heartDisease}</p>
-  //             <p class="card__age">Вік: ${this.age}</p>
-  //             <button class="card__btn-rewrite" >Редагувати</button>
-  //           </div>
-  //           </div>`;
-
-  //   let element = document.querySelector(".conteiner__cards");
-  //   if (element) {
-  //     element.insertAdjacentHTML("beforeend", card);
-  //     // shomMeMore(".conteiner__cards");
-  //   }
-  // }
-
-  // TODO
   render() {
     let element = document.querySelector(".conteiner__cards");
 
@@ -234,6 +220,7 @@ class VisitCardiologist extends Visit {
     let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
+    let status = document.createElement("p");
     let pressure = document.createElement("p");
     let bmi = document.createElement("p");
     let heartDisease = document.createElement("p");
@@ -251,6 +238,7 @@ class VisitCardiologist extends Visit {
     desc.classList.add("card__descriptionVisit");
     goal.classList.add("card__goalVisit");
     urgency.classList.add("card__changeUrgency");
+    status.classList.add("card__changeStatus");
     pressure.classList.add("card__pressure");
     bmi.classList.add("card__bmi");
     heartDisease.classList.add("card__heartDisease");
@@ -259,10 +247,11 @@ class VisitCardiologist extends Visit {
 
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `Клієнт: ${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
     goal.textContent = `Мета візиту: ${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
+    status.textContent = `Статус візиту: ${this.changeStatus}`;
     pressure.textContent = `Звичайний тиск: ${this.pressure}`;
     bmi.textContent = `Індекс маси тіла: ${this.bmi}`;
     heartDisease.textContent = `Перенесенні захворювання: ${this.heartDisease}`;
@@ -278,7 +267,8 @@ class VisitCardiologist extends Visit {
     moreInfo.append(goal);
     goal.after(desc);
     desc.after(urgency);
-    urgency.after(pressure);
+    urgency.after(status);
+    status.after(pressure);
     pressure.after(bmi);
     bmi.after(heartDisease);
     heartDisease.after(age);
@@ -287,6 +277,10 @@ class VisitCardiologist extends Visit {
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }
@@ -296,42 +290,26 @@ class VisitDentist extends Visit {
     descriptionVisit,
     goalVisit,
     changeUrgency,
+    changeStatus,
     namePatient,
     doc,
     id,
     lastDate
   ) {
-    super(descriptionVisit, goalVisit, changeUrgency, namePatient),
+    super(
+      descriptionVisit,
+      goalVisit,
+      changeUrgency,
+      changeStatus,
+      namePatient
+    ),
       (this.doc = doc),
       (this.id = id),
       (this.lastDate = lastDate);
   }
-  // ! Oleg
-  // render() {
-  //   let card = `
-  //           <div class="card" id="${this.id}">
-  //           <button class="card__delete">❌</button>
-  //           <h4 class="card__title">ПІБ: ${this.namePatient}</h4>
-  //           <h4 class="card__doc">Доктор: ${this.doc}</h4>
-  //           <button class="card__btn-more">Показати більше</button>
-  //           <div class="card__block" data-card-info= "${this.id}">
-  //             <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
-  //             <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
-  //             <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
-  //             <p class="card__age">Вік: ${this.age}</p>
-  //             <p class="card__lastDate">Останній візит: ${this.lastDate}</p>
-  //             <button class="card__btn-rewrite" >Редагувати</button>
-  //           </div>
-  //           </div>`;
-  //   let element = document.querySelector(".conteiner__cards");
-  //   if (element) {
-  //     element.insertAdjacentHTML("beforeend", card);
-  //     // shomMeMore(".conteiner__cards");
-  //   }
-  // }
 
-  // TODO
   render() {
+    let formattedDate = formatDate(this.lastDate);
     let element = document.querySelector(".conteiner__cards");
 
     let wrapper = document.createElement("div");
@@ -344,6 +322,7 @@ class VisitDentist extends Visit {
     let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
+    let status = document.createElement("p");
     let lastDate = document.createElement("p");
     let editBtn = document.createElement("div");
 
@@ -358,16 +337,19 @@ class VisitDentist extends Visit {
     desc.classList.add("card__descriptionVisit");
     goal.classList.add("card__goalVisit");
     urgency.classList.add("card__changeUrgency");
+    status.classList.add("card__changeStatus");
     lastDate.classList.add("card__lastDate");
     editBtn.classList.add("card__btn-rewrite");
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
-    urgency.textContent = `${this.changeUrgency}`;
-    lastDate.textContent = `${this.lastDate}`;
+    urgency.textContent = `Терміновість: ${this.changeUrgency}`;
+    status.textContent = `Статус зустрічі: ${this.changeStatus}`;
+    // lastDate.textContent = `Остання дата відвідування: ${this.lastDate}`;
+    lastDate.textContent = `Остання дата відвідування: ${formattedDate}`;
     editBtn.textContent = "Редагувати";
 
     wrapper.append(nameWrapper);
@@ -379,12 +361,17 @@ class VisitDentist extends Visit {
     moreInfo.append(desc);
     desc.after(goal);
     goal.after(urgency);
-    urgency.after(lastDate);
+    urgency.after(status);
+    status.after(lastDate);
     lastDate.after(editBtn);
     element.prepend(wrapper);
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }
@@ -394,38 +381,23 @@ class VisitTherapist extends Visit {
     descriptionVisit,
     goalVisit,
     changeUrgency,
+    changeStatus,
     namePatient,
     doc,
     age,
     id
   ) {
-    super(descriptionVisit, goalVisit, changeUrgency, namePatient),
+    super(
+      descriptionVisit,
+      goalVisit,
+      changeUrgency,
+      changeStatus,
+      namePatient
+    ),
       (this.doc = doc),
       (this.age = age),
       (this.id = id);
   }
-  // ! Oleg
-  // render() {
-  //   let card = `
-  //           <div class="card" id="${this.id}">
-  //           <button class="card__delete">❌</button>
-  //           <h4 class="card__title">ПІБ: ${this.namePatient}</h4>
-  //           <h4 class="card__doc">Доктор: ${this.doc}</h4>
-  //           <button class="card__btn-more">Показати більше</button>
-  //           <div class="card__block" data-card-info= "${this.id}">
-  //             <p class ="card__descriptionVisit">Опис візиту: ${this.descriptionVisit}</p>
-  //             <p class="card__goalVisit">Мета визиту: ${this.goalVisit}</p>
-  //             <p class="card__changeUrgency">Терміновість: ${this.changeUrgency}</p>
-  //             <p class="card__age">Вік: ${this.age}</p>
-  //             <button class="card__btn-rewrite" >Редагувати</button>
-  //           </div>
-  //           </div>`;
-  //   let element = document.querySelector(".conteiner__cards");
-  //   if (element) {
-  //     element.insertAdjacentHTML("beforeend", card);
-  //     // shomMeMore(".conteiner__cards");
-  //   }
-  // }
 
   render() {
     let element = document.querySelector(".conteiner__cards");
@@ -440,6 +412,7 @@ class VisitTherapist extends Visit {
     let desc = document.createElement("p");
     let goal = document.createElement("p");
     let urgency = document.createElement("p");
+    let status = document.createElement("p");
     let age = document.createElement("p");
     let editBtn = document.createElement("div");
 
@@ -454,15 +427,17 @@ class VisitTherapist extends Visit {
     desc.classList.add("card__descriptionVisit");
     goal.classList.add("card__goalVisit");
     urgency.classList.add("card__changeUrgency");
+    status.classList.add("card__changeStatus");
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
-    moreBtn.textContent = `показати / сховати`;
+    moreBtn.textContent = `показати більше`;
     desc.textContent = `${this.descriptionVisit}`;
     goal.textContent = `${this.goalVisit}`;
-    urgency.textContent = `${this.changeUrgency}`;
+    urgency.textContent = `Терміновість: ${this.changeUrgency}`;
+    status.textContent = `Статус зустрічі: ${this.changeStatus}`;
     age.textContent = `${this.age}`;
     editBtn.textContent = "Редагувати";
 
@@ -475,12 +450,17 @@ class VisitTherapist extends Visit {
     moreInfo.append(desc);
     desc.after(goal);
     goal.after(urgency);
-    urgency.after(age);
+    urgency.after(status);
+    status.after(age);
     age.after(editBtn);
     element.prepend(wrapper);
 
     moreBtn.addEventListener("click", function () {
       moreInfo.classList.toggle("hidden");
+      moreBtn.textContent = `приховати`;
+      if (moreInfo.matches(".hidden")) {
+        moreBtn.textContent = `показати більше`;
+      }
     });
   }
 }

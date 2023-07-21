@@ -22,37 +22,13 @@ function sendFormData(formData) {
   });
 }
 
-// ! ???
-// function shomMeMore(styleClass) {
-//   let conteinerCards = document.querySelector(styleClass);
-//   conteinerCards.addEventListener("click", function (event) {
-//     let div = event.target.closest("div").lastElementChild;
-//     if (div.style.display === "") {
-//       div.style.display = "block";
-//     } else if (div.style.display === "block") {
-//       div.style.display = "";
-//     }
-//   });
-// }
-
-// function shomMeMore(styleClass) {
-//   let conteinerCards = document.querySelector(styleClass);
-//   conteinerCards.addEventListener("click", function (event) {
-//     let div = event.target.closest("div").lastElementChild;
-//     if (div.style.display === "") {
-//       div.style.display = "block";
-//     } else if (div.style.display === "block") {
-//       div.style.display = "";
-//     }
-//   });
-// }
-
 function rendering(e) {
   if (e.doc === "Кардіолог") {
     let card = new VisitCardiologist(
       e.descriptionVisit,
       e.goalVisit,
       e.changeUrgency,
+      e.changeStatus,
       e.namePatient,
       e.doc,
       e.pressure,
@@ -67,6 +43,7 @@ function rendering(e) {
       e.descriptionVisit,
       e.goalVisit,
       e.changeUrgency,
+      e.changeStatus,
       e.namePatient,
       e.doc,
       e.id,
@@ -78,6 +55,7 @@ function rendering(e) {
       e.descriptionVisit,
       e.goalVisit,
       e.changeUrgency,
+      e.changeStatus,
       e.namePatient,
       e.doc,
       e.age,
@@ -87,5 +65,15 @@ function rendering(e) {
   }
 }
 
-// export { deleteWorningWindow, sendFormData, shomMeMore, rendering };
-export { deleteWorningWindow, sendFormData, rendering };
+function formatDate(a) {
+  let parts = a.split("-");
+  let year = parts[0];
+  let month = parts[1];
+  let day = parts[2];
+
+  let formattedDate = `${day}-${month}-${year}`;
+
+  return formattedDate;
+}
+
+export { deleteWorningWindow, sendFormData, rendering, formatDate };
