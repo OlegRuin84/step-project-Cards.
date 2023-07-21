@@ -287,12 +287,9 @@ cardsOfMain.addEventListener('click', function(event){
       if(e === "cross"){
         let card = event.target.closest('.card')
         console.log(card.id)
-  
-        let text = `https://ajax.test-danit.com/api/v2/cards/${card.id}`
-        
-        console.log (text)
+
         // виклик функциї видаленняб згідно номера
-        deleteCardAtAPI(text) 
+        deleteCardAtAPI(card.id) 
       }
     }
   })

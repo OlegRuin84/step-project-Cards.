@@ -238,14 +238,17 @@ async function getUserServer(token) {
 
 // запит на видалення картки
 async function deleteCardAtAPI(arg){
-  let response = await fetch(arg, {
+  let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${arg}`, {
   method: 'DELETE',
   headers: {
     Authorization: `Bearer ${token}`
   },
 })
+// перевірка статусу видалення за номером ID, 
+// і при видаленні - видаляємо картку з відповідним ID з DOM
 if (response.status === 200) {
-  console.log(response);
+  let el = document.getElementById(arg)
+  el.remove()
 }
 }
 
