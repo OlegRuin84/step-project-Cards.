@@ -520,14 +520,55 @@ textarea::placeholder {
 }
 
 .filter-wrapper {
+  width: 100%;
   padding: 100px 0px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(119, 119, 119);
+}
+
+.filter-wrapper__headline {
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 30px;
+}
+
+.filter-content {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-description-wrapper,
+.filter-status-wrapper,
+.filter-urgency-wrapper {
+  height: 80px;
+}
+
+.filter-status-wrapper,
+.filter-urgency-wrapper {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
 .filter-description {
   width: 300px;
+  margin: 0px;
+}
+
+.filter-label {
+  padding-bottom: 10px;
 }
 
 .filter-status,
