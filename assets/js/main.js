@@ -108,8 +108,8 @@ function createWindowAfterLogIn(login, password) {
       const urgencyFilter =
         filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
       console.log(urgencyFilter);
-      const statusFilter =
-        filterStatus.options[filterStatus.options.selectedIndex].textContent;
+      // const statusFilter =
+      //   filterStatus.options[filterStatus.options.selectedIndex].textContent;
 
       // Отримати всі картки для фільтрації
       const cards = document.querySelectorAll(".card");
@@ -121,17 +121,17 @@ function createWindowAfterLogIn(login, password) {
           .textContent.trim();
 
         const urgency = card.querySelector(".card__changeUrgency").textContent;
-        const status = card.querySelector(".select-status").textContent;
+        // const status = card.querySelector(".select-status").textContent;
 
         const descriptionMatch =
           descriptionFilter === "" || description.includes(descriptionFilter);
         const urgencyMatch =
           urgencyFilter === "" || urgency.includes(urgencyFilter);
 
-        const statusMatch =
-          statusFilter === "" || status.includes(statusFilter);
+        // const statusMatch =
+        //   statusFilter === "" || status.includes(statusFilter);
 
-        if (descriptionMatch && urgencyMatch && statusMatch) {
+        if (descriptionMatch && urgencyMatch) {
           card.style.display = "block";
         } else {
           card.style.display = "none";
