@@ -295,4 +295,17 @@ cardsOfMain.addEventListener('click', function(event){
   })
 
 
+
+// Метод редагування
+
+
+// cardsOfMain.addEventListener('click', function (event){
+//    if(event.target.className === "card__btn-rewrite"){
+//     let card = event.target.closest('.card')
+//     console.log(card.id)
+//    }
+// })
+
+
+
 export { createWindowContent }

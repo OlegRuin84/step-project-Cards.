@@ -14,7 +14,8 @@ async function fetchData(token, data) {
     // TODO GET
     if (response.status === 200) {
       console.log(data);
-      rendering(data);
+      // rendering(data);
+      getUserServer(token)
 
       // if (data.doc === "Кардіолог") {
       //   let card = new VisitCardiologist(
@@ -139,6 +140,7 @@ async function getUserServer(token) {
     });
     let data = await response.json();
     console.log(data);
+    rendering(data);
 
     // TODO
     // let filterWrapper = document.querySelector(".filter-wrapper");
