@@ -241,23 +241,13 @@ async function deleteCardAtAPI(arg){
   let response = await fetch(arg, {
   method: 'DELETE',
   headers: {
-    'Authorization': `Bearer ${token}`
+    Authorization: `Bearer ${token}`
   },
 })
-  console.log(response)
+if (response.status === 200) {
+  console.log(response);
 }
-
-
-// function deleteCard(text){
-//   fetch(text, {
-//   method: 'DELETE',
-//   headers: {
-//   'Authorization': `Bearer ${token}`
-//   },
-//   })
-//   }
-  
-
+}
 
 
 export { getToken, getToken2, deleteCardAtAPI};

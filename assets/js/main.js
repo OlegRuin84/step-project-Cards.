@@ -1,5 +1,5 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getToken2, deleteCardAtAPI  } from "./api/api.js";
+import { getToken2, deleteCardAtAPI } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,
@@ -281,19 +281,21 @@ let cardsOfMain = document.querySelector('main')
 
 cardsOfMain.addEventListener('click', function(event){
 // змінна з номером картки, для delete
-let text
-// console.log(event.target.classList)
-let arr = event.target.classList
-  for (let e of arr){
-    if(e === "cross"){
-      let card = event.target.closest('.card')
-      console.log(card.id)
-      let text = `https://ajax.test-danit.com/api/v2/cards/${card.id}`
-      console.log (text)
-      deleteCardAtAPI(text)
+
+  let arr = event.target.classList
+    for (let e of arr){
+      if(e === "cross"){
+        let card = event.target.closest('.card')
+        console.log(card.id)
+  
+        let text = `https://ajax.test-danit.com/api/v2/cards/${card.id}`
+        
+        console.log (text)
+        // виклик функциї видаленняб згідно номера
+        deleteCardAtAPI(text) 
+      }
     }
-  }
-})
+  })
 
 
-export { createWindowContent };
+export { createWindowContent }

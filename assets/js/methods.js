@@ -3,7 +3,11 @@
 
 // ---------------- TEST ----------------------
 // to see the result
-let token = "62c5f5c5-0f93-422d-8955-a756d445d739";
+// 70dd6d15-1769-4113-a892-9664144ebf41 oleh?
+// 62c5f5c5-0f93-422d-8955-a756d445d739 був до мене
+// ed0baaa2-558b-48fc-9651-92d35c662e2a 220
+// e58072ee-0b56-4a39-a5e8-bbb64929726e JK2007
+let token = "ed0baaa2-558b-48fc-9651-92d35c662e2a";
 async function getUserServer() {
   try {
     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
