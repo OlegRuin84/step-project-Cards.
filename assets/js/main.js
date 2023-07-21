@@ -138,47 +138,48 @@ function createWindowAfterLogIn(login, password) {
     filterWrapper.after(cardsConteiner);
 
     // Функція фільтрації даних
-    // function filterData(event) {
-    //   event.preventDefault();
-    //   // Отримати значення з полів вводу та вибору
-    //   const descriptionFilter = filterDescription.value.trim();
-    //   const urgencyFilter =
-    //     filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
-    //   console.log(urgencyFilter);
-    //   const statusFilter =
-    //     filterStatus.options[filterStatus.options.selectedIndex].textContent;
+    function filterData(event) {
+      event.preventDefault();
+      // Отримати значення з полів вводу та вибору
+      const descriptionFilter = filterDescription.value.trim();
+      const urgencyFilter =
+        filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
+      const statusFilter =
+        filterStatus.options[filterStatus.options.selectedIndex].textContent;
 
-    //   // Отримати всі картки для фільтрації
-    //   const cards = document.querySelectorAll(".card");
+      // Отримати всі картки для фільтрації
+      const cards = document.querySelectorAll(".card");
 
-    //   // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
-    //   cards.forEach((card) => {
-    //     const description = card
-    //       .querySelector(".card__title")
-    //       .textContent.trim();
+      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
+      cards.forEach((card) => {
+        const description = card
+          .querySelector(".card__title")
+          .textContent.trim();
 
-    //     const urgency = card.querySelector(".card__changeUrgency").textContent;
-    //     const status = card.querySelector(".select-status").textContent;
+        const urgency = card.querySelector(".card__changeUrgency").textContent;
 
-    //     const descriptionMatch =
-    //       descriptionFilter === "" || description.includes(descriptionFilter);
-    //     const urgencyMatch =
-    //       urgencyFilter === "" || urgency.includes(urgencyFilter);
+        const status = card.querySelector(".card__changeStatus").textContent;
 
-    //     const statusMatch =
-    //       statusFilter === "" || status.includes(statusFilter);
+        const descriptionMatch =
+          descriptionFilter === "" || description.includes(descriptionFilter);
+        const urgencyMatch =
+          urgencyFilter === "Всі" || urgency.includes(urgencyFilter);
 
-    //     if (descriptionMatch && urgencyMatch && statusMatch) {
-    //       card.style.display = "block";
-    //     } else {
-    //       card.style.display = "none";
-    //     }
-    //   });
-    //   return false;
-    // }
+        const statusMatch =
+          statusFilter === "Всі" || status.includes(statusFilter);
 
-    // filterDescription.addEventListener("input", filterData);
-    // filterUrgency.addEventListener("change", filterData);
+        if (descriptionMatch && urgencyMatch && statusMatch) {
+          card.classList.remove("card-hidden");
+        } else {
+          card.classList.add("card-hidden");
+        }
+      });
+      return false;
+    }
+
+    filterDescription.addEventListener("input", filterData);
+    filterUrgency.addEventListener("change", filterData);
+    filterStatus.addEventListener("change", filterData);
 
     getToken2(login, password);
   }
