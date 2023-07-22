@@ -139,8 +139,9 @@ async function getUserServer(token) {
       },
     });
     let data = await response.json();
-    console.log(data);
-    rendering(data);
+    // console.log(data);
+    // rendering(data);
+    
 
     // TODO
     // let filterWrapper = document.querySelector(".filter-wrapper");
@@ -159,9 +160,9 @@ async function getUserServer(token) {
     //   filterWrapper.after(text);
     // }
     // TODO
-
     data.forEach((e) => {
       console.log(e.doc);
+      
       rendering(e);
       // if (e.doc === "Кардіолог") {
       //   let card = new VisitCardiologist(
@@ -255,4 +256,23 @@ if (response.status === 200) {
 }
 
 
-export { getToken, getToken2, deleteCardAtAPI};
+// get for 1 card
+
+async function getOneCard (token, id) {
+  try {
+    let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let data = await response.json();
+    console.log(data)
+    return data;
+  } catch (e) {
+    console.log("Помилка в GET запиті (функція getOneCard)!");
+    console.log(e);
+  }}
+
+
+export { getToken, getToken2, deleteCardAtAPI, getOneCard };

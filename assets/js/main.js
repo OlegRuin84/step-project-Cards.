@@ -1,10 +1,11 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getToken2, deleteCardAtAPI } from "./api/api.js";
+import { getToken2, deleteCardAtAPI, getOneCard  } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,
   ModalCardWindow,
   VisitCardiologist,
+  ModalCardiologistForm
 } from "./classes.js";
 
 //
@@ -294,16 +295,45 @@ cardsOfMain.addEventListener('click', function(event){
     }
   })
 
+// текст при відсутності карток
+
 
 
 // Метод редагування
 
 
-// cardsOfMain.addEventListener('click', function (event){
-//    if(event.target.className === "card__btn-rewrite"){
+// cardsOfMain.addEventListener('click', 
+// async function (event){
+//   if(event.target.className === "card__btn-rewrite"){
 //     let card = event.target.closest('.card')
-//     console.log(card.id)
-//    }
+//     // console.log(card.id)
+//     let objcard = await getOneCard (token, card.id)
+//     // console.log(objcard.doc);
+//     let modalForm;
+//       if(objcard.doc === "Кардіолог"){
+//         modalForm = new ModalCardiologistForm(objcard)
+//         modalForm.createCardiologistForm();
+//         const createWindow = new ModalCardWindow(header, "Змінити візит");
+//         createWindow.open();
+//         console.log(modalForm)
+//       }
+      
+//     // handleSelectChange(objcard.doc)
+//     // objcard.then(data => card1=data)
+//     // console.log(objcard.data)
+//     // розкр проміс
+//     // витягую креат віндов 
+//     // наповнюю форму з промісу
+
+
+//     // arrayCards.forEach(elem => {
+//     //   if (elem.id === card.id) {
+//     //     console.log(elem)
+        
+//     //   }
+//     // })
+
+//   }
 // })
 
 

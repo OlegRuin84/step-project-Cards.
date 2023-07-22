@@ -35,7 +35,7 @@ class Modal {
     this.modalElement = document.createElement("div");
     this.modalElement.classList.add("window");
     element.append(this.modalElement);
-
+    console.log(element)
     this.headline = document.createElement("h2");
     this.headline.classList.add("headline");
     this.modalElement.append(this.headline);
@@ -495,6 +495,7 @@ export {
   VisitCardiologist,
   VisitDentist,
   VisitTherapist,
+  ModalCardiologistForm
 };
 
 //    записав у властвість карток  wrapper.id = `${this.id}` , пр
