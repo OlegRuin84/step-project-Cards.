@@ -15,6 +15,7 @@ class Form {
     inputElement.setAttribute("type", inputType);
     inputElement.setAttribute("name", inputName);
     inputElement.classList.add(style);
+
     inputElement.setAttribute("required", true);
     this.formElement.append(inputElement);
   }
@@ -32,6 +33,7 @@ class Form {
     const selectElement = document.createElement("select");
     selectElement.setAttribute("name", selectName);
     selectElement.classList.add(style);
+    selectElement.setAttribute("required", true);
     this.formElement.append(selectElement);
     this.selectElement = selectElement;
   }
@@ -78,60 +80,77 @@ class Form {
   }
 
   //   GO TO THE SERVER
+
   // TODO validation
-  // sendData() {
-  //   // const self = this;
-  //   const formData = new FormData(this.formElement);
-  //   console.log(formData);
-  //   let selectMain = document.querySelector(".select-main");
-  //   formData.append("doc", selectMain.value);
+  validateForm() {
+    const formElements = this.formElement.elements;
+    let isValid = true;
+    let errorFields = [];
 
-  //   // const isFormValid = this.validateForm(formData);
-  //   sendFormData(formData);
+    for (const element of formElements) {
+      if (
+        element.nodeName === "INPUT" ||
+        element.nodeName === "TEXTAREA" ||
+        element.nodeName === "SELECT"
+      ) {
+        // Перевірка на пусте значення поля
+        if (element.value.trim() === "") {
+          isValid = false;
+          errorFields.push(element.name);
+        }
 
-  //   if (isFormValid) {
-  //     console.log(formData);
-  //     sendFormData(formData)
-  //       .then((response) => {
-  //         console.log(response);
-  //         if (response && response.ok) {
-  //           console.log("Data sent successfully");
-  //         } else {
-  //           throw new Error("Error sending data");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error sending data:", error);
-  //         alert("An error occurred while sending data. Please try again.");
-  //       });
-  //   } else {
-  //     alert("Будь ласка, заповніть всі обов'язкові поля.");
-  //   }
-  // }
+        // Додаткова перевірка для конкретних полів
+        if (element.name === "goalVisit") {
+          const regex = /^[A-Za-z]+$/; // Регулярний вираз для перевірки на букви
+          if (!regex.test(element.value)) {
+            isValid = false;
+            errorFields.push(element.name);
+          }
+        }
+
+        // Інші додаткові перевірки для інших полів (за потреби)
+      }
+    }
+
+    // Виводимо помилку для невалідних полів
+    if (!isValid) {
+      this.displayErrorFields(errorFields);
+    }
+
+    return isValid;
+  }
+
+  displayErrorFields(fields) {
+    // Ви можете замінити alert на модальне вікно або інше сповіщення
+    let errorMessage = "Перевірте введені дані у виділених полях:";
+    for (const fieldName of fields) {
+      const fieldElement = this.formElement.elements[fieldName];
+      fieldElement.style.borderColor = "red";
+      errorMessage += "\n- " + fieldName;
+    }
+
+    alert(errorMessage);
+  }
 
   // ! can't touch this!
   sendData() {
     const formData = new FormData(this.formElement);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
-    sendFormData(formData);
+    // Викликаємо функцію валідації перед відправкою даних
+    try {
+      // Викликаємо функцію валідації перед відправкою даних
+      if (this.validateForm()) {
+        sendFormData(formData);
+      } else {
+        // Функція валідації вже вивела повідомлення про помилку для невалідних полів.
+        // Тут можна зробити додаткові дії або нічого не робити.
+      }
+    } catch (error) {
+      // Тут ви можете обробити інші типи помилок, якщо потрібно.
+      alert("Помилка під час відправки даних: " + error.message);
+    }
   }
-
-  // TODO validation
-  // validateForm(formData) {
-  //   let isFormValid = true;
-  //   for (let inputElement of this.formElement.querySelectorAll(
-  //     "input[required]"
-  //   )) {
-  //     if (!inputElement.value) {
-  //       inputElement.classList.add("error");
-  //       isFormValid = false;
-  //     } else {
-  //       inputElement.classList.remove("error");
-  //     }
-  //   }
-  //   return isFormValid;
-  // }
 }
 
 // all doctors form
