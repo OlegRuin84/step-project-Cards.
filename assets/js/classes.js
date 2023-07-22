@@ -8,9 +8,7 @@ import {
 } from "./forms.js";
 import { formatDate } from "./functions.js";
 
-// import { createWindowContent } from "./main.js";
-
-// Classes for buttons
+// Buttons
 class Button {
   constructor(width = 140, height = 50, type = "button") {
     this.width = width;
@@ -28,8 +26,7 @@ class Button {
   }
 }
 
-//
-// Modals
+// Modal windows
 class Modal {
   constructor(element) {
     this.modalElement = document.createElement("div");
@@ -123,7 +120,6 @@ class ModalCardWindow extends Modal {
     if (modalForm) {
       const selectElement = this.form.formElement.querySelector("select");
       const closeWindow = this.form.formElement.querySelector(".close-card");
-      // const createCard = this.form.formElement.querySelector(".create-card");
 
       const noneOption = selectElement.querySelector(
         'option[value="-- none --"]'
@@ -143,7 +139,6 @@ class ModalCardWindow extends Modal {
       createButton.addEventListener("click", () => {
         modalForm.form.sendData();
 
-        // conteiner__cards is visiable after sending
         function closeWindow() {
           let conteinerCards = document.querySelector(".conteiner__cards");
           let filterWrapper = document.querySelector(".filter-wrapper");
@@ -161,6 +156,7 @@ class ModalCardWindow extends Modal {
   }
 }
 
+// Visits
 class Visit {
   constructor(
     descriptionVisit,
@@ -230,6 +226,7 @@ class VisitCardiologist extends Visit {
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");
+    cross.setAttribute("data-id", `${this.id}`);
     doc.classList.add("card__doc");
     name.classList.add("card__title");
     moreBtn.classList.add("card__btn-more");
@@ -329,6 +326,7 @@ class VisitDentist extends Visit {
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");
+    cross.setAttribute("data-id", `${this.id}`);
     doc.classList.add("card__doc");
     name.classList.add("card__title");
     moreBtn.classList.add("card__btn-more");
@@ -419,6 +417,7 @@ class VisitTherapist extends Visit {
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");
+    cross.setAttribute("data-id", `${this.id}`);
     doc.classList.add("card__doc");
     name.classList.add("card__title");
     moreBtn.classList.add("card__btn-more");

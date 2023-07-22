@@ -1,11 +1,6 @@
-import { deleteWorningWindow } from "./functions.js";
+import { deleteWorningWindow, createFilter } from "./functions.js";
 import { getToken2 } from "./api/api.js";
-import {
-  Button,
-  ModalEnterWindow,
-  ModalCardWindow,
-  VisitCardiologist,
-} from "./classes.js";
+import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 
 //
 // Create log-in button
@@ -28,6 +23,7 @@ let isLoggedIn = false;
 
 let createNewVisitButton = null;
 
+// get local storage data - download the page
 window.addEventListener("DOMContentLoaded", function () {
   let storedLogin = localStorage.getItem("login");
   let storedPassword = localStorage.getItem("password");
@@ -36,210 +32,11 @@ window.addEventListener("DOMContentLoaded", function () {
     headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
     body.style.backgroundColor = "rgb(190, 220, 255)";
     isLoggedIn = true;
-    createWindowAfterLogIn(header);
+    createPageAfterLogIn();
   }
 });
 
-function createWindowAfterLogIn(login, password) {
-  if (!createNewVisitButton) {
-    let conteinerCards = document.querySelector(".conteiner__cards");
-
-    const visitBtn = new Button();
-    createNewVisitButton = visitBtn.createButton();
-    createNewVisitButton.classList.add("button-create-visit");
-    createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
-    btnWrapper.append(createNewVisitButton);
-    createNewVisitButton.addEventListener("click", createWindowContent);
-
-    // for filtering
-    let filterWrapper = document.createElement("div");
-    let filterWrapperHeadline = document.createElement("h2");
-    let filterContent = document.createElement("div");
-    let filterDescriptionWrapper = document.createElement("div");
-    let filterDescriptionLabel = document.createElement("label");
-    let filterDescription = document.createElement("input");
-    let filterStatusWrapper = document.createElement("div");
-    let filterStatusLabel = document.createElement("label");
-    let filterStatus = document.createElement("select");
-    let filterStatusAll = document.createElement("option");
-    let filterStatusOpen = document.createElement("option");
-    let filterStatusDone = document.createElement("option");
-    let filterUrgencyWrapper = document.createElement("div");
-    let filterUrgencyLabel = document.createElement("label");
-    let filterUrgency = document.createElement("select");
-    let filterUrgencyAll = document.createElement("option");
-    let filterUrgencyHigh = document.createElement("option");
-    let filterUrgencyNormal = document.createElement("option");
-    let filterUrgencyLow = document.createElement("option");
-
-    filterWrapper.classList.add("container");
-    filterWrapper.classList.add("filter-wrapper");
-    filterWrapperHeadline.classList.add("filter-wrapper__headline");
-    filterContent.classList.add("filter-content");
-    filterDescriptionWrapper.classList.add("filter-description-wrapper");
-    filterWrapperHeadline.textContent = "Фільтрування візитів";
-    filterDescriptionLabel.classList.add("filter-label");
-    filterDescriptionLabel.textContent = "За заголовком та вмістом:";
-    filterDescription.classList.add("filter-description");
-    filterStatusWrapper.classList.add("filter-status-wrapper");
-    filterStatusLabel.classList.add("filter-label");
-    filterStatusLabel.textContent = "За статусом:";
-    filterStatus.classList.add("select");
-    filterStatus.classList.add("filter-status");
-    filterStatusAll.setAttribute("value", "All");
-    filterStatusOpen.setAttribute("value", "Open");
-    filterStatusDone.setAttribute("value", "Done");
-    filterStatusAll.textContent = "Всі";
-    filterStatusOpen.textContent = "Відкритий";
-    filterStatusDone.textContent = "Закритий";
-    filterUrgencyWrapper.classList.add("filter-urgency-wrapper");
-    filterUrgencyLabel.classList.add("filter-label");
-    filterUrgencyLabel.textContent = "За терміновістю:";
-    filterUrgency.classList.add("filter-urgency");
-    filterUrgency.classList.add("select");
-    filterUrgencyAll.setAttribute("value", "All");
-    filterUrgencyHigh.setAttribute("value", "High");
-    filterUrgencyNormal.setAttribute("value", "Norma");
-    filterUrgencyLow.setAttribute("value", "Low");
-    filterUrgencyAll.textContent = "Всі";
-    filterUrgencyLow.textContent = "Звичайна";
-    filterUrgencyNormal.textContent = "Пріоритетна";
-    filterUrgencyHigh.textContent = "Невідкладна";
-
-    filterWrapper.prepend(filterWrapperHeadline);
-    filterWrapperHeadline.after(filterContent);
-    filterContent.prepend(filterDescriptionWrapper);
-    filterDescriptionWrapper.prepend(filterDescriptionLabel);
-    filterDescriptionLabel.after(filterDescription);
-    filterStatusWrapper.prepend(filterStatusLabel);
-    filterStatusLabel.after(filterStatus);
-    filterStatus.prepend(filterStatusAll);
-    filterStatusAll.after(filterStatusOpen);
-    filterStatusOpen.after(filterStatusDone);
-    filterDescriptionWrapper.after(filterStatusWrapper);
-    filterStatusLabel.after(filterStatus);
-    filterUrgencyWrapper.append(filterUrgencyLabel);
-    filterUrgencyLabel.after(filterUrgency);
-    filterUrgency.prepend(filterUrgencyAll);
-    filterUrgencyAll.after(filterUrgencyLow);
-    filterUrgencyLow.after(filterUrgencyNormal);
-    filterUrgencyNormal.after(filterUrgencyHigh);
-    filterStatusWrapper.after(filterUrgencyWrapper);
-
-    // for cards rendering
-    let cardsWrapper = document.createElement("div");
-    let cardsConteiner = document.createElement("div");
-    cardsWrapper.classList.add("cards-wrapper");
-    cardsConteiner.classList.add("conteiner__cards");
-
-    // main.prepend(cardsWrapper);
-    // cardsWrapper.prepend(cardsConteiner);
-    main.prepend(filterWrapper);
-    filterWrapper.after(cardsConteiner);
-
-    // Функція фільтрації даних
-    function filterData(event) {
-      event.preventDefault();
-      // Отримати значення з полів вводу та вибору
-      const descriptionFilter = filterDescription.value.trim();
-      const urgencyFilter =
-        filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
-      const statusFilter =
-        filterStatus.options[filterStatus.options.selectedIndex].textContent;
-
-      // Отримати всі картки для фільтрації
-      const cards = document.querySelectorAll(".card");
-
-      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
-      cards.forEach((card) => {
-        const description = card
-          .querySelector(".card__title")
-          .textContent.trim();
-
-        const urgency = card.querySelector(".card__changeUrgency").textContent;
-
-        const status = card.querySelector(".card__changeStatus").textContent;
-
-        const descriptionMatch =
-          descriptionFilter === "" || description.includes(descriptionFilter);
-        const urgencyMatch =
-          urgencyFilter === "Всі" || urgency.includes(urgencyFilter);
-
-        const statusMatch =
-          statusFilter === "Всі" || status.includes(statusFilter);
-
-        if (descriptionMatch && urgencyMatch && statusMatch) {
-          card.classList.remove("card-hidden");
-        } else {
-          card.classList.add("card-hidden");
-        }
-      });
-      return false;
-    }
-
-    filterDescription.addEventListener("input", filterData);
-    filterUrgency.addEventListener("change", filterData);
-    filterStatus.addEventListener("change", filterData);
-
-    getToken2(login, password);
-  }
-}
-
-//
-function createWindowContent() {
-  if (isRequesting || !isLoggedIn) {
-    console.log("Condition check:", isRequesting, isLoggedIn);
-    return;
-  }
-  isRequesting = true;
-
-  const createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
-  createWindow.open();
-
-  let button = document.querySelector(".button-create-visit");
-  let window = document.querySelector(".window-create-doctor");
-  let conteinerCards = document.querySelector(".conteiner__cards");
-  let filterWrapper = document.querySelector(".filter-wrapper");
-  // TODO
-  // let text = document.querySelector(".text");
-  // TODO
-
-  // close the window
-  if (window) {
-    setTimeout(() => {
-      document.addEventListener("click", closeModalWindow);
-      button.classList.add("hidden");
-      conteinerCards.style.display = "none";
-      filterWrapper.style.display = "none";
-      // TODO
-      // if (text) {
-      //   text.style.display = "none";
-      // }
-      // TODO
-    }, 0);
-  }
-  function closeModalWindow(event) {
-    const targetElement = event.target;
-
-    if (window && !window.contains(targetElement)) {
-      window.remove();
-      button.classList.remove("hidden");
-      conteinerCards.style.display = "flex";
-      filterWrapper.style.display = "flex";
-      // TODO
-      // if (!text) {
-      //   text.style.display = "flex";
-      // }
-      // TODO
-      document.removeEventListener("click", closeModalWindow);
-    }
-  }
-  isRequesting = false;
-}
-//
-
-//
-// Create log-in window
+// create the log-in window
 logInBtnElement.addEventListener("click", openWindow);
 function openWindow() {
   if (isRequesting || isLoggedIn) return;
@@ -290,14 +87,8 @@ function openWindow() {
           headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
           body.style.backgroundColor = "rgb(190, 220, 255)";
 
-          // createWindowAfterLogIn(header);
-          createWindowAfterLogIn(inputLogin.value, inputPassword.value);
+          createPageAfterLogIn(inputLogin.value, inputPassword.value);
         } else {
-          // delete
-          // alert(
-          //   "ДРУЗІ! Вводимо логін та пароль, які вводили при реєстрації на сервері"
-          // );
-
           inputLogin.classList.add("input-worning");
           inputPassword.classList.add("input-worning");
           const worningWindow = document.createElement("div");
@@ -341,18 +132,133 @@ function closeWindow(event) {
   }
 }
 
-// window.addEventListener("beforeunload", function () {
-//   let storedLogin = localStorage.getItem("login");
-//   let storedPassword = localStorage.getItem("password");
-//   if (storedLogin && storedPassword) {
-//     const visitBtn = new Button();
-//     const visitBtnElement = visitBtn.createButton();
-//     visitBtnElement.classList.add("button-create-visit");
-//     visitBtnElement.textContent = "НОВИЙ ВІЗИТ";
-//     btnWrapper.append(visitBtnElement);
+// create the page after log-in
+function createPageAfterLogIn(login, password) {
+  if (!createNewVisitButton) {
+    // let conteinerCards = document.querySelector(".conteiner__cards");
 
-//     visitBtnElement.addEventListener("click", createWindowContent);
-//   }
-// });
+    const visitBtn = new Button();
+    createNewVisitButton = visitBtn.createButton();
+    createNewVisitButton.classList.add("button-create-visit");
+    createNewVisitButton.textContent = "НОВИЙ ВІЗИТ";
+    btnWrapper.append(createNewVisitButton);
+    createNewVisitButton.addEventListener("click", createWindowContent);
 
-export { createWindowContent };
+    // for cards rendering
+    let cardsWrapper = document.createElement("div");
+    let cardsConteiner = document.createElement("div");
+    cardsWrapper.classList.add("cards-wrapper");
+    cardsConteiner.classList.add("conteiner__cards");
+
+    // create the filter form
+    createFilter(main, cardsConteiner);
+    let filterDescription = document.querySelector(".filter-description");
+    let filterUrgency = document.querySelector(".filter-urgency");
+    let filterStatus = document.querySelector(".filter-status");
+
+    // Функція фільтрації даних
+    function filterData(event) {
+      event.preventDefault();
+      // Отримати значення з полів вводу та вибору
+      const descriptionFilter = filterDescription.value.trim();
+      const urgencyFilter =
+        filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
+      const statusFilter =
+        filterStatus.options[filterStatus.options.selectedIndex].textContent;
+
+      // Отримати всі картки для фільтрації
+      const cards = document.querySelectorAll(".card");
+
+      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
+      cards.forEach((card) => {
+        const description = card
+          .querySelector(".card__title")
+          .textContent.trim();
+
+        const urgency = card.querySelector(".card__changeUrgency").textContent;
+
+        const status = card.querySelector(".card__changeStatus").textContent;
+
+        const descriptionMatch =
+          descriptionFilter === "" || description.includes(descriptionFilter);
+        const urgencyMatch =
+          urgencyFilter === "Всі" || urgency.includes(urgencyFilter);
+
+        const statusMatch =
+          statusFilter === "Всі" || status.includes(statusFilter);
+
+        if (descriptionMatch && urgencyMatch && statusMatch) {
+          card.classList.remove("card-hidden");
+        } else {
+          card.classList.add("card-hidden");
+        }
+      });
+      return false;
+    }
+
+    filterDescription.addEventListener("input", filterData);
+    filterUrgency.addEventListener("change", filterData);
+    filterStatus.addEventListener("change", filterData);
+
+    // TODO text
+    async function isServerEmpty() {
+      let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      let data = await response.json();
+      console.log(data.length);
+      if (data.length === 0) {
+        let text = document.createElement("div");
+        text.classList.add("text");
+        text.textContent = "Картки відвідувань відсутні";
+        cardsConteiner.prepend(text);
+      }
+    }
+    isServerEmpty();
+    // TODO
+
+    getToken2(login, password);
+  }
+}
+
+// create modal window visit
+function createWindowContent() {
+  if (isRequesting || !isLoggedIn) {
+    console.log("Condition check:", isRequesting, isLoggedIn);
+    return;
+  }
+  isRequesting = true;
+
+  const createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
+  createWindow.open();
+
+  let button = document.querySelector(".button-create-visit");
+  let window = document.querySelector(".window-create-doctor");
+  let conteinerCards = document.querySelector(".conteiner__cards");
+  let filterWrapper = document.querySelector(".filter-wrapper");
+
+  // close the window
+  if (window) {
+    setTimeout(() => {
+      document.addEventListener("click", closeModalWindow);
+      button.classList.add("hidden");
+      conteinerCards.style.display = "none";
+      filterWrapper.style.display = "none";
+    }, 0);
+  }
+  function closeModalWindow(event) {
+    const targetElement = event.target;
+
+    if (window && !window.contains(targetElement)) {
+      window.remove();
+      button.classList.remove("hidden");
+      conteinerCards.style.display = "flex";
+      filterWrapper.style.display = "flex";
+      document.removeEventListener("click", closeModalWindow);
+    }
+  }
+  isRequesting = false;
+}

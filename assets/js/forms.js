@@ -112,6 +112,14 @@ class Form {
   // ! can't touch this!
   sendData() {
     const formData = new FormData(this.formElement);
+    // TODO valid
+    let data = Object.fromEntries(formData.entries());
+    console.log(data.goalVisit);
+    if (data.goalVisit === "") {
+      console.log("Погано...");
+    }
+    // TODO valid
+
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
     sendFormData(formData);
@@ -180,7 +188,6 @@ class ModalCardiologistForm extends ModalDoctor {
     );
     this.form.addInput("Вік", "text", "age", "input-login");
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -199,7 +206,6 @@ class ModalDentistForm extends ModalDoctor {
       "input-login"
     );
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -213,7 +219,6 @@ class ModalTherapistForm extends ModalDoctor {
   createTherapistForm() {
     this.form.addInput("Вік", "text", "age", "input-login");
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 

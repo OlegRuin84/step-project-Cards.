@@ -1,5 +1,40 @@
 import { rendering } from "../functions.js";
 
+function buttonClickHandler(e, token) {
+  if (this.getAttribute("data-id") === e.target.dataset.id) {
+    fetch(`https://ajax.test-danit.com/api/v2/cards/${e.target.dataset.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
+      // TODO DELETE
+      if (response.ok === true) {
+        let card = e.target.closest(".card");
+        if (card) {
+          card.remove();
+
+          // TODO text
+          let cardsConteiner = document.querySelector(".conteiner__cards");
+          let remainingCards = cardsConteiner.querySelectorAll(".card");
+          if (remainingCards.length === 0) {
+            let text = document.querySelector(".text");
+            if (text) {
+              text.classList.remove("hidden");
+            } else {
+              let text = document.createElement("div");
+              text.classList.add("text");
+              text.textContent = "Картки відвідувань відсутні";
+              cardsConteiner.prepend(text);
+            }
+          }
+          // TODO
+        }
+      }
+    });
+  }
+}
+
 async function fetchData(token, data) {
   try {
     const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
@@ -10,12 +45,34 @@ async function fetchData(token, data) {
       },
       body: JSON.stringify(data),
     });
-    // TODO GET
-    if (response.status === 200) {
-      console.log(data);
-      rendering(data);
-    }
-    // TODO GET
+
+    await response.json().then((response) => {
+      if (response.id) {
+        rendering(data, response.id);
+        // TODO text
+        let cardsConteiner = document.querySelector(".conteiner__cards");
+        let remainingCards = cardsConteiner.querySelectorAll(".card");
+        if (remainingCards.length !== 0) {
+          let text = document.querySelector(".text");
+          if (text) {
+            text.classList.add("hidden");
+          }
+        }
+        // TODO
+
+        // TODO DELETE
+        let allButtons = [...document.querySelectorAll(".cross")];
+        allButtons.forEach((button) => {
+          if (!button.hasEventListener) {
+            button.addEventListener("click", function (e) {
+              buttonClickHandler.call(this, e, token);
+            });
+            button.hasEventListener = true;
+          }
+        });
+        // TODO
+      }
+    });
   } catch (error) {
     console.log("Помилка в fetchData, файл api.js");
     console.log(error);
@@ -63,9 +120,7 @@ async function getToken2(login, password) {
           }),
         }
       );
-      console.log(response);
       const token = await response.text();
-      console.log(token);
       getUserServer(token);
     } else {
       const response = await fetch(
@@ -100,32 +155,28 @@ async function getUserServer(token) {
       },
     });
     let data = await response.json();
-
-    // TODO
-    // let filterWrapper = document.querySelector(".filter-wrapper");
-    // let text = document.createElement("div");
-    // text.classList.add("text");
-    // text.textContent = "Візити відсутні";
-
-    // if (data.length !== 0) {
-    //   if (text) {
-    //     // text.remove();
-    //     text.remove();
-    //   }
-    // } else if (data.length === 0) {
-    //   console.log("Ok");
-
-    //   filterWrapper.after(text);
-    // }
-    // TODO
+    console.log(data);
 
     // sorting
     data.sort((a, b) => a.id - b.id);
+
     data.forEach((e) => {
-      rendering(e);
+      rendering(e, e.id);
+
+      // TODO DELETE
+      let allButtons = [...document.querySelectorAll(".cross")];
+      allButtons.forEach((button) => {
+        if (!button.hasEventListener) {
+          button.addEventListener("click", function (e) {
+            buttonClickHandler.call(this, e, token);
+          });
+          button.hasEventListener = true;
+        }
+      });
+      // TODO
     });
 
-    return data;
+    // return data;
   } catch (e) {
     console.log("Помилка в GET запиті (функція getUserServer)!");
     console.log(e);
