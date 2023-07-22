@@ -241,6 +241,7 @@ class VisitCardiologist extends Visit {
     let editBtn = document.createElement("div");
 
     wrapper.classList.add("card");
+    wrapper.id = `${this.id}`
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");
     doc.classList.add("card__doc");
@@ -348,6 +349,7 @@ class VisitDentist extends Visit {
     let editBtn = document.createElement("div");
 
     wrapper.classList.add("card");
+    wrapper.id = `${this.id}`
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");
     doc.classList.add("card__doc");
@@ -431,6 +433,7 @@ class VisitTherapist extends Visit {
     let element = document.querySelector(".conteiner__cards");
 
     let wrapper = document.createElement("div");
+    wrapper.id = `${this.id}`
     let nameWrapper = document.createElement("div");
     let cross = document.createElement("div");
     let doc = document.createElement("h3");

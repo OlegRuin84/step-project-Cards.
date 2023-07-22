@@ -1,5 +1,5 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getToken2 } from "./api/api.js";
+import { getToken2, deleteCardAtAPI } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,
@@ -94,7 +94,7 @@ function createWindowAfterLogIn(login, password) {
     let cardsConteiner = document.createElement("div");
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
-
+    cardsConteiner.id = 1;
     // main.prepend(cardsWrapper);
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
@@ -273,5 +273,28 @@ function closeWindow(event) {
 //     visitBtnElement.addEventListener("click", createWindowContent);
 //   }
 // });
+
+
+// Видалення карток
+
+let cardsOfMain = document.querySelector('main')
+
+cardsOfMain.addEventListener('click', function(event){
+// змінна з номером картки, для delete
+
+  let arr = event.target.classList
+    for (let e of arr){
+      if(e === "cross"){
+        let card = event.target.closest('.card')
+
+        // виклик функциї видаленняб згідно номера
+        deleteCardAtAPI(card.id) 
+      }
+    }
+  })
+  // let a = document.getElementsByClassName('contain['main']')
+  // // let b = bodyFirsElem.lastElementChild
+  // console.log(a)
+// текст при відсутності карток
 
 export { createWindowContent };
