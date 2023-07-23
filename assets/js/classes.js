@@ -244,6 +244,7 @@ class VisitCardiologist extends Visit {
     heartDisease.classList.add("card__heartDisease");
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
+    wrapper.setAttribute("draggable", "true");
 
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `Клієнт: ${this.namePatient}`;
@@ -340,6 +341,7 @@ class VisitDentist extends Visit {
     status.classList.add("card__changeStatus");
     lastDate.classList.add("card__lastDate");
     editBtn.classList.add("card__btn-rewrite");
+    wrapper.setAttribute("draggable", "true");
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
@@ -430,6 +432,7 @@ class VisitTherapist extends Visit {
     status.classList.add("card__changeStatus");
     age.classList.add("card__age");
     editBtn.classList.add("card__btn-rewrite");
+    wrapper.setAttribute("draggable", "true");
 
     doc.textContent = `${this.doc}`;
     name.textContent = `${this.namePatient}`;
