@@ -1,9 +1,7 @@
 // import { VisitCardiologist, VisitDentist, VisitTherapist } from "../classes.js";
-import { rendering } from "../functions.js";
-
+import { rendering, paragraphDisplay } from "../functions.js";
 // set ID елементів, що вже відображені
 let setID = new Set;
-console.log(setID)
 
 
 async function fetchData(token, data) {
@@ -142,7 +140,7 @@ async function getUserServer() {
       },
     });
     let data = await response.json();
-    // console.log(data);
+    paragraphDisplay(data.length)
     
     // TODO
     // let filterWrapper = document.querySelector(".filter-wrapper");
@@ -163,7 +161,6 @@ async function getUserServer() {
     // TODO
 
     data.forEach((e) => {
-      // console.log(e)
     let id = e.id
     if (setID.has(id)){
       return
@@ -172,9 +169,6 @@ async function getUserServer() {
       rendering(e);
       return setID
     }
-    
-      // rendering(e);
-
 
       // if (e.doc === "Кардіолог") {
       //   let card = new VisitCardiologist(
@@ -213,7 +207,6 @@ async function getUserServer() {
       //   card.render();
       // }
     });
-    // console.log(setID)
     return data, setID;
   } catch (e) {
     console.log("Помилка в GET запиті (функція getUserServer)!");
@@ -253,7 +246,6 @@ async function getUserServer() {
 
 // запит на видалення картки
 async function deleteCardAtAPI(arg){
-  console.log(setID)
   let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${arg}`, {
   method: 'DELETE',
   headers: {
@@ -267,8 +259,10 @@ if (response.status === 200) {
   let num = arg;
   el.remove();
   setID.delete(num);
+  // рендер тих карток, що є на сервері
+  getUserServer()
 }
 }
 
 
-export { getToken, getToken2, deleteCardAtAPI };
+export { getToken, getToken2, deleteCardAtAPI, setID };

@@ -87,5 +87,18 @@ function rendering(e) {
   }
 }
 
+// paragraph style.display
+
+function paragraphDisplay (num) {
+  let arg 
+  if (num > 0){
+    arg = "none"
+  }else{
+    arg = "block"
+  }
+  let p = document.getElementById('paragraphText');
+  p.style.display = `${arg}`
+}
+
 // export { deleteWorningWindow, sendFormData, shomMeMore, rendering };
-export { deleteWorningWindow, sendFormData, rendering };
+export { deleteWorningWindow, sendFormData, rendering, paragraphDisplay };

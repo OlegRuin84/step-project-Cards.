@@ -1,5 +1,5 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getToken2, deleteCardAtAPI } from "./api/api.js";
+import { getToken2, deleteCardAtAPI, setID } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,
@@ -96,10 +96,12 @@ function createWindowAfterLogIn(login, password) {
     cardsConteiner.classList.add("conteiner__cards");
     cardsConteiner.id = 1;
 
-      // // if cards__conteiner will not have a cards
-      // let paragraph = document.createElement("p")
-      // paragraph.textContent = "No items have been added"
-      // cardsConteiner.prepend(paragraph)
+      // if cards__conteiner will not have a cards
+      let paragraph = document.createElement("p")
+      paragraph.id = "paragraphText"
+      paragraph.textContent = "No items have been added"
+      cardsConteiner.append(paragraph)
+
       
 
     // main.prepend(cardsWrapper);
