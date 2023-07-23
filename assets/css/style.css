@@ -435,7 +435,6 @@ textarea::placeholder {
   justify-content: space-between;
   flex-wrap: wrap;
   font-size: 20px;
-  background-color: rgb(219, 236, 255);
   /* display: none; */
 }
 .card {
@@ -489,7 +488,6 @@ textarea::placeholder {
   font-style: italic;
   color: rgb(87, 87, 87);
   width: 200px;
-  background-color: rgb(219, 236, 255);
   cursor: pointer;
   border: none;
   border-radius: 10px;
