@@ -17,6 +17,43 @@ async function fetchData(token, data) {
     // TODO GET
     if (response.status === 200) {
       getUserServer()
+
+      // if (data.doc === "Кардіолог") {
+      //   let card = new VisitCardiologist(
+      //     data.descriptionVisit,
+      //     data.goalVisit,
+      //     data.changeUrgency,
+      //     data.namePatient,
+      //     data.doc,
+      //     data.pressure,
+      //     data.bmi,
+      //     data.heartDisease,
+      //     data.age,
+      //     data.id
+      //   );
+      //   card.render();
+      // } else if (data.doc === "Стоматолог") {
+      //   let card = new VisitDentist(
+      //     data.descriptionVisit,
+      //     data.goalVisit,
+      //     data.changeUrgency,
+      //     data.namePatient,
+      //     data.doc,
+      //     data.id
+      //   );
+      //   card.render();
+      // } else if (data.doc === "Терапевт") {
+      //   let card = new VisitTherapist(
+      //     data.descriptionVisit,
+      //     data.goalVisit,
+      //     data.changeUrgency,
+      //     data.namePatient,
+      //     data.doc,
+      //     data.age,
+      //     data.id
+      //   );
+      //   card.render();
+      // }
     }
     // TODO GET
   } catch (error) {
@@ -123,8 +160,6 @@ async function getUserServer() {
     // }
     // TODO
 
-    // sorting
-    data.sort((a, b) => a.id - b.id);
     data.forEach((e) => {
     let id = e.id
     if (setID.has(id)){
@@ -132,7 +167,46 @@ async function getUserServer() {
     } else {
       setID.add(id);
       rendering(e);
-    }});
+      return setID
+    }
+
+      // if (e.doc === "Кардіолог") {
+      //   let card = new VisitCardiologist(
+      //     e.descriptionVisit,
+      //     e.goalVisit,
+      //     e.changeUrgency,
+      //     e.namePatient,
+      //     e.doc,
+      //     e.pressure,
+      //     e.bmi,
+      //     e.heartDisease,
+      //     e.age,
+      //     e.id
+      //   );
+      //   card.render();
+      // } else if (e.doc === "Стоматолог") {
+      //   let card = new VisitDentist(
+      //     e.descriptionVisit,
+      //     e.goalVisit,
+      //     e.changeUrgency,
+      //     e.namePatient,
+      //     e.doc,
+      //     e.id
+      //   );
+      //   card.render();
+      // } else if (e.doc === "Терапевт") {
+      //   let card = new VisitTherapist(
+      //     e.descriptionVisit,
+      //     e.goalVisit,
+      //     e.changeUrgency,
+      //     e.namePatient,
+      //     e.doc,
+      //     e.age,
+      //     e.id
+      //   );
+      //   card.render();
+      // }
+    });
     return data, setID;
   } catch (e) {
     console.log("Помилка в GET запиті (функція getUserServer)!");
