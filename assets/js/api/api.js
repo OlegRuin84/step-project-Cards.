@@ -18,7 +18,6 @@ async function fetchData(token, data) {
     });
     // TODO GET
     if (response.status === 200) {
-      // console.log(data);
       getUserServer()
 
       // if (data.doc === "Кардіолог") {
@@ -165,12 +164,11 @@ async function getUserServer() {
 
     data.forEach((e) => {
       // console.log(e)
-      // console.l
-    if (setID.has(e.id)){
-
+    let id = e.id
+    if (setID.has(id)){
       return
     } else {
-      setID.add(e.id);
+      setID.add(id);
       rendering(e);
       return setID
     }
@@ -255,6 +253,7 @@ async function getUserServer() {
 
 // запит на видалення картки
 async function deleteCardAtAPI(arg){
+  console.log(setID)
   let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${arg}`, {
   method: 'DELETE',
   headers: {
@@ -265,13 +264,11 @@ async function deleteCardAtAPI(arg){
 // і при видаленні - видаляємо картку з відповідним ID з DOM
 if (response.status === 200) {
   let el = document.getElementById(arg);
+  let num = arg;
   el.remove();
-  // console.log(arg)
-  setID = setID.delete(arg);
-  // console.log(setID);
-  return setID;
+  setID.delete(num);
 }
 }
-console.log(setID.size)
+
 
 export { getToken, getToken2, deleteCardAtAPI };

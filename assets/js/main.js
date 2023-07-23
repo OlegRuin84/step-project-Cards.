@@ -95,6 +95,13 @@ function createWindowAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
     cardsConteiner.id = 1;
+
+      // // if cards__conteiner will not have a cards
+      // let paragraph = document.createElement("p")
+      // paragraph.textContent = "No items have been added"
+      // cardsConteiner.prepend(paragraph)
+      
+
     // main.prepend(cardsWrapper);
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
@@ -292,9 +299,10 @@ cardsOfMain.addEventListener('click', function(event){
       }
     }
   })
-  // let a = document.getElementsByClassName('contain['main']')
-  // // let b = bodyFirsElem.lastElementChild
-  // console.log(a)
+
 // текст при відсутності карток
+
+// let a = document.querySelector(#1);
+// console.log(a)
 
 export { createWindowContent };
