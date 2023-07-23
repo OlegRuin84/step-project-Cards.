@@ -1,6 +1,6 @@
 class DragAndDrop {
-  constructor(contrainer) {
-    this.container = contrainer;
+  constructor(container) {
+    this.container = container;
   }
 
   init() {

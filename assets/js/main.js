@@ -133,13 +133,13 @@ function createWindowAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
 
-    const dragAndDrop = new DragAndDrop(cardsConteiner);
-    dragAndDrop.init();
-
     // main.prepend(cardsWrapper);
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
+
+    const dragAndDrop = new DragAndDrop(cardsConteiner);
+    dragAndDrop.init();
 
     // Функція фільтрації даних
     function filterData(event) {
