@@ -3,7 +3,7 @@
 
 // ---------------- TEST ----------------------
 // to see the result
-// let token = "62c5f5c5-0f93-422d-8955-a756d445d739";
+// let token = "a7c42688-75a8-4f5c-90f8-40e655267873";
 let token = "ed0baaa2-558b-48fc-9651-92d35c662e2a";
 // async function getUserServer() {
 //   try {

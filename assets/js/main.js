@@ -6,6 +6,7 @@ import {
   ModalCardWindow,
   VisitCardiologist,
 } from "./classes.js";
+import DragAndDrop from "./drag_drop.js";
 
 //
 // Create log-in button
@@ -53,41 +54,78 @@ function createWindowAfterLogIn(login, password) {
 
     // for filtering
     let filterWrapper = document.createElement("div");
+    let filterWrapperHeadline = document.createElement("h2");
+    let filterContent = document.createElement("div");
+    let filterDescriptionWrapper = document.createElement("div");
+    let filterDescriptionLabel = document.createElement("label");
     let filterDescription = document.createElement("input");
+    let filterStatusWrapper = document.createElement("div");
+    let filterStatusLabel = document.createElement("label");
     let filterStatus = document.createElement("select");
+    let filterStatusAll = document.createElement("option");
     let filterStatusOpen = document.createElement("option");
     let filterStatusDone = document.createElement("option");
+    let filterUrgencyWrapper = document.createElement("div");
+    let filterUrgencyLabel = document.createElement("label");
     let filterUrgency = document.createElement("select");
+    let filterUrgencyAll = document.createElement("option");
     let filterUrgencyHigh = document.createElement("option");
     let filterUrgencyNormal = document.createElement("option");
     let filterUrgencyLow = document.createElement("option");
 
     filterWrapper.classList.add("container");
     filterWrapper.classList.add("filter-wrapper");
+    filterWrapperHeadline.classList.add("filter-wrapper__headline");
+    filterContent.classList.add("filter-content");
+    filterDescriptionWrapper.classList.add("filter-description-wrapper");
+    filterWrapperHeadline.textContent = "Фільтрування візитів";
+    filterDescriptionLabel.classList.add("filter-label");
+    filterDescriptionLabel.textContent = "За заголовком та вмістом:";
     filterDescription.classList.add("filter-description");
+    filterStatusWrapper.classList.add("filter-status-wrapper");
+    filterStatusLabel.classList.add("filter-label");
+    filterStatusLabel.textContent = "За статусом:";
     filterStatus.classList.add("select");
     filterStatus.classList.add("filter-status");
+    filterStatusAll.setAttribute("value", "All");
     filterStatusOpen.setAttribute("value", "Open");
     filterStatusDone.setAttribute("value", "Done");
-    filterStatusOpen.textContent = "Чинна";
-    filterStatusDone.textContent = "Закрита";
+    filterStatusAll.textContent = "Всі";
+    filterStatusOpen.textContent = "Відкритий";
+    filterStatusDone.textContent = "Закритий";
+    filterUrgencyWrapper.classList.add("filter-urgency-wrapper");
+    filterUrgencyLabel.classList.add("filter-label");
+    filterUrgencyLabel.textContent = "За терміновістю:";
     filterUrgency.classList.add("filter-urgency");
     filterUrgency.classList.add("select");
+    filterUrgencyAll.setAttribute("value", "All");
     filterUrgencyHigh.setAttribute("value", "High");
     filterUrgencyNormal.setAttribute("value", "Norma");
     filterUrgencyLow.setAttribute("value", "Low");
+    filterUrgencyAll.textContent = "Всі";
     filterUrgencyLow.textContent = "Звичайна";
-    filterUrgencyNormal.textContent = "Приоритетна";
+    filterUrgencyNormal.textContent = "Пріоритетна";
     filterUrgencyHigh.textContent = "Невідкладна";
 
-    filterWrapper.prepend(filterDescription);
-    filterStatus.prepend(filterStatusOpen);
-    filterStatus.prepend(filterStatusDone);
-    filterDescription.after(filterStatus);
-    filterUrgency.prepend(filterUrgencyHigh);
-    filterUrgency.prepend(filterUrgencyNormal);
-    filterUrgency.prepend(filterUrgencyLow);
-    filterStatus.after(filterUrgency);
+    filterWrapper.prepend(filterWrapperHeadline);
+    filterWrapperHeadline.after(filterContent);
+    filterContent.prepend(filterDescriptionWrapper);
+    filterDescriptionWrapper.prepend(filterDescriptionLabel);
+    filterDescriptionLabel.after(filterDescription);
+    filterStatusWrapper.prepend(filterStatusLabel);
+    filterStatusLabel.after(filterStatus);
+    filterStatus.prepend(filterStatusAll);
+    filterStatusAll.after(filterStatusOpen);
+    filterStatusOpen.after(filterStatusDone);
+    filterDescriptionWrapper.after(filterStatusWrapper);
+    filterStatusLabel.after(filterStatus);
+    filterUrgencyWrapper.append(filterUrgencyLabel);
+    filterUrgencyLabel.after(filterUrgency);
+    filterUrgency.prepend(filterUrgencyAll);
+    filterUrgencyAll.after(filterUrgencyLow);
+    filterUrgencyLow.after(filterUrgencyNormal);
+    filterUrgencyNormal.after(filterUrgencyHigh);
+    filterStatusWrapper.after(filterUrgencyWrapper);
 
     // for cards rendering
     let cardsWrapper = document.createElement("div");
@@ -108,6 +146,53 @@ function createWindowAfterLogIn(login, password) {
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
+
+    const dragAndDrop = new DragAndDrop(cardsConteiner);
+    dragAndDrop.init();
+
+    // Функція фільтрації даних
+    function filterData(event) {
+      event.preventDefault();
+      // Отримати значення з полів вводу та вибору
+      const descriptionFilter = filterDescription.value.trim();
+      const urgencyFilter =
+        filterUrgency.options[filterUrgency.options.selectedIndex].textContent;
+      const statusFilter =
+        filterStatus.options[filterStatus.options.selectedIndex].textContent;
+
+      // Отримати всі картки для фільтрації
+      const cards = document.querySelectorAll(".card");
+
+      // Проходження крізь всі картки і приховування тих, що не відповідають фільтру
+      cards.forEach((card) => {
+        const description = card
+          .querySelector(".card__title")
+          .textContent.trim();
+
+        const urgency = card.querySelector(".card__changeUrgency").textContent;
+
+        const status = card.querySelector(".card__changeStatus").textContent;
+
+        const descriptionMatch =
+          descriptionFilter === "" || description.includes(descriptionFilter);
+        const urgencyMatch =
+          urgencyFilter === "Всі" || urgency.includes(urgencyFilter);
+
+        const statusMatch =
+          statusFilter === "Всі" || status.includes(statusFilter);
+
+        if (descriptionMatch && urgencyMatch && statusMatch) {
+          card.classList.remove("card-hidden");
+        } else {
+          card.classList.add("card-hidden");
+        }
+      });
+      return false;
+    }
+
+    filterDescription.addEventListener("input", filterData);
+    filterUrgency.addEventListener("change", filterData);
+    filterStatus.addEventListener("change", filterData);
 
     getToken2(login, password);
   }

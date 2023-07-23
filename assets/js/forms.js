@@ -59,6 +59,7 @@ class Form {
     buttonElement.addEventListener("click", (event) => {
       event.preventDefault();
     });
+
     this.formElement.append(buttonElement);
   }
 
@@ -152,6 +153,12 @@ class ModalDoctor {
     this.form.addOption("option", "Звичайна");
     this.form.addOption("option", "Пріоритетна");
     this.form.addOption("option", "Невідкладна");
+
+    this.form.addSelect("changeStatus", "select-status");
+    this.form.addOption("option-status", "-- none --", "Статус");
+    this.form.addOption("option-status", "Відкритий", "Відкритий");
+    this.form.addOption("option-status-close", "Закритий", "Закритий");
+
     this.form.addInput("ПІБ", "text", "namePatient", "input-login");
   }
 }
@@ -187,7 +194,7 @@ class ModalDentistForm extends ModalDoctor {
   createDentistForm() {
     this.form.addInput(
       "Останнє відвідування",
-      "text",
+      "date",
       "lastDate",
       "input-login"
     );
