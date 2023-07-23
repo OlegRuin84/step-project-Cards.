@@ -6,6 +6,7 @@ import {
   ModalCardWindow,
   VisitCardiologist,
 } from "./classes.js";
+import DragAndDrop from "./drag_drop.js";
 
 //
 // Create log-in button
