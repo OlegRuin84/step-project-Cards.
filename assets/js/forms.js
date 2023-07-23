@@ -84,41 +84,46 @@ class Form {
   // TODO validation
   validateForm() {
     const formElements = this.formElement.elements;
+    const allowedNodeNames = ["INPUT", "TEXTAREA", "SELECT"];
+    const formElementsArray = Array.from(formElements);
+    const filteredFormElements = formElementsArray.filter((element) =>
+      allowedNodeNames.includes(element.nodeName)
+    );
     let isValid = true;
 
-    for (const element of formElements) {
-      if (
-        element.nodeName === "INPUT" ||
-        element.nodeName === "TEXTAREA" ||
-        element.nodeName === "SELECT"
-      ) {
-        // Перевірка на пусте значення поля
-        if (element.value.trim() === "") {
-          isValid = false;
-          break;
-        }
+    // Видаляємо попередні повідомлення про помилки перед перевіркою форми
+    const errorElements = document.querySelectorAll(".error");
+    errorElements.forEach((error) => error.remove());
+
+    for (const element of filteredFormElements) {
+      // Перевірка на пусте значення поля
+      if (element.value.trim() === "") {
+        isValid = false;
+        const newError = document.createElement("span");
+        newError.className = "error";
+        newError.style.color = "red";
+        newError.innerHTML = "Це поле є обов'язковим!";
+        element.insertAdjacentElement("afterend", newError);
       }
     }
-
+    if (!isValid) {
+      throw new Error(
+        "Форма не може бути порожньою! Заповніть будь ласка всі поля форми!"
+      );
+    }
     return isValid;
   }
+
   // ! can't touch this!
   sendData() {
     const formData = new FormData(this.formElement);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
     // Викликаємо функцію валідації перед відправкою даних
-    try {
-      if (this.validateForm()) {
-        sendFormData(formData);
-      } else {
-        // Функція валідації вже вивела повідомлення про помилку для невалідних полів.
-        // Тут можна зробити додаткові дії або нічого не робити.
-        alert("Error! Please try again! ");
-      }
-    } catch (error) {
-      // Тут ви можете обробити інші типи помилок, якщо потрібно.
-      alert("Помилка під час відправки даних: " + error.message);
+
+    if (this.validateForm() === true) {
+      sendFormData(formData);
+    } else {
     }
   }
 }
