@@ -80,90 +80,48 @@ class Form {
   }
 
   //   GO TO THE SERVER
-  sendData() {
-    const self = this;
-    const formData = new FormData(self.formElement);
-    let selectMain = document.querySelectorAll(".select");
-    formData.append("doc", selectMain[0].value);
-
-    const isFormValid = this.validateForm(formData);
-    if (isFormValid) {
-      sendFormData(formData)
-        .then((response) => {
-          if (response && response.ok) {
-            console.log("Data sent successfully");
-          } else {
-            throw new Error("Error sending data");
-          }
-        })
-        .catch((error) => {
-          console.error("Error sending data:", error);
-          alert("An error occurred while sending data. Please try again.");
-        });
-    } else {
-      alert("Будь ласка, заповніть всі обов'язкові поля.");
-    }
-  }
 
   // TODO validation
-  // validateForm() {
-  //   const formElements = this.formElement.elements;
-  //   let isValid = true;
-  //   let errorFields = [];
+  validateForm() {
+    const formElements = this.formElement.elements;
+    let isValid = true;
 
-  //   for (const element of formElements) {
-  //     if (
-  //       element.nodeName === "INPUT" ||
-  //       element.nodeName === "TEXTAREA" ||
-  //       element.nodeName === "SELECT"
-  //     ) {
-  //       // Перевірка на пусте значення поля
-  //       if (element.value.trim() === "") {
-  //         isValid = false;
-  //         errorFields.push(element.name);
-  //       }
+    for (const element of formElements) {
+      if (
+        element.nodeName === "INPUT" ||
+        element.nodeName === "TEXTAREA" ||
+        element.nodeName === "SELECT"
+      ) {
+        // Перевірка на пусте значення поля
+        if (element.value.trim() === "") {
+          isValid = false;
+          break;
+        }
+      }
+    }
 
-  //       // Додаткова перевірка для конкретних полів
-  //       if (element.name === "goalVisit") {
-  //         const regex = /^[A-Za-z]+$/; // Регулярний вираз для перевірки на букви
-  //         if (!regex.test(element.value)) {
-  //           isValid = false;
-  //           errorFields.push(element.name);
-  //         }
-  //       }
-
-  //       // Інші додаткові перевірки для інших полів (за потреби)
-  //     }
-  //   }
-
-  //   // Виводимо помилку для невалідних полів
-  //   if (!isValid) {
-  //     this.displayErrorFields(errorFields);
-  //   }
-
-  //   return isValid;
-  // }
-
+    return isValid;
+  }
   // ! can't touch this!
-  // sendData() {
-  //   const formData = new FormData(this.formElement);
-  //   let selectMain = document.querySelector(".select-main");
-  //   formData.append("doc", selectMain.value);
-  // Викликаємо функцію валідації перед відправкою даних
-  // try {
-  //   // Викликаємо функцію валідації перед відправкою даних
-  //   if (this.validateForm()) {
-  //     sendFormData(formData);
-  //   } else {
-  //     // Функція валідації вже вивела повідомлення про помилку для невалідних полів.
-  //     // Тут можна зробити додаткові дії або нічого не робити.
-  //   }
-  // } catch (error) {
-  //   // Тут ви можете обробити інші типи помилок, якщо потрібно.
-  //   alert("Помилка під час відправки даних: " + error.message);
-  // }
+  sendData() {
+    const formData = new FormData(this.formElement);
+    let selectMain = document.querySelector(".select-main");
+    formData.append("doc", selectMain.value);
+    // Викликаємо функцію валідації перед відправкою даних
+    try {
+      if (this.validateForm()) {
+        sendFormData(formData);
+      } else {
+        // Функція валідації вже вивела повідомлення про помилку для невалідних полів.
+        // Тут можна зробити додаткові дії або нічого не робити.
+        alert("Error! Please try again! ");
+      }
+    } catch (error) {
+      // Тут ви можете обробити інші типи помилок, якщо потрібно.
+      alert("Помилка під час відправки даних: " + error.message);
+    }
+  }
 }
-// }
 
 // all doctors form
 class ModalDoctor {

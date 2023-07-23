@@ -1,40 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".conteiner__cards");
-  container.addEventListener(`dragstart`, (evt) => {
-    evt.target.classList.add(`selected`);
-  });
+class DragAndDrop {
+  constructor(contrainer) {
+    this.container = contrainer;
+  }
 
-  container.addEventListener(`dragend`, (evt) => {
-    evt.target.classList.remove(`selected`);
-  });
+  init() {
+    this.container.addEventListener(`dragstart`, (evt) => {
+      evt.target.classList.add(`selected`);
+    });
 
-  container.addEventListener(`dragover`, (evt) => {
-    // Разрешаем сбрасывать элементы в эту область
-    evt.preventDefault();
+    this.container.addEventListener(`dragend`, (evt) => {
+      evt.target.classList.remove(`selected`);
+    });
 
-    // Находим перемещаемый элемент
-    const activeElement = container.querySelector(`.selected`);
-    // Находим элемент, над которым в данный момент находится курсор
-    const currentElement = evt.target;
-    // Проверяем, что событие сработало:
-    // 1. не на том элементе, который мы перемещаем,
-    // 2. именно на элементе списка
-    const isMoveable =
-      activeElement !== currentElement &&
-      currentElement.classList.contains(`card`);
+    this.container.addEventListener(`dragover`, (evt) => {
+      evt.preventDefault();
 
-    // Если нет, прерываем выполнение функции
-    if (!isMoveable) {
-      return;
-    }
+      const activeElement = this.container.querySelector(`.selected`);
 
-    // Находим элемент, перед которым будем вставлять
-    const nextElement =
-      currentElement === activeElement.nextElementSibling
-        ? currentElement.nextElementSibling
-        : currentElement;
+      const currentElement = evt.target;
 
-    // Вставляем activeElement перед nextElement
-    container.insertBefore(activeElement, nextElement);
-  });
-});
+      const isMoveable =
+        activeElement !== currentElement &&
+        currentElement.classList.contains(`card`);
+
+      if (!isMoveable) {
+        return;
+      }
+
+      const nextElement =
+        currentElement === activeElement.nextElementSibling
+          ? currentElement.nextElementSibling
+          : currentElement;
+
+      this.container.insertBefore(activeElement, nextElement);
+    });
+  }
+}
+
+export default DragAndDrop;

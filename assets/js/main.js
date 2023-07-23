@@ -6,6 +6,7 @@ import {
   ModalCardWindow,
   VisitCardiologist,
 } from "./classes.js";
+import DragAndDrop from "./drag_drop.js";
 
 //
 // Create log-in button
@@ -136,6 +137,9 @@ function createWindowAfterLogIn(login, password) {
     // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
+
+    const dragAndDrop = new DragAndDrop(cardsConteiner);
+    dragAndDrop.init();
 
     // Функція фільтрації даних
     function filterData(event) {
