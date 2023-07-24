@@ -1,6 +1,7 @@
 import { deleteWorningWindow } from "./deleteWorningWindow.js";
 import { getRegistrationData } from "./api/getRegistrationData.js";
-import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
+import { ModalEnterWindow, ModalCardWindow } from "./classes/modals.js";
+import { Button } from "./classes/button.js";
 import DragAndDrop from "./drag_drop.js";
 
 //

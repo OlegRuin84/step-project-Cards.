@@ -1,4 +1,6 @@
-import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js";
+import { VisitCardiologist } from "./classes/visitCardiologist.js";
+import { VisitDentist } from "./classes/visitDentist.js";
+import { VisitTherapist } from "./classes/visitTherapist.js";
 
 function rendering(e) {
   if (e.doc === "Кардіолог") {
