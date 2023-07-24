@@ -110,7 +110,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
+  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -302,7 +302,7 @@ input {
 
 [class="input-login"][name="bmi"] {
   width: 20%;
-  margin-left: 65px;
+  /* margin-left: 65px; */
   /* margin-right: 10px; */
 }
 
@@ -396,9 +396,9 @@ textarea::placeholder {
   /* background-color: rgb(255, 48, 48); */
 }
 
-.select-status {
+/* .select-status {
   margin-left: 50px;
-}
+} */
 
 /* * rendering * */
 .text {
