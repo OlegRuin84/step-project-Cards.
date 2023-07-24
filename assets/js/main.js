@@ -180,9 +180,9 @@ function createPageAfterLogIn(login, password) {
           statusFilter === "Всі" || status.includes(statusFilter);
 
         if (descriptionMatch && urgencyMatch && statusMatch) {
-          card.classList.remove("card-hidden");
+          card.classList.remove("hidden");
         } else {
-          card.classList.add("card-hidden");
+          card.classList.add("hidden");
         }
       });
       return false;

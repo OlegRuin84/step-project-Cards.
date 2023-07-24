@@ -3,33 +3,111 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
+.container,
+.card,
+.cross {
   position: relative;
+}
+
+.container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.header-background {
+.header-background,
+.enter-btn,
+.window-create-card-wrapper {
   background-color: rgb(162, 204, 252);
+}
+
+.header-background {
   border-bottom: 10px solid rgb(200, 226, 255);
+}
+
+.header,
+.logo-wrapper,
+.btn-wrapper,
+.button,
+.log-in-form,
+.doctor-form,
+.cardiologist-form,
+.enter-btn,
+.window-create-card-wrapper,
+.visit-form,
+.close-card,
+.create-card,
+.doctors-inputs-wrapper,
+.conteiner__cards,
+.card,
+.card__btn-rewrite,
+.filter-wrapper,
+.filter-content,
+.filter-description-wrapper,
+.filter-status-wrapper,
+.filter-urgency-wrapper,
+.filter-status,
+.filter-urgency,
+.card__name-wrapper {
+  display: flex;
+}
+
+.header,
+.btn-wrapper,
+.conteiner__cards,
+.filter-content,
+.filter-description-wrapper,
+.filter-status-wrapper,
+.filter-urgency-wrapper,
+.card__name-wrapper {
+  justify-content: space-between;
+}
+
+.header,
+.button,
+.window,
+.log-in-form,
+.doctor-form,
+.cardiologist-form,
+.enter-btn,
+.window-create-card-wrapper,
+.visit-form,
+.close-card,
+.create-card,
+.doctors-inputs-wrapper,
+.card__btn-rewrite,
+.filter-content,
+.filter-description-wrapper,
+.filter-status-wrapper,
+.filter-urgency-wrapper,
+.filter-status,
+.filter-urgency {
+  align-items: center;
 }
 
 .header {
   padding: 50px 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.logo-wrapper {
-  display: flex;
+.logo-wrapper,
+.button,
+.window,
+.log-in-form,
+.doctor-form,
+.cardiologist-form,
+.enter-btn,
+.visit-form,
+.close-card,
+.create-card,
+.doctors-inputs-wrapper,
+.card__btn-rewrite,
+.filter-wrapper,
+.filter-status,
+.filter-urgency {
   justify-content: center;
 }
 
 .logo {
-  display: inline-block;
   width: 100px;
-  height: 100px;
   animation: circle 80s cubic-bezier(1, 1, 1, 1) infinite;
 }
 @keyframes circle {
@@ -42,136 +120,267 @@ body {
 }
 
 /* ********* log-in ********** */
-.btn-wrapper {
-  display: flex;
-  justify-content: space-between;
+.button,
+input,
+.select,
+.select-main,
+.doctors-inputs-wrapper input,
+.input-desc,
+.input-heartDiseases,
+.select-urgency,
+.select-status,
+.option-status-close,
+.card__delete,
+.card__btn-more {
+  border: none;
 }
 
-.button {
-  border: none;
-  margin-top: 20px;
+.button,
+.enter-btn,
+.close-card,
+.create-card,
+.card__btn-more,
+.card__btn-rewrite,
+.cross {
   cursor: pointer;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  letter-spacing: 2px;
+}
+
+.button,
+.enter-btn,
+.select,
+.select-main,
+.close-card,
+.create-card,
+.select-urgency,
+.select-status,
+.option-status-close,
+.select-urgency .option:nth-child(2),
+.select-status .option-status:nth-child(2),
+.select-urgency .option:nth-child(3),
+.select-status .option-status:nth-child(3),
+.select-urgency .option:nth-child(4),
+.select-status .option-status:nth-child(4),
+.card__doc {
   font-weight: 700;
 }
 
-.button-log-in {
+.button,
+.window,
+.worning-window,
+.window-create-card-wrapper,
+.close-card,
+.create-card {
+  border-radius: 15px;
+}
+
+.button {
+  margin-top: 20px;
+  letter-spacing: 2px;
+}
+
+.button-log-in,
+.button-log-out,
+.button-log-in:hover,
+.button-log-out:hover,
+.log-in-window-header,
+.create-card,
+.close-card {
   color: white;
+}
+
+.button-log-in,
+.window,
+.close-card,
+.create-card {
   background-color: rgb(54, 148, 255);
+}
+
+.button-log-in,
+.button-log-out,
+.close-card,
+.create-card {
   transition: transform 0.7s ease, opacity 0.5s ease;
 }
 
 .button-log-out {
-  color: white;
   background-color: rgb(181, 54, 255);
-  transition: transform 0.7s ease, opacity 0.5s ease;
-}
-
-.not-visiable {
-  opacity: 0;
-  cursor: auto;
 }
 
 .button-log-in:hover,
-.button-log-out:hover {
-  color: white;
+.button-log-out:hover,
+.button-create-visit:hover {
   transform: scale(0.95);
 }
 
-.window {
+.window,
+.worning-window,
+.window-create-card-wrapper,
+.card__delete,
+.cross::before,
+.cross::after {
   position: absolute;
+}
+
+.window,
+.hidden {
+  display: none;
+}
+
+.window,
+.log-in-form,
+.cardiologist-form,
+.window-create-card-wrapper,
+.visit-form,
+.doctors-inputs-wrapper,
+.card,
+.filter-wrapper,
+.filter-description-wrapper,
+.filter-status-wrapper,
+.filter-urgency-wrapper {
+  flex-direction: column;
+}
+
+.window {
   transform: translate(100px, 50px);
   width: 600px;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-radius: 15px;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(54, 148, 255);
 }
 
 .log-in-window-header {
   height: 50px;
   font-size: 26px;
-  color: white;
 }
 
 .log-in-form,
-.doctor-form {
+.doctor-form,
+.error,
+.input-wrapper,
+.card,
+.card__block,
+.filter-wrapper,
+.card__name-wrapper {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-.log-in-form {
-  flex-direction: column;
+.log-in-form,
+.doctor-form,
+.conteiner__cards {
+  flex-wrap: wrap;
 }
 
 .cardiologist-form {
   margin-top: 200px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+}
+
+input,
+textarea {
+  border-radius: 5px;
+}
+
+input,
+.conteiner__cards,
+.card__title {
+  font-size: 20px;
+}
+
+input,
+.input-worning,
+.input-worning:focus,
+.select,
+.select-main,
+.doctors-inputs-wrapper input,
+.input-desc,
+.input-heartDiseases,
+textarea,
+.select-urgency,
+.select-status,
+.option-status-close {
+  outline: none;
 }
 
 input {
   width: 70%;
   height: 50px;
-  border-radius: 5px;
   padding: 0px 20px;
   margin: 5px 0px;
-  font-size: 20px;
-  outline: none;
-  border: none;
 }
 
 .input-worning {
-  outline: none;
   background-color: rgb(255, 186, 186);
 }
 
-.input-worning:focus {
-  outline: none;
+.worning-window,
+.error,
+.button-create-visit,
+.create-btn,
+.select,
+.select-main,
+.select-urgency,
+.select-status,
+.option-status-close,
+.cards-wrapper,
+.filter-wrapper__headline {
+  text-align: center;
+}
+
+.worning-window,
+.cards-wrapper {
+  color: rgb(63, 63, 63);
 }
 
 .worning-window {
   width: 350px;
   padding: 20px;
-  position: absolute;
   transform: translate(0, -77px);
   background-color: rgb(255, 148, 148);
-  border-radius: 15px;
-  text-align: center;
-  color: rgb(63, 63, 63);
 }
 
-.error {
-  width: 100%;
-  text-align: center;
+.enter-btn,
+.card__btn-more,
+.card__btn-rewrite {
+  border-radius: 10px;
+}
+
+.enter-btn,
+.card__btn-rewrite {
+  border: 1px solid white;
+}
+
+.enter-btn,
+.card__btn-rewrite {
+  color: rgb(30, 135, 255);
+}
+
+.enter-btn,
+.input-login,
+.input-password,
+.card__btn-more,
+.card__btn-rewrite {
+  font-size: 14px;
+}
+
+.enter-btn,
+.close-card,
+.create-card,
+.card__btn-rewrite {
+  width: 120px;
+}
+
+.enter-btn,
+.close-card,
+.create-card,
+.doctors-inputs-wrapper input,
+.select-urgency,
+.select-status,
+.option-status-close,
+.card__btn-rewrite,
+.filter-status,
+.filter-urgency {
+  height: 40px;
 }
 
 .enter-btn {
-  border-radius: 10px;
-  border: 1px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(30, 135, 255);
-  font-size: 14px;
-  font-weight: 700;
-  width: 120px;
-  height: 40px;
-  background-color: rgb(162, 204, 252);
-  cursor: pointer;
   transition: transform 0.2s ease;
   margin-top: 20px;
 }
@@ -186,38 +395,26 @@ input {
   color: rgb(139, 139, 139);
   transition: transform 0.7s ease, box-shadow 0.5s ease;
   background-color: rgb(173, 255, 194);
-  text-align: center;
 }
 
 .button-create-visit:hover {
-  transform: scale(0.95);
   box-shadow: rgba(255, 255, 255) 0px 0px 20px 10px;
 }
 
-/** modale window **/
+/* modale window visit */
 
 .window-create-card-wrapper {
   width: 1000px;
-  position: absolute;
   top: 30px;
   left: 100px;
   padding: 0px 50px 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: start;
-  border-radius: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  background-color: rgb(162, 204, 252);
 }
 
 .visit-form {
   width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .headline {
@@ -226,8 +423,21 @@ input {
   padding: 20px 0px 20px;
 }
 
-.input-wrapper {
-  width: 100%;
+.select,
+.select-main,
+.select-urgency,
+.select-status,
+.option-status-close,
+.card__doc {
+  color: rgb(54, 148, 255);
+}
+
+.select,
+.select-main,
+.doctors-inputs-wrapper input,
+.input-desc,
+.input-heartDiseases {
+  background-color: rgb(219, 236, 255);
 }
 
 .select,
@@ -235,49 +445,30 @@ input {
   width: 30%;
   height: 100%;
   border-radius: 25px;
-  border: none;
-  outline: none;
-  text-align: center;
-  color: rgb(54, 148, 255);
-  background-color: rgb(219, 236, 255);
-  font-size: 22px;
-  font-weight: 700;
   margin-bottom: 10px;
   padding: 10px 0px;
 }
 
-.select-main {
-  width: 80%;
+.select {
+  font-size: 22px;
 }
 
-.select {
-  color: rgb(54, 148, 255);
-  font-weight: 700;
+.select-main {
+  width: 80%;
+  font-size: 20px;
 }
 
 .close-card,
 .create-card {
   margin: 20px 0px 0px;
-  cursor: pointer;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   letter-spacing: 2px;
-  font-weight: 700;
-  background-color: rgb(54, 148, 255);
-  transition: transform 0.7s ease, opacity 0.5s ease;
-  height: 40px;
-  width: 120px;
 }
 
 .create-card {
-  color: white;
   border: 2px solid rgb(125, 255, 125);
 }
 
 .close-card {
-  color: white;
   border: 2px solid rgb(255, 179, 179);
 }
 
@@ -285,7 +476,6 @@ input {
 .input-password {
   width: 70%;
   height: 30px;
-  font-size: 14px;
 }
 
 [class="input-login"][name="age"],
@@ -300,41 +490,20 @@ input {
   margin: 0 27px;
 }
 
-[class="input-login"][name="pressure"] {
-  width: 20%;
-}
-
+[class="input-login"][name="pressure"],
 [class="input-login"][name="bmi"] {
   width: 20%;
 }
 
-.doctors-inputs-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .doctors-inputs-wrapper input {
   width: 1700px;
-  height: 40px;
-  background-color: rgb(219, 236, 255);
-  border: none;
-  outline: none;
   margin: 10px 0px;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .input-desc,
 .input-heartDiseases {
   width: 700px;
   padding: 10px 20px;
-  font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif;
-  border: none;
-  outline: none;
-  background-color: rgb(219, 236, 255);
   margin: 10px 0px;
 }
 
@@ -342,32 +511,18 @@ textarea {
   height: 70px;
   width: 70%;
   resize: none;
-  outline: none;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px 20px;
-  border-radius: 5px;
-}
-
-textarea::placeholder {
-  font-size: 16px;
 }
 
 .select-urgency,
 .select-status,
 .option-status-close {
   width: 30%;
-  height: 40px;
   margin-top: 5px;
-  font-size: 16px;
-  text-align: center;
   border-radius: 25px;
-  border: none;
-  outline: none;
-  text-align: center;
-  color: rgb(54, 148, 255);
   background-color: white;
-  font-weight: 700;
   margin-bottom: 10px;
   padding: 3px 0px;
 }
@@ -377,84 +532,50 @@ textarea::placeholder {
   margin: 0px 20px;
 }
 
-.select-urgency .option:nth-child(2),
-.select-status .option-status:nth-child(2) {
-  /* color: rgb(31, 102, 0); */
-  font-weight: 700;
+.select-urgency option,
+.select-status option {
+  font-size: 14px;
 }
 
-.select-urgency .option:nth-child(3),
-.select-status .option-status:nth-child(3) {
-  font-weight: 700;
-}
-
-.select-urgency .option:nth-child(4),
-.select-status .option-status:nth-child(4) {
-  font-weight: 700;
-}
-
-/* * rendering * */
-.text {
-  display: flex;
-  justify-content: center;
-  padding-top: 400px;
-  font-size: 20px;
-  color: rgb(119, 119, 119);
-}
-
-/** cards **/
+/* ********** rendering ********** */
 .cards-wrapper {
   padding: 100px 0px 100px;
-  text-align: center;
-  color: rgb(63, 63, 63);
-}
-
-/*  */
-.hidden {
-  display: none;
 }
 
 /* block card , Rendor new card */
 .conteiner__cards {
   margin: 0px 0px 50px;
   padding: 100px 40px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-size: 20px;
 }
+
 .card {
-  width: 100%;
   min-height: 200px;
   margin: 10px;
   padding: 30px;
   border: 2px solid white;
   box-sizing: border-box;
-  position: relative;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: start;
 }
 
 .card p {
   padding: 10px 0px 10px;
-  font-size: 16px;
 }
 
 .card__delete {
-  position: absolute;
+  background-color: rgb(190, 220, 255);
+}
+
+.card__delete {
   top: 10px;
   right: 10px;
-  background-color: rgb(190, 220, 255);
-  border: none;
 }
+
 .card__delete:hover {
   transform: scale(1.2);
 }
 
 .card__block {
-  width: 100%;
   padding-top: 30px;
 }
 
@@ -463,34 +584,19 @@ textarea::placeholder {
   word-break: break-all;
   max-height: 100px;
   overflow-y: auto;
-  font-size: 16px;
 }
 
 .card__btn-more {
-  font-size: 14px;
   font-style: italic;
   color: rgb(87, 87, 87);
   width: 200px;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
   align-self: flex-end;
   text-align: end;
 }
 
 .card__btn-rewrite {
-  color: rgb(30, 135, 255);
-  font-size: 14px;
-  width: 120px;
-  height: 40px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: 1px solid white;
   margin-top: 50px;
   margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card__btn-more:hover,
@@ -499,46 +605,22 @@ textarea::placeholder {
 }
 
 .filter-wrapper {
-  width: 100%;
   padding: 100px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   color: rgb(119, 119, 119);
 }
 
 .filter-wrapper__headline {
-  text-align: center;
-  font-size: 18px;
   padding-bottom: 30px;
 }
 
 .filter-content {
   width: 800px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.filter-description-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .filter-description-wrapper,
 .filter-status-wrapper,
 .filter-urgency-wrapper {
   height: 80px;
-}
-
-.filter-status-wrapper,
-.filter-urgency-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .filter-description {
@@ -551,33 +633,28 @@ textarea::placeholder {
 }
 
 .filter-status,
+.filter-urgency,
+.filter-wrapper__headline,
+.input-desc,
+.input-heartDiseases {
+  font-size: 18px;
+}
+
+.filter-status,
 .filter-urgency {
   width: 200px;
-  height: 40px;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0px;
 }
 
-/* * cards * */
-.card__name-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
+/* cards */
 .cross {
-  cursor: pointer;
   width: 10px;
   height: 10px;
-  position: relative;
 }
 
 .cross::before,
 .cross::after {
   content: "";
-  position: absolute;
   top: 50%;
   left: 0;
   width: 80%;
@@ -600,15 +677,8 @@ textarea::placeholder {
 
 .card__doc {
   font-size: 24px;
-  color: rgb(54, 148, 255);
-  font-weight: 700;
 }
 
 .card__title {
-  font-size: 20px;
   font-weight: 400;
-}
-
-.card-hidden {
-  display: none;
 }
