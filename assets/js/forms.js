@@ -32,6 +32,7 @@ class Form {
     const selectElement = document.createElement("select");
     selectElement.setAttribute("name", selectName);
     selectElement.classList.add(style);
+    selectElement.setAttribute("required", true);
     this.formElement.append(selectElement);
     this.selectElement = selectElement;
   }
@@ -79,59 +80,50 @@ class Form {
 
   //   GO TO THE SERVER
   // TODO validation
-  // sendData() {
-  //   // const self = this;
-  //   const formData = new FormData(this.formElement);
-  //   console.log(formData);
-  //   let selectMain = document.querySelector(".select-main");
-  //   formData.append("doc", selectMain.value);
+  validateForm() {
+    const formElements = this.formElement.elements;
+    const allowedNodeNames = ["INPUT", "TEXTAREA", "SELECT"];
+    const formElementsArray = Array.from(formElements);
+    const filteredFormElements = formElementsArray.filter((element) =>
+      allowedNodeNames.includes(element.nodeName)
+    );
+    let isValid = true;
 
-  //   // const isFormValid = this.validateForm(formData);
-  //   sendFormData(formData);
+    // Видаляємо попередні повідомлення про помилки перед перевіркою форми
+    const errorElements = document.querySelectorAll(".error");
+    errorElements.forEach((error) => error.remove());
 
-  //   if (isFormValid) {
-  //     console.log(formData);
-  //     sendFormData(formData)
-  //       .then((response) => {
-  //         console.log(response);
-  //         if (response && response.ok) {
-  //           console.log("Data sent successfully");
-  //         } else {
-  //           throw new Error("Error sending data");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error sending data:", error);
-  //         alert("An error occurred while sending data. Please try again.");
-  //       });
-  //   } else {
-  //     alert("Будь ласка, заповніть всі обов'язкові поля.");
-  //   }
-  // }
+    for (const element of filteredFormElements) {
+      // Перевірка на пусте значення поля
+      if (element.value.trim() === "" || element.value === "-- none --") {
+        isValid = false;
+        const newError = document.createElement("span");
+        newError.className = "error";
+        newError.style.color = "red";
+        newError.innerHTML = "Це поле є обов'язковим!";
+        element.insertAdjacentElement("afterend", newError);
+      }
+    }
+    if (!isValid) {
+      throw new Error(
+        "Форма не може бути порожньою! Заповніть будь ласка всі поля форми!"
+      );
+    }
+    return isValid;
+  }
 
   // ! can't touch this!
   sendData() {
     const formData = new FormData(this.formElement);
     let selectMain = document.querySelector(".select-main");
     formData.append("doc", selectMain.value);
-    sendFormData(formData);
-  }
+    // Викликаємо функцію валідації перед відправкою даних
 
-  // TODO validation
-  // validateForm(formData) {
-  //   let isFormValid = true;
-  //   for (let inputElement of this.formElement.querySelectorAll(
-  //     "input[required]"
-  //   )) {
-  //     if (!inputElement.value) {
-  //       inputElement.classList.add("error");
-  //       isFormValid = false;
-  //     } else {
-  //       inputElement.classList.remove("error");
-  //     }
-  //   }
-  //   return isFormValid;
-  // }
+    if (this.validateForm() === true) {
+      sendFormData(formData);
+    } else {
+    }
+  }
 }
 
 // all doctors form
