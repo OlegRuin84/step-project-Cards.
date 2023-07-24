@@ -1,4 +1,4 @@
-import { getToken } from "./api/api.js";
+import { getToken } from "./api/getToken.js";
 import { VisitCardiologist, VisitDentist, VisitTherapist } from "./classes.js";
 
 // delete worning window

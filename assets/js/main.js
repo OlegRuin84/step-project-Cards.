@@ -1,5 +1,6 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getRegistrationData } from "./api/api.js";
+import { getRegistrationData } from "./api/getRegistrationData.js";
+// import { getRegistrationData } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,

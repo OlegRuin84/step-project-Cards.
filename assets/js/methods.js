@@ -15,7 +15,7 @@ async function getUserServer() {
     let data = await response.json();
     console.log(data);
 
-    return data;
+    // return data;
   } catch (e) {
     console.log("Помилка в GET запиті (функція getUserServer)!");
     console.log(e);
