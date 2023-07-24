@@ -97,7 +97,7 @@ class Form {
 
     for (const element of filteredFormElements) {
       // Перевірка на пусте значення поля
-      if (element.value.trim() === "") {
+      if (element.value.trim() === "" || element.value === "-- none --") {
         isValid = false;
         const newError = document.createElement("span");
         newError.className = "error";
