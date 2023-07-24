@@ -1,5 +1,5 @@
 import { deleteWorningWindow } from "./functions.js";
-import { getToken2 } from "./api/api.js";
+import { getRegistrationData } from "./api/api.js";
 import {
   Button,
   ModalEnterWindow,
@@ -37,7 +37,8 @@ window.addEventListener("DOMContentLoaded", function () {
     headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
     body.style.backgroundColor = "rgb(190, 220, 255)";
     isLoggedIn = true;
-    createWindowAfterLogIn(header);
+    // createWindowAfterLogIn(header);
+    createWindowAfterLogIn();
   }
 });
 
@@ -80,7 +81,7 @@ function createWindowAfterLogIn(login, password) {
     filterDescriptionWrapper.classList.add("filter-description-wrapper");
     filterWrapperHeadline.textContent = "Фільтрування візитів";
     filterDescriptionLabel.classList.add("filter-label");
-    filterDescriptionLabel.textContent = "За заголовком та вмістом:";
+    filterDescriptionLabel.textContent = "За ПІБ клієнта:";
     filterDescription.classList.add("filter-description");
     filterStatusWrapper.classList.add("filter-status-wrapper");
     filterStatusLabel.classList.add("filter-label");
@@ -185,7 +186,7 @@ function createWindowAfterLogIn(login, password) {
     filterUrgency.addEventListener("change", filterData);
     filterStatus.addEventListener("change", filterData);
 
-    getToken2(login, password);
+    getRegistrationData(login, password);
   }
 }
 
@@ -197,7 +198,7 @@ function createWindowContent() {
   }
   isRequesting = true;
 
-  const createWindow = new ModalCardWindow(header, "НОВИЙ ВІЗИТ");
+  const createWindow = new ModalCardWindow(main, "НОВИЙ ВІЗИТ");
   createWindow.open();
 
   let button = document.querySelector(".button-create-visit");
@@ -249,7 +250,7 @@ function openWindow() {
   if (isRequesting || isLoggedIn) return;
   isRequesting = true;
 
-  let logInWindow = new ModalEnterWindow(header, "АВТОРИЗАЦІЯ");
+  let logInWindow = new ModalEnterWindow(main, "АВТОРИЗАЦІЯ");
   logInWindow.open();
 
   logInBtnElement.style.display = "none";
@@ -297,20 +298,15 @@ function openWindow() {
           // createWindowAfterLogIn(header);
           createWindowAfterLogIn(inputLogin.value, inputPassword.value);
         } else {
-          // delete
-          // alert(
-          //   "ДРУЗІ! Вводимо логін та пароль, які вводили при реєстрації на сервері"
-          // );
-
           inputLogin.classList.add("input-worning");
           inputPassword.classList.add("input-worning");
           const worningWindow = document.createElement("div");
           worningWindow.classList.add("worning-window");
           worningWindow.textContent =
-            "Невведені або некоректно введені дані. Будь ласка, повторіть спробу";
+            "Дані не введено або введено некоректно. Будь ласка, повторіть спробу";
           window.append(worningWindow);
 
-          setTimeout(deleteWorningWindow, 3000);
+          // setTimeout(deleteWorningWindow, 3000);
         }
       } catch (error) {
         console.log("Помилка:");

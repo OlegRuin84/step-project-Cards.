@@ -30,7 +30,7 @@ body {
   display: inline-block;
   width: 100px;
   height: 100px;
-  /* animation: circle 80s cubic-bezier(1, 1, 1, 1) infinite; */
+  animation: circle 80s cubic-bezier(1, 1, 1, 1) infinite;
 }
 @keyframes circle {
   0% {
@@ -44,7 +44,6 @@ body {
 /* ********* log-in ********** */
 .btn-wrapper {
   display: flex;
-  /* width: 300px; */
   justify-content: space-between;
 }
 
@@ -84,10 +83,8 @@ body {
 }
 
 .window {
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+  position: absolute;
+  transform: translate(100px, 50px);
   width: 600px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -110,9 +107,12 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
   align-items: center;
   flex-wrap: wrap;
+}
+
+.log-in-form {
+  flex-direction: column;
 }
 
 .cardiologist-form {
@@ -147,14 +147,16 @@ input {
   width: 350px;
   padding: 20px;
   position: absolute;
-  z-index: 1;
-  transform: translate(-50%, -15%);
-  top: 20%;
-  left: 50%;
+  transform: translate(0, -77px);
   background-color: rgb(255, 148, 148);
   border-radius: 15px;
   text-align: center;
   color: rgb(63, 63, 63);
+}
+
+.error {
+  width: 100%;
+  text-align: center;
 }
 
 .enter-btn {
@@ -211,7 +213,6 @@ input {
 }
 
 .visit-form {
-  /* height: 100px; */
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -294,16 +295,17 @@ input {
   margin-right: 10px;
 }
 
+[class="input-login"][name="pressure"],
+[class="input-login"][name="bmi"] {
+  margin: 0 27px;
+}
+
 [class="input-login"][name="pressure"] {
   width: 20%;
-  /* margin-left: 10px;
-  margin-right: 10px; */
 }
 
 [class="input-login"][name="bmi"] {
   width: 20%;
-  margin-left: 65px;
-  /* margin-right: 10px; */
 }
 
 .doctors-inputs-wrapper {
@@ -370,34 +372,25 @@ textarea::placeholder {
   padding: 3px 0px;
 }
 
-/* ! don't touch */
-/* .option-status-close {
-  display: none;
-} */
+.select-urgency,
+.select-status {
+  margin: 0px 20px;
+}
 
 .select-urgency .option:nth-child(2),
 .select-status .option-status:nth-child(2) {
   /* color: rgb(31, 102, 0); */
   font-weight: 700;
-  /* background-color: rgb(31, 102, 0); */
 }
 
 .select-urgency .option:nth-child(3),
 .select-status .option-status:nth-child(3) {
-  /* color: rgb(255, 102, 0); */
   font-weight: 700;
-  /* background-color: rgb(255, 102, 0); */
 }
 
 .select-urgency .option:nth-child(4),
 .select-status .option-status:nth-child(4) {
-  /* color: rgb(255, 48, 48); */
   font-weight: 700;
-  /* background-color: rgb(255, 48, 48); */
-}
-
-.select-status {
-  margin-left: 50px;
 }
 
 /* * rendering * */
@@ -411,14 +404,9 @@ textarea::placeholder {
 
 /** cards **/
 .cards-wrapper {
-  /* margin-top: 500px;
-  border-top: 3px solid rgb(200, 226, 255); */
   padding: 100px 0px 100px;
   text-align: center;
   color: rgb(63, 63, 63);
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
 /*  */
@@ -427,7 +415,6 @@ textarea::placeholder {
 }
 
 /* block card , Rendor new card */
-
 .conteiner__cards {
   margin: 0px 0px 50px;
   padding: 100px 40px;
@@ -435,7 +422,6 @@ textarea::placeholder {
   justify-content: space-between;
   flex-wrap: wrap;
   font-size: 20px;
-  /* display: none; */
 }
 .card {
   width: 100%;
@@ -474,16 +460,13 @@ textarea::placeholder {
 
 .card__descriptionVisit,
 .card__heartDisease {
-  /* word-wrap: break-word; */
   word-break: break-all;
   max-height: 100px;
-  /* overflow-y: scroll; */
   overflow-y: auto;
   font-size: 16px;
 }
 
 .card__btn-more {
-  /* color: rgb(30, 135, 255); */
   font-size: 14px;
   font-style: italic;
   color: rgb(87, 87, 87);
@@ -498,10 +481,8 @@ textarea::placeholder {
 .card__btn-rewrite {
   color: rgb(30, 135, 255);
   font-size: 14px;
-  /* font-weight: 700; */
   width: 120px;
   height: 40px;
-  /* background-color: rgb(162, 204, 252); */
   cursor: pointer;
   border-radius: 10px;
   border: 1px solid white;

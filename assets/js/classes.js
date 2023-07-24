@@ -1,5 +1,3 @@
-//
-// imports
 import {
   Form,
   ModalCardiologistForm,
@@ -247,7 +245,7 @@ class VisitCardiologist extends Visit {
     wrapper.setAttribute("draggable", "true");
 
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
-    name.textContent = `Клієнт: ${this.namePatient}`;
+    name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати більше`;
     desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
     goal.textContent = `Мета візиту: ${this.goalVisit}`;
@@ -255,7 +253,7 @@ class VisitCardiologist extends Visit {
     status.textContent = `Статус візиту: ${this.changeStatus}`;
     pressure.textContent = `Звичайний тиск: ${this.pressure}`;
     bmi.textContent = `Індекс маси тіла: ${this.bmi}`;
-    heartDisease.textContent = `Перенесенні захворювання: ${this.heartDisease}`;
+    heartDisease.textContent = `Перенесені захворювання: ${this.heartDisease}`;
     age.textContent = `Вік: ${this.age}`;
     editBtn.textContent = "Редагувати";
 
@@ -343,11 +341,11 @@ class VisitDentist extends Visit {
     editBtn.classList.add("card__btn-rewrite");
     wrapper.setAttribute("draggable", "true");
 
-    doc.textContent = `${this.doc}`;
+    doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати більше`;
-    desc.textContent = `${this.descriptionVisit}`;
-    goal.textContent = `${this.goalVisit}`;
+    desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
+    goal.textContent = `Мета візиту: ${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
     status.textContent = `Статус зустрічі: ${this.changeStatus}`;
     // lastDate.textContent = `Остання дата відвідування: ${this.lastDate}`;
@@ -434,14 +432,14 @@ class VisitTherapist extends Visit {
     editBtn.classList.add("card__btn-rewrite");
     wrapper.setAttribute("draggable", "true");
 
-    doc.textContent = `${this.doc}`;
+    doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати більше`;
-    desc.textContent = `${this.descriptionVisit}`;
-    goal.textContent = `${this.goalVisit}`;
+    desc.textContent = `Опис візиту: ${this.descriptionVisit}`;
+    goal.textContent = `Мета візиту: ${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
     status.textContent = `Статус зустрічі: ${this.changeStatus}`;
-    age.textContent = `${this.age}`;
+    age.textContent = `Вік: ${this.age}`;
     editBtn.textContent = "Редагувати";
 
     wrapper.append(nameWrapper);

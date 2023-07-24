@@ -10,12 +10,10 @@ async function fetchData(token, data) {
       },
       body: JSON.stringify(data),
     });
-    // TODO GET
     if (response.status === 200) {
       console.log(data);
       rendering(data);
     }
-    // TODO GET
   } catch (error) {
     console.log("Помилка в fetchData, файл api.js");
     console.log(error);
@@ -44,7 +42,7 @@ async function getToken(data) {
   }
 }
 
-async function getToken2(login, password) {
+async function getRegistrationData(login, password) {
   try {
     let storedLogin = localStorage.getItem("login");
     let storedPassword = localStorage.getItem("password");
@@ -101,24 +99,6 @@ async function getUserServer(token) {
     });
     let data = await response.json();
 
-    // TODO
-    // let filterWrapper = document.querySelector(".filter-wrapper");
-    // let text = document.createElement("div");
-    // text.classList.add("text");
-    // text.textContent = "Візити відсутні";
-
-    // if (data.length !== 0) {
-    //   if (text) {
-    //     // text.remove();
-    //     text.remove();
-    //   }
-    // } else if (data.length === 0) {
-    //   console.log("Ok");
-
-    //   filterWrapper.after(text);
-    // }
-    // TODO
-
     // sorting
     data.sort((a, b) => a.id - b.id);
     data.forEach((e) => {
@@ -132,34 +112,4 @@ async function getUserServer(token) {
   }
 }
 
-//
-// ! You can't touch this
-// async function fetchData(url, fetchMethod, data = null) {
-//   const options = {
-//     method: `${fetchMethod}`,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-
-//   if (data) {
-//     options.body = data;
-//   }
-
-//   try {
-//     const response = await fetch(url, options);
-//     console.log(response);
-//     const responseData = await response.json();
-
-//     if (!response.ok) {
-//       throw new Error(responseData.message || "Помилка методу fetch");
-//     }
-
-//     return responseData;
-//   } catch (error) {
-//     console.error("Помилка:", error);
-//     throw error;
-//   }
-// }
-
-export { getToken, getToken2 };
+export { getToken, getRegistrationData };
