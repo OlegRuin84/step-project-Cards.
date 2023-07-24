@@ -1,4 +1,4 @@
-import { rendering } from "../functions.js";
+import { rendering } from "../rendering.js";
 
 async function fetchData(token, data) {
   try {

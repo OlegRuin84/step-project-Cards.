@@ -4,9 +4,7 @@ import {
   ModalDentistForm,
   ModalTherapistForm,
 } from "./forms.js";
-import { formatDate } from "./functions.js";
-
-// import { createWindowContent } from "./main.js";
+import { formatDate } from "./formatDate.js";
 
 // Classes for buttons
 class Button {
@@ -121,7 +119,6 @@ class ModalCardWindow extends Modal {
     if (modalForm) {
       const selectElement = this.form.formElement.querySelector("select");
       const closeWindow = this.form.formElement.querySelector(".close-card");
-      // const createCard = this.form.formElement.querySelector(".create-card");
 
       const noneOption = selectElement.querySelector(
         'option[value="-- none --"]'
@@ -348,7 +345,6 @@ class VisitDentist extends Visit {
     goal.textContent = `Мета візиту: ${this.goalVisit}`;
     urgency.textContent = `Терміновість: ${this.changeUrgency}`;
     status.textContent = `Статус зустрічі: ${this.changeStatus}`;
-    // lastDate.textContent = `Остання дата відвідування: ${this.lastDate}`;
     lastDate.textContent = `Остання дата відвідування: ${formattedDate}`;
     editBtn.textContent = "Редагувати";
 

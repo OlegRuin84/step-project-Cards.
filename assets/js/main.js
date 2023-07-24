@@ -1,12 +1,6 @@
-import { deleteWorningWindow } from "./functions.js";
+import { deleteWorningWindow } from "./deleteWorningWindow.js";
 import { getRegistrationData } from "./api/getRegistrationData.js";
-// import { getRegistrationData } from "./api/api.js";
-import {
-  Button,
-  ModalEnterWindow,
-  ModalCardWindow,
-  VisitCardiologist,
-} from "./classes.js";
+import { Button, ModalEnterWindow, ModalCardWindow } from "./classes.js";
 import DragAndDrop from "./drag_drop.js";
 
 //
@@ -38,14 +32,13 @@ window.addEventListener("DOMContentLoaded", function () {
     headerBackground.style.backgroundColor = "rgb(162, 204, 252)";
     body.style.backgroundColor = "rgb(190, 220, 255)";
     isLoggedIn = true;
-    // createWindowAfterLogIn(header);
     createWindowAfterLogIn();
   }
 });
 
 function createWindowAfterLogIn(login, password) {
   if (!createNewVisitButton) {
-    let conteinerCards = document.querySelector(".conteiner__cards");
+    // let conteinerCards = document.querySelector(".conteiner__cards");
 
     const visitBtn = new Button();
     createNewVisitButton = visitBtn.createButton();
@@ -135,8 +128,6 @@ function createWindowAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
 
-    // main.prepend(cardsWrapper);
-    // cardsWrapper.prepend(cardsConteiner);
     main.prepend(filterWrapper);
     filterWrapper.after(cardsConteiner);
 
@@ -170,7 +161,6 @@ function createWindowAfterLogIn(login, password) {
           descriptionFilter === "" || description.includes(descriptionFilter);
         const urgencyMatch =
           urgencyFilter === "Всі" || urgency.includes(urgencyFilter);
-
         const statusMatch =
           statusFilter === "Всі" || status.includes(statusFilter);
 
@@ -206,9 +196,6 @@ function createWindowContent() {
   let window = document.querySelector(".window-create-doctor");
   let conteinerCards = document.querySelector(".conteiner__cards");
   let filterWrapper = document.querySelector(".filter-wrapper");
-  // TODO
-  // let text = document.querySelector(".text");
-  // TODO
 
   // close the window
   if (window) {
@@ -217,11 +204,6 @@ function createWindowContent() {
       button.classList.add("hidden");
       conteinerCards.style.display = "none";
       filterWrapper.style.display = "none";
-      // TODO
-      // if (text) {
-      //   text.style.display = "none";
-      // }
-      // TODO
     }, 0);
   }
   function closeModalWindow(event) {
@@ -232,11 +214,6 @@ function createWindowContent() {
       button.classList.remove("hidden");
       conteinerCards.style.display = "flex";
       filterWrapper.style.display = "flex";
-      // TODO
-      // if (!text) {
-      //   text.style.display = "flex";
-      // }
-      // TODO
       document.removeEventListener("click", closeModalWindow);
     }
   }
@@ -255,7 +232,6 @@ function openWindow() {
   logInWindow.open();
 
   logInBtnElement.style.display = "none";
-
   headerBackground.style.backgroundColor = "rgb(219, 219, 219)";
   body.style.backgroundColor = "rgb(219, 219, 219)";
   isRequesting = false;
@@ -268,7 +244,7 @@ function openWindow() {
     const inputPassword = document.querySelector(".input-password");
     const window = document.querySelector(".window");
 
-    // TODO: Login API request
+    // login API request
     async function takeToken() {
       try {
         let response = await fetch(
@@ -307,7 +283,7 @@ function openWindow() {
             "Дані не введено або введено некоректно. Будь ласка, повторіть спробу";
           window.append(worningWindow);
 
-          // setTimeout(deleteWorningWindow, 3000);
+          setTimeout(deleteWorningWindow, 3000);
         }
       } catch (error) {
         console.log("Помилка:");
@@ -341,19 +317,5 @@ function closeWindow(event) {
     isRequesting = false;
   }
 }
-
-// window.addEventListener("beforeunload", function () {
-//   let storedLogin = localStorage.getItem("login");
-//   let storedPassword = localStorage.getItem("password");
-//   if (storedLogin && storedPassword) {
-//     const visitBtn = new Button();
-//     const visitBtnElement = visitBtn.createButton();
-//     visitBtnElement.classList.add("button-create-visit");
-//     visitBtnElement.textContent = "НОВИЙ ВІЗИТ";
-//     btnWrapper.append(visitBtnElement);
-
-//     visitBtnElement.addEventListener("click", createWindowContent);
-//   }
-// });
 
 export { createWindowContent };

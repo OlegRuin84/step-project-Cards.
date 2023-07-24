@@ -1,4 +1,4 @@
-import { sendFormData } from "./functions.js";
+import { sendFormData } from "./sendFormData.js";
 
 //
 // Forms
@@ -79,7 +79,7 @@ class Form {
   }
 
   //   GO TO THE SERVER
-  // TODO validation
+  // validation
   validateForm() {
     const formElements = this.formElement.elements;
     const allowedNodeNames = ["INPUT", "TEXTAREA", "SELECT"];
@@ -112,7 +112,6 @@ class Form {
     return isValid;
   }
 
-  // ! can't touch this!
   sendData() {
     const formData = new FormData(this.formElement);
     let selectMain = document.querySelector(".select-main");
@@ -126,6 +125,7 @@ class Form {
   }
 }
 
+//
 // all doctors form
 class ModalDoctor {
   constructor() {
@@ -172,7 +172,6 @@ class ModalCardiologistForm extends ModalDoctor {
     );
     this.form.addInput("Вік", "text", "age", "input-login");
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -191,7 +190,6 @@ class ModalDentistForm extends ModalDoctor {
       "input-login"
     );
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
@@ -205,7 +203,6 @@ class ModalTherapistForm extends ModalDoctor {
   createTherapistForm() {
     this.form.addInput("Вік", "text", "age", "input-login");
     this.form.addButton("СТВОРИТИ", "create-card", "submit");
-    // this.form.addButton("ЗАКРИТИ", "close-card", "button");
   }
 }
 
