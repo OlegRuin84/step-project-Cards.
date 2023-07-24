@@ -6,4 +6,4 @@ function deleteWorningWindow() {
   }
 }
 
-export { deleteWorningWindow };
+export default deleteWorningWindow;

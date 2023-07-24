@@ -1,4 +1,4 @@
-import { getUserServer } from "./getUserServer.js";
+import getUserServer from "./getUserServer.js";
 
 async function getRegistrationData(login, password) {
   try {
@@ -44,4 +44,4 @@ async function getRegistrationData(login, password) {
   }
 }
 
-export { getRegistrationData };
+export default getRegistrationData;

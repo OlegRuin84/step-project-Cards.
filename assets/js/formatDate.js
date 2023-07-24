@@ -9,4 +9,4 @@ function formatDate(a) {
   return formattedDate;
 }
 
-export { formatDate };
+export default formatDate;

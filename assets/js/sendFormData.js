@@ -1,4 +1,4 @@
-import { getToken } from "./api/getToken.js";
+import getToken from "./api/getToken.js";
 
 function sendFormData(formData) {
   return new Promise((resolve, reject) => {

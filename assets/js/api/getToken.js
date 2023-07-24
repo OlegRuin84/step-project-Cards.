@@ -1,4 +1,4 @@
-import { fetchData } from "./fetchData.js";
+import fetchData from "./fetchData.js";
 
 async function getToken(data) {
   try {
@@ -22,4 +22,4 @@ async function getToken(data) {
   }
 }
 
-export { getToken };
+export default getToken;

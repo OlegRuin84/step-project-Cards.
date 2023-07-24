@@ -23,4 +23,4 @@ async function getUserServer(token) {
   }
 }
 
-export { getUserServer };
+export default getUserServer;

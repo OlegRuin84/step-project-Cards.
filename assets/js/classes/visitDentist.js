@@ -1,5 +1,5 @@
 import { Visit } from "./visit.js";
-import { formatDate } from "../formatDate.js";
+import formatDate from "../formatDate.js";
 
 class VisitDentist extends Visit {
   constructor(

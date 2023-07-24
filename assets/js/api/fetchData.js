@@ -19,4 +19,4 @@ async function fetchData(token, data) {
   }
 }
 
-export { fetchData };
+export default fetchData;
