@@ -1,4 +1,6 @@
 import { rendering } from "../rendering.js";
+import { set } from "./counter.js";
+import { paragraphDisplay } from "./paragraph.js"
 
 async function fetchData(token, data) {
   try {
@@ -12,8 +14,7 @@ async function fetchData(token, data) {
     });
     if (response.status === 200) {
 
-      // rendering(data);
-// -------------
+// rendering
 
     let info = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
       method: "GET",
@@ -22,27 +23,25 @@ async function fetchData(token, data) {
     }});
     let data = await info.json();
 
+    // контроль над надписом , про відсутність карток
+    paragraphDisplay(data.length)
+
+      
+
     // sorting
     data.sort((a, b) => a.id - b.id);
-    let setID = new Set;
     data.forEach((e) => {
-      let id = e.id
-      if (setID.has(id)){
-        return 
+      if(set.has(e.id)){
+        return;
       } else {
-        setID.add(id);
+        set.add(e.id)
         rendering(e);
-        return setID;
-      }});
-      console.log(setID)
-    ;
+      }
+    });
   } 
 }
-
-
-// ---------------
     
-   catch (error) {
+  catch (error) {
     console.log("Помилка в fetchData, файл api.js");
     console.log(error);
   }

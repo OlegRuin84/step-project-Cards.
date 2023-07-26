@@ -140,6 +140,13 @@ function createPageAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
 
+    // add paragraph with text "картки відсутні"
+        let paragraph = document.createElement('p');
+        cardsConteiner.prepend(paragraph);
+        paragraph.textContent = "Картки відсутні";
+        paragraph.id = 'paragraphText';
+
+
     // filter rendering
     buildFilter(main, cardsConteiner);
 

@@ -15,7 +15,6 @@ async function getToken(data) {
       }
     );
     const token = await response.text();
-    console.log(token)
     fetchData(token, data);
   } catch (error) {
     console.log("Помилка в getToken, файл api.js");
