@@ -686,3 +686,7 @@ textarea {
 .card__title {
   font-weight: 400;
 }
+
+.conteiner__cards p {
+  color: rgb(85, 85, 85);
+}

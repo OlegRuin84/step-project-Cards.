@@ -4,6 +4,7 @@ import buildFilter from "./buildFilter.js";
 import { ModalEnterWindow, ModalCardWindow } from "./classes/modals.js";
 import Button from "./classes/button.js";
 import DragAndDrop from "./classes/drag_drop.js";
+import deleteCardAtAPI from "./api/deleteCardAPI.js";
 
 //
 // Create the First page
@@ -138,6 +139,12 @@ function createPageAfterLogIn(login, password) {
     cardsWrapper.classList.add("cards-wrapper");
     cardsConteiner.classList.add("conteiner__cards");
 
+    // add paragraph with text "картки відсутні"
+    let paragraph = document.createElement("p");
+    cardsConteiner.prepend(paragraph);
+    paragraph.textContent = "Картки відсутні";
+    paragraph.id = "paragraphText";
+
     // filter rendering
     buildFilter(main, cardsConteiner);
 
@@ -247,5 +254,23 @@ window.addEventListener("DOMContentLoaded", function () {
     body.style.backgroundColor = "rgb(190, 220, 255)";
     isLoggedIn = true;
     createPageAfterLogIn();
+  }
+});
+
+// Видалення карток
+
+let cardsOfMain = document.querySelector("main");
+
+cardsOfMain.addEventListener("click", function (event) {
+  // змінна з номером картки, для delete
+
+  let arr = event.target.classList;
+  for (let e of arr) {
+    if (e === "cross") {
+      let card = event.target.closest(".card");
+
+      // виклик функциї видаленняб згідно номера
+      deleteCardAtAPI(card.id);
+    }
   }
 });
