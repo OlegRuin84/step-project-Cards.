@@ -1,14 +1,32 @@
-    import { setIdDelete, set } from "./counter.js" 
+    import { setIdDelete } from "./counter.js" 
     import { paragraphDisplay } from "./paragraph.js"
-    import { getToken }from "./fetchData.js";
 
     // запит на видалення картки
 
 async function deleteCardAtAPI(arg){
-
+let token
     // отримання токену 
-    getToken() 
+    try {
+        let storedLogin = localStorage.getItem("login");
+        let storedPassword = localStorage.getItem("password");
+        const response = await fetch(
+          "https://ajax.test-danit.com/api/v2/cards/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: storedLogin, password: storedPassword }),
+          }
+        );
+        token = await response.text(); 
+        fetchData(token);
+      } catch (error) {
+        console.log("Помилка в deleteCardAPI, файл api.js");
+        console.log(error);
+      }
     // відправлення запросу на видалення конкретної картки
+   
     let response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${arg}`, {
     method: 'DELETE',
     headers: {

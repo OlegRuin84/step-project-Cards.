@@ -5,7 +5,6 @@ import { ModalEnterWindow, ModalCardWindow } from "./classes/modals.js";
 import Button from "./classes/button.js";
 import DragAndDrop from "./classes/drag_drop.js";
 import deleteCardAtAPI from "./api/deleteCardAPI.js";
-import getUserServer from "./api/getUserServer.js";
 
 //
 // Create the First page
