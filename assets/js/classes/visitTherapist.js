@@ -40,7 +40,6 @@ class VisitTherapist extends Visit {
     let age = document.createElement("p");
     let editBtn = document.createElement("div");
 
-    wrapper.id = `${this.id}`;
     wrapper.classList.add("card");
     nameWrapper.classList.add("card__name-wrapper");
     cross.classList.add("cross");

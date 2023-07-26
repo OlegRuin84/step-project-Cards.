@@ -11,38 +11,9 @@ async function fetchData(token, data) {
       body: JSON.stringify(data),
     });
     if (response.status === 200) {
-
-      // rendering(data);
-// -------------
-
-    let info = await fetch(`https://ajax.test-danit.com/api/v2/cards/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-    }});
-    let data = await info.json();
-
-    // sorting
-    data.sort((a, b) => a.id - b.id);
-    let setID = new Set;
-    data.forEach((e) => {
-      let id = e.id
-      if (setID.has(id)){
-        return 
-      } else {
-        setID.add(id);
-        rendering(e);
-        return setID;
-      }});
-      console.log(setID)
-    ;
-  } 
-}
-
-
-// ---------------
-    
-   catch (error) {
+      rendering(data);
+    }
+  } catch (error) {
     console.log("Помилка в fetchData, файл api.js");
     console.log(error);
   }

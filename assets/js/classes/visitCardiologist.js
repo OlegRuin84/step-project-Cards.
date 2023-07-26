@@ -68,7 +68,6 @@ class VisitCardiologist extends Visit {
     editBtn.classList.add("card__btn-rewrite");
     wrapper.setAttribute("draggable", "true");
 
-    wrapper.id = `${this.id}`;
     doc.textContent = `ВІЗИТ ДО: ${this.doc}а`;
     name.textContent = `${this.namePatient}`;
     moreBtn.textContent = `показати більше`;
