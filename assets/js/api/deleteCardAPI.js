@@ -20,7 +20,6 @@ let token
           }
         );
         token = await response.text(); 
-        fetchData(token);
       } catch (error) {
         console.log("Помилка в deleteCardAPI, файл api.js");
         console.log(error);
