@@ -207,3 +207,4 @@ class ModalTherapistForm extends ModalDoctor {
 }
 
 export { Form, ModalCardiologistForm, ModalDentistForm, ModalTherapistForm };
+export const createDoctorForm = ModalDoctor.createDoctorForm ;
