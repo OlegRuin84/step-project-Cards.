@@ -6,8 +6,11 @@ import Button from "./classes/button.js";
 import DragAndDrop from "./classes/drag_drop.js";
 import deleteCardAtAPI from "./api/deleteCardAPI.js";
 import getOneCard from "./api/getOneCard.js";
-import { ModalCardiologistForm, ModalDentistForm, ModalTherapistForm } from "./forms.js"
-import { createDoctorForm } from "./forms.js"
+import { ModalCardiologistForm, ModalDentistForm, ModalTherapistForm } from "./forms.js";
+import valuesFormTherapist  from "./valuesFormDoctors/valuesFormTherapist.js";
+import valuesFormDantist from "./valuesFormDoctors/valuesFormDantist.js";
+import valuesFormCardiologist from "./valuesFormDoctors/valuesFormCardiologist.js"
+
 
 //
 // Create the First page
@@ -298,15 +301,94 @@ async function (event){
     let modalForm;
   //  фільтрація, згідно вдастивості objcard.doc
       if(objcard.doc === "Кардіолог"){
-        modalForm = new ModalCardiologistForm(objcard)
-        modalForm.createCardiologistForm();
+
         const createWindow = new ModalCardWindow(header, "Змінити візит");
-        createWindow.open();
-        // createDoctorForm();
-        console.log(modalForm)
+        createWindow.open();      
+          //  фіксація значення у випадаючому списку вже обранного лікаря
+          document.querySelector('.select-main').value = objcard.doc;
+          // прибираємо наявні блоки при виклиці вікна редагування картки
+          document.querySelector('.filter-wrapper').style.display = "none";
+          document.querySelector('.button-create-visit').style.display = "none";
+          document.querySelector('.conteiner__cards').style.display = "none";
+          document.querySelector('.logo-wrapper').style.display = "none";
+
+        modalForm = new ModalCardiologistForm()
+        // modalForm.createCardiologistForm()
+
+        const a = document.querySelector('.visit-form')
+        console.log(a)
+        a.append(modalForm.form.formElement)
+        valuesFormCardiologist(objcard)
+
+      }
+      if(objcard.doc === "Стоматолог"){
+        const createWindow = new ModalCardWindow(header, "Змінити візит");
+        createWindow.open();      
+          //  фіксація значення у випадаючому списку вже обранного лікаря
+          document.querySelector('.select-main').value = objcard.doc;
+          // прибираємо наявні блоки при виклиці вікна редагування картки
+          document.querySelector('.filter-wrapper').style.display = "none";
+          document.querySelector('.button-create-visit').style.display = "none";
+          document.querySelector('.conteiner__cards').style.display = "none";
+          document.querySelector('.logo-wrapper').style.display = "none";
+
+        modalForm = new ModalDentistForm()
+        // modalForm.createCardiologistForm()
+
+        const a = document.querySelector('.visit-form')
+        console.log(a)
+        a.append(modalForm.form.formElement)
+        valuesFormDantist(objcard)
+      }
+
+      if(objcard.doc === "Терапевт"){
+        const createWindow = new ModalCardWindow(header, "Змінити візит");
+        createWindow.open();      
+          //  фіксація значення у випадаючому списку вже обранного лікаря
+          document.querySelector('.select-main').value = objcard.doc;
+          // прибираємо наявні блоки при виклиці вікна редагування картки
+          document.querySelector('.filter-wrapper').style.display = "none";
+          document.querySelector('.button-create-visit').style.display = "none";
+          document.querySelector('.conteiner__cards').style.display = "none";
+          document.querySelector('.logo-wrapper').style.display = "none";
+
+        modalForm = new ModalTherapistForm()
+        // modalForm.form.formElement.
+
+        const a = document.querySelector('.visit-form')
+        console.log(a)
+        a.append(modalForm.form.formElement)
+        valuesFormTherapist(objcard)
       }
     }
 })
+
+
+        // createDoctorForm();
+        // console.log(modalForm.createDoctorForm("B", "W"));
+        // modalForm.createDoctorForm("B", "W")
+        // createWindow.handleSelectChange.modalForm = `${objcard.doc}`;
+
+
+    // objcard.then(data => card1=data)
+    // console.log(objcard.data)
+    //     createWindow.handleSelectChange.value = `${objcard.doc}`;
+    //     modalForm.createDoctorForm(objcard.goalVisit, objcard.description)
+        // console.log(createDoctorForm())
+
+// console.log(createCardiologistForm())
+        // age:"60"
+        // bmi:"1"
+        // changeStatus:"Відкритий"
+        // changeUrgency:"Звичайна"
+        // descriptionVisit:"cssc"
+        // doc:"Кардіолог"
+        // goalVisit:"Плановий огляд"
+        // heartDisease:"cssc"
+        // id:186711
+        // namePatient:"Івашов Ігор Хомич "
+        // pressure:"120/60"
+
     // handleSelectChange(objcard.doc)
     // objcard.then(data => card1=data)
     // console.log(objcard.data)
@@ -321,4 +403,3 @@ async function (event){
         
     //   }
     // })
-
